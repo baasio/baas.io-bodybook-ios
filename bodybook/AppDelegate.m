@@ -10,10 +10,14 @@
 
 #import "ViewController.h"
 
+#import <baas.io/Baas.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Baasio setApplicationInfo:@"ceffba5f-3514-11e2-a2c1-02003a570010" applicationName:@"d31a99ec-3514-11e2-a2c1-02003a570010"];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];

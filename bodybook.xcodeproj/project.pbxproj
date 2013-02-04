@@ -18,6 +18,19 @@
 		DEF7021716BFA37C008FEEA0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7021616BFA37C008FEEA0 /* Default-568h@2x.png */; };
 		DEF7021A16BFA37C008FEEA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF7021916BFA37C008FEEA0 /* ViewController.m */; };
 		DEF7021D16BFA37C008FEEA0 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEF7021B16BFA37C008FEEA0 /* ViewController.xib */; };
+		DEF7022416BFA3A6008FEEA0 /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7022316BFA3A6008FEEA0 /* baas.io.framework */; };
+		DEF7022616BFA438008FEEA0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7022516BFA438008FEEA0 /* MobileCoreServices.framework */; };
+		DEF7022816BFA43E008FEEA0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7022716BFA43E008FEEA0 /* SystemConfiguration.framework */; };
+		DEF7023516BFA6C0008FEEA0 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7022E16BFA6C0008FEEA0 /* Icon-72.png */; };
+		DEF7023616BFA6C0008FEEA0 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7022F16BFA6C0008FEEA0 /* Icon-Small-50.png */; };
+		DEF7023716BFA6C0008FEEA0 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7023016BFA6C0008FEEA0 /* Icon-Small.png */; };
+		DEF7023816BFA6C0008FEEA0 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7023116BFA6C0008FEEA0 /* Icon-Small@2x.png */; };
+		DEF7023916BFA6C0008FEEA0 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7023216BFA6C0008FEEA0 /* Icon.png */; };
+		DEF7023A16BFA6C0008FEEA0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7023316BFA6C0008FEEA0 /* Icon@2x.png */; };
+		DEF7023B16BFA6C0008FEEA0 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7023416BFA6C0008FEEA0 /* iTunesArtwork.png */; };
+		DEF7023E16BFA6FC008FEEA0 /* bodybook_text.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7023D16BFA6FC008FEEA0 /* bodybook_text.png */; };
+		DEF7024316BFA72D008FEEA0 /* loginFields@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7024116BFA72D008FEEA0 /* loginFields@2x.png */; };
+		DEF7024416BFA72D008FEEA0 /* usernameField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7024216BFA72D008FEEA0 /* usernameField@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +50,19 @@
 		DEF7021816BFA37C008FEEA0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		DEF7021916BFA37C008FEEA0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		DEF7021C16BFA37C008FEEA0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		DEF7022316BFA3A6008FEEA0 /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = baas.io.framework; path = "baas.io-sdk-ios/baas.io.framework"; sourceTree = "<group>"; };
+		DEF7022516BFA438008FEEA0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		DEF7022716BFA43E008FEEA0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DEF7022E16BFA6C0008FEEA0 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "bodybook/Icon-72.png"; sourceTree = "<group>"; };
+		DEF7022F16BFA6C0008FEEA0 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "bodybook/Icon-Small-50.png"; sourceTree = "<group>"; };
+		DEF7023016BFA6C0008FEEA0 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "bodybook/Icon-Small.png"; sourceTree = "<group>"; };
+		DEF7023116BFA6C0008FEEA0 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "bodybook/Icon-Small@2x.png"; sourceTree = "<group>"; };
+		DEF7023216BFA6C0008FEEA0 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = bodybook/Icon.png; sourceTree = "<group>"; };
+		DEF7023316BFA6C0008FEEA0 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "bodybook/Icon@2x.png"; sourceTree = "<group>"; };
+		DEF7023416BFA6C0008FEEA0 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesArtwork.png; path = bodybook/iTunesArtwork.png; sourceTree = "<group>"; };
+		DEF7023D16BFA6FC008FEEA0 /* bodybook_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bodybook_text.png; path = bodybook/bodybook_text.png; sourceTree = "<group>"; };
+		DEF7024116BFA72D008FEEA0 /* loginFields@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loginFields@2x.png"; path = "bodybook/loginFields@2x.png"; sourceTree = "<group>"; };
+		DEF7024216BFA72D008FEEA0 /* usernameField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "usernameField@2x.png"; path = "bodybook/usernameField@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +70,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEF7022816BFA43E008FEEA0 /* SystemConfiguration.framework in Frameworks */,
+				DEF7022616BFA438008FEEA0 /* MobileCoreServices.framework in Frameworks */,
+				DEF7022416BFA3A6008FEEA0 /* baas.io.framework in Frameworks */,
 				DEF7020116BFA37C008FEEA0 /* UIKit.framework in Frameworks */,
 				DEF7020316BFA37C008FEEA0 /* Foundation.framework in Frameworks */,
 				DEF7020516BFA37C008FEEA0 /* CoreGraphics.framework in Frameworks */,
@@ -56,6 +85,7 @@
 		DEF701F416BFA37C008FEEA0 = {
 			isa = PBXGroup;
 			children = (
+				DEF7022C16BFA6A8008FEEA0 /* Image */,
 				DEF7020616BFA37C008FEEA0 /* bodybook */,
 				DEF701FF16BFA37C008FEEA0 /* Frameworks */,
 				DEF701FE16BFA37C008FEEA0 /* Products */,
@@ -73,6 +103,9 @@
 		DEF701FF16BFA37C008FEEA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DEF7022716BFA43E008FEEA0 /* SystemConfiguration.framework */,
+				DEF7022516BFA438008FEEA0 /* MobileCoreServices.framework */,
+				DEF7022316BFA3A6008FEEA0 /* baas.io.framework */,
 				DEF7020016BFA37C008FEEA0 /* UIKit.framework */,
 				DEF7020216BFA37C008FEEA0 /* Foundation.framework */,
 				DEF7020416BFA37C008FEEA0 /* CoreGraphics.framework */,
@@ -105,6 +138,47 @@
 				DEF7021616BFA37C008FEEA0 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DEF7022C16BFA6A8008FEEA0 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				DEF7024016BFA719008FEEA0 /* TextField */,
+				DEF7023C16BFA6F4008FEEA0 /* AppTitle */,
+				DEF7022D16BFA6B0008FEEA0 /* icon */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		DEF7022D16BFA6B0008FEEA0 /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				DEF7022E16BFA6C0008FEEA0 /* Icon-72.png */,
+				DEF7022F16BFA6C0008FEEA0 /* Icon-Small-50.png */,
+				DEF7023016BFA6C0008FEEA0 /* Icon-Small.png */,
+				DEF7023116BFA6C0008FEEA0 /* Icon-Small@2x.png */,
+				DEF7023216BFA6C0008FEEA0 /* Icon.png */,
+				DEF7023316BFA6C0008FEEA0 /* Icon@2x.png */,
+				DEF7023416BFA6C0008FEEA0 /* iTunesArtwork.png */,
+			);
+			name = icon;
+			sourceTree = "<group>";
+		};
+		DEF7023C16BFA6F4008FEEA0 /* AppTitle */ = {
+			isa = PBXGroup;
+			children = (
+				DEF7023D16BFA6FC008FEEA0 /* bodybook_text.png */,
+			);
+			name = AppTitle;
+			sourceTree = "<group>";
+		};
+		DEF7024016BFA719008FEEA0 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				DEF7024116BFA72D008FEEA0 /* loginFields@2x.png */,
+				DEF7024216BFA72D008FEEA0 /* usernameField@2x.png */,
+			);
+			name = TextField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +237,16 @@
 				DEF7021516BFA37C008FEEA0 /* Default@2x.png in Resources */,
 				DEF7021716BFA37C008FEEA0 /* Default-568h@2x.png in Resources */,
 				DEF7021D16BFA37C008FEEA0 /* ViewController.xib in Resources */,
+				DEF7023516BFA6C0008FEEA0 /* Icon-72.png in Resources */,
+				DEF7023616BFA6C0008FEEA0 /* Icon-Small-50.png in Resources */,
+				DEF7023716BFA6C0008FEEA0 /* Icon-Small.png in Resources */,
+				DEF7023816BFA6C0008FEEA0 /* Icon-Small@2x.png in Resources */,
+				DEF7023916BFA6C0008FEEA0 /* Icon.png in Resources */,
+				DEF7023A16BFA6C0008FEEA0 /* Icon@2x.png in Resources */,
+				DEF7023B16BFA6C0008FEEA0 /* iTunesArtwork.png in Resources */,
+				DEF7023E16BFA6FC008FEEA0 /* bodybook_text.png in Resources */,
+				DEF7024316BFA72D008FEEA0 /* loginFields@2x.png in Resources */,
+				DEF7024416BFA72D008FEEA0 /* usernameField@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,9 +344,17 @@
 		DEF7022116BFA37C008FEEA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/baas.io-sdk-ios\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bodybook/bodybook-Prefix.pch";
 				INFOPLIST_FILE = "bodybook/bodybook-Info.plist";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -271,9 +363,17 @@
 		DEF7022216BFA37C008FEEA0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/baas.io-sdk-ios\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bodybook/bodybook-Prefix.pch";
 				INFOPLIST_FILE = "bodybook/bodybook-Info.plist";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
