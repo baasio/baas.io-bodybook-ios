@@ -8,6 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController {
+    UIImageView *bodybookTitle;
+    UIImageView *textFileBackground;
+    UIButton *loginButton;
+    UIButton *joinButton;
+    UITextField *userName;
+    UITextField *password;
+    
+    BOOL keyboardIsShown;
+    UITextField *currentTextField;
+    UIScrollView *scrollView;
+}
 
+@property (nonatomic, retain) IBOutlet UIImageView *bodybookTitle;
+@property (nonatomic, retain) IBOutlet UIImageView *textFileBackground;
+@property (nonatomic, retain) IBOutlet UIButton *loginButton,*joinButton;
+@property (nonatomic, nonatomic) IBOutlet UITextField *userName;
+@property (nonatomic, nonatomic) IBOutlet UITextField *password;
+@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
+
+-(IBAction)loginTouched:(id)sender;
+-(IBAction)joinTouched:(id)sender;
 @end
