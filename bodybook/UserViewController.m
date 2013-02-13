@@ -31,20 +31,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    //[self.tableView reloadData];
     [self.tableView setContentOffset:CGPointMake(0.0, 0.0)];
-
-    BaasioQuery *query = [BaasioQuery queryWithCollection:@"feed"];
-    [query setWheres:[NSString stringWithFormat:@"username = '%@'",[[BaasioUser currentUser] objectForKey:@"username"]]];
-    //[query setLimit:2];
-    [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
-    [query queryInBackground:^(NSArray *array) {
-        contentArray = [[NSMutableArray alloc]initWithArray:array];
-        [self.tableView reloadData];
-        NSLog(@"array : %@", contentArray);
-    }
-                failureBlock:^(NSError *error) {
-                    NSLog(@"fail : %@", error.localizedDescription);
-                }];
+    [self updateFeedData];
 }
 
 - (void)viewDidLoad
@@ -61,6 +50,21 @@
     [bt addTarget:self action:@selector(postingPage) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithCustomView:bt];
     self.navigationItem.rightBarButtonItem = src;
+}
+
+-(void)updateFeedData{
+    BaasioQuery *query = [BaasioQuery queryWithCollection:@"feed"];
+    [query setWheres:[NSString stringWithFormat:@"username = '%@'",[[BaasioUser currentUser] objectForKey:@"username"]]];
+    //[query setLimit:2];
+    [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
+    [query queryInBackground:^(NSArray *array) {
+        contentArray = [[NSMutableArray alloc]initWithArray:array];
+        [self.tableView reloadData];
+        //NSLog(@"array : %@", contentArray);
+    }
+                failureBlock:^(NSError *error) {
+                    NSLog(@"fail : %@", error.localizedDescription);
+                }];
 }
 
 -(void)postingPage{

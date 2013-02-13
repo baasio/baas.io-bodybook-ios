@@ -31,37 +31,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointMake(0.0, 0.0)];
-    
-    BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/following/user/",[[BaasioUser currentUser]objectForKey:@"username"]]];
-    //limit이 걸리나? 그럼 10개한정이면 10명이상의 친구가 있을 경우는 어쩌지? 답 : next, preview기능이 있다.
-    [query queryInBackground:^(NSArray *array) {
-        NSMutableArray *friendArray = [[NSMutableArray alloc]initWithArray:array];
-        NSDictionary *friendInfo = [[NSDictionary alloc]init];
-        
-        BaasioQuery *query = [BaasioQuery queryWithCollection:@"feed"];
-        NSString *whereQueryString = [NSString stringWithFormat:@"username = '%@'",[[BaasioUser currentUser] objectForKey:@"username"]];
-        for(int i=0;i<friendArray.count;i++){
-            friendInfo = [friendArray objectAtIndex:i];
-            whereQueryString = [whereQueryString stringByAppendingFormat:@" or username = '%@'",[friendInfo objectForKey:@"username"]];
-        }
-        [query setWheres:whereQueryString];
-        //[query setLimit:2];
-        [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
-        [query queryInBackground:^(NSArray *array) {
-            contentArray = [[NSMutableArray alloc]initWithArray:array];
-            [self.tableView reloadData];
-            //NSLog(@"array : %@", contentArray);
-        }
-                    failureBlock:^(NSError *error) {
-                        NSLog(@"뉴스피드 불러오기 실패 : %@", error.localizedDescription);
-                    }];
-    }
-                failureBlock:^(NSError *error) {
-                    NSLog(@"친구목록 불러오기 실패 : %@", error.localizedDescription);
-                }];
-    
+    //[self.tableView reloadData];
+    //[self.tableView setContentOffset:CGPointMake(0.0, 0.0)];
+    [self updateFeedData];
 }
 
 - (void)viewDidLoad
@@ -81,6 +53,36 @@
     [bt addTarget:self action:@selector(postingPage) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithCustomView:bt];
     self.navigationItem.rightBarButtonItem = src;
+}
+
+-(void)updateFeedData{
+    BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/following/user/",[[BaasioUser currentUser]objectForKey:@"username"]]];
+    //limit이 걸리나? 그럼 10개한정이면 10명이상의 친구가 있을 경우는 어쩌지? 답 : next, preview기능이 있다.
+    [query queryInBackground:^(NSArray *array) {
+        NSMutableArray *friendArray = [[NSMutableArray alloc]initWithArray:array];
+        NSDictionary *friendInfo = [[NSDictionary alloc]init];
+        
+        BaasioQuery *query = [BaasioQuery queryWithCollection:@"feed"];
+        NSString *whereQueryString = [NSString stringWithFormat:@"username = '%@'",[[BaasioUser currentUser] objectForKey:@"username"]];
+        for(int i=0;i<friendArray.count;i++){
+            friendInfo = [friendArray objectAtIndex:i];
+            whereQueryString = [whereQueryString stringByAppendingFormat:@" or username = '%@'",[friendInfo objectForKey:@"username"]];
+        }
+        [query setWheres:whereQueryString];
+        [query setLimit:14];
+        [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
+        [query queryInBackground:^(NSArray *array) {
+            contentArray = [[NSMutableArray alloc]initWithArray:array];
+            [self.tableView reloadData];
+            //NSLog(@"array : %@", contentArray);
+        }
+                    failureBlock:^(NSError *error) {
+                        NSLog(@"뉴스피드 불러오기 실패 : %@", error.localizedDescription);
+                    }];
+    }
+                failureBlock:^(NSError *error) {
+                    NSLog(@"친구목록 불러오기 실패 : %@", error.localizedDescription);
+                }];
 }
 
 -(void)postingPage{

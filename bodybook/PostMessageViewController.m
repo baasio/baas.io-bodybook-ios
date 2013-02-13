@@ -134,8 +134,8 @@
             
             BaasioFile *file = [[BaasioFile alloc] init];
             file.data = contentImageData;
-            file.filename = @"사진.png";
-            file.contentType = @"application/json";
+            file.filename = @"사진.jpeg";
+            file.contentType = @"image/jpeg";
             [file setObject:[[BaasioUser currentUser]objectForKey:@"username"] forKey:@"writer"];
             [file fileUploadInBackground:^(BaasioFile *file) {
                 NSLog(@"사진올리기 성공 : %@", file.uuid);

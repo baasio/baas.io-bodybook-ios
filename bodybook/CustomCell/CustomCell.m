@@ -15,7 +15,7 @@
 
 @implementation CustomCell
 
-@synthesize name, contentText, bottomView, background, likeLabel, imageView, profileImage, badLabel, dateLabel, likeButton, badButton;
+@synthesize name, contentText, bottomView, background, likeLabel, imageView, profileImage, badLabel, dateLabel, likeButton, badButton, imageContentButton,viewController;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -94,6 +94,7 @@
             NSMutableArray *postUser = [NSMutableArray arrayWithArray:array];
             postUserInfo = [[NSDictionary alloc]init];
             postUserInfo = [postUser objectAtIndex:0];
+            [profileImage setClipsToBounds:YES];
             [profileImage setImageWithURL:[NSURL URLWithString:[postUserInfo objectForKey:@"picture"]] placeholderImage:nil];
         }
                     failureBlock:^(NSError *error) {
@@ -129,7 +130,7 @@
     CGSize size = [[userInfo objectForKey:@"content"] sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(285, 9000)];
     CGFloat labelHeight = MAX(size.height, 10.0);
     [self.contentText setFont:[UIFont systemFontOfSize:13.0]];
-    [self.contentText setLineBreakMode:UILineBreakModeCharacterWrap];
+    [self.contentText setLineBreakMode:NSLineBreakByCharWrapping];
     [self.contentText setNumberOfLines:0];
     [self.contentText setFrame:CGRectMake(self.contentText.frame.origin.x, self.contentText.frame.origin.y, self.contentText.frame.size.width, labelHeight+5.0)];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -138,6 +139,8 @@
     if([[userInfo objectForKey:@"contentImagePath"] isEqualToString:@"-"]){
         //사진이 없는경우
         self.imageView.hidden = YES;
+        self.imageContentButton.enabled = NO;
+        self.imageContentButton.hidden = YES;
         [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
         [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.contentText.frame.origin.y + self.contentText.frame.size.height)];
     }else{
@@ -147,9 +150,14 @@
         //////////////////////////////////////////////////////////////////
         
         self.imageView.hidden = NO;
+        self.imageContentButton.enabled = YES;
+        self.imageContentButton.hidden = NO;
         [self.imageView setImageWithURL:[NSURL URLWithString:contentImagePath]];
         [self.imageView setClipsToBounds:YES];
         [self.imageView setFrame:CGRectMake(self.imageView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.imageView.frame.size.width, 180)];
+        [self.imageContentButton setClipsToBounds:YES];
+        [self.imageContentButton setFrame:CGRectMake(self.imageView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.imageView.frame.size.width, 180)];
+        
         [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height + self.imageView.frame.size.height, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
         
         [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.contentText.frame.origin.y + self.contentText.frame.size.height + self.imageView.frame.size.height)];
@@ -164,4 +172,7 @@
     self.background.layer.shouldRasterize = YES;
 }
 
+- (IBAction)imageTouched:(id)sender{
+    NSLog(@"터치됨");
+}
 @end

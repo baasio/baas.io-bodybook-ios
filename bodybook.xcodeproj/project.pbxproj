@@ -21,6 +21,8 @@
 		DE3F506316C230410073B168 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3F506116C230410073B168 /* AddFriendViewController.m */; };
 		DE3F506416C230410073B168 /* AddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE3F506216C230410073B168 /* AddFriendViewController.xib */; };
 		DE3F506716C23FC70073B168 /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F506616C23FC70073B168 /* baas.io.framework */; };
+		DED8103F16CB28AA00E8FB65 /* default_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DED8103E16CB28AA00E8FB65 /* default_user@2x.png */; };
+		DEED156C16CB70A0001F42E0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEED156B16CB70A0001F42E0 /* MessageUI.framework */; };
 		DEF7020116BFA37C008FEEA0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7020016BFA37C008FEEA0 /* UIKit.framework */; };
 		DEF7020316BFA37C008FEEA0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7020216BFA37C008FEEA0 /* Foundation.framework */; };
 		DEF7020516BFA37C008FEEA0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7020416BFA37C008FEEA0 /* CoreGraphics.framework */; };
@@ -115,6 +117,8 @@
 		DE3F506116C230410073B168 /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		DE3F506216C230410073B168 /* AddFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendViewController.xib; sourceTree = "<group>"; };
 		DE3F506616C23FC70073B168 /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = baas.io.framework; sourceTree = "<group>"; };
+		DED8103E16CB28AA00E8FB65 /* default_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_user@2x.png"; path = "bodybook/default_user@2x.png"; sourceTree = "<group>"; };
+		DEED156B16CB70A0001F42E0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		DEF701FD16BFA37C008FEEA0 /* bodybook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bodybook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEF7020016BFA37C008FEEA0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DEF7020216BFA37C008FEEA0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -176,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEED156C16CB70A0001F42E0 /* MessageUI.framework in Frameworks */,
 				DE3F506716C23FC70073B168 /* baas.io.framework in Frameworks */,
 				DE3F505816C1D55A0073B168 /* AssetsLibrary.framework in Frameworks */,
 				DE3F504216C0F5230073B168 /* ImageIO.framework in Frameworks */,
@@ -267,6 +272,7 @@
 		DEF701FF16BFA37C008FEEA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DEED156B16CB70A0001F42E0 /* MessageUI.framework */,
 				DE3F505716C1D55A0073B168 /* AssetsLibrary.framework */,
 				DE3F504116C0F5230073B168 /* ImageIO.framework */,
 				DE3F503F16C0F51E0073B168 /* MapKit.framework */,
@@ -317,6 +323,7 @@
 		DEF7022C16BFA6A8008FEEA0 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				DED8103E16CB28AA00E8FB65 /* default_user@2x.png */,
 				DE3F505E16C1F4490073B168 /* camera_icon@2x.png */,
 				DEF7024016BFA719008FEEA0 /* TextField */,
 				DEF7023C16BFA6F4008FEEA0 /* AppTitle */,
@@ -514,6 +521,7 @@
 				DE3F505D16C1DA420073B168 /* JoinController.xib in Resources */,
 				DE3F505F16C1F4490073B168 /* camera_icon@2x.png in Resources */,
 				DE3F506416C230410073B168 /* AddFriendViewController.xib in Resources */,
+				DED8103F16CB28AA00E8FB65 /* default_user@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +638,7 @@
 		DEF7022116BFA37C008FEEA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/baas.io-sdk-ios\"",
@@ -646,6 +655,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -653,6 +663,7 @@
 		DEF7022216BFA37C008FEEA0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/baas.io-sdk-ios\"",
@@ -669,6 +680,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -70,6 +70,10 @@
 										<int key="IBUIContentMode">2</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+										<object class="NSCustomResource" key="IBUIImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">default_user@2x.png</string>
+										</object>
 									</object>
 									<object class="IBUIImageView" id="505541949">
 										<reference key="NSNextResponder" ref="300375909"/>
@@ -141,6 +145,7 @@
 								<string key="NSFrame">{{118, 185}, {202, 35}}</string>
 								<reference key="NSSuperview" ref="888005761"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -923,20 +928,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ProfileInfoCell</string>
 					<string key="superclassName">UITableViewCell</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="profileBigImageChange:">id</string>
-						<string key="profileImageChange:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="profileBigImageChange:">
-							<string key="name">profileBigImageChange:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="profileImageChange:">
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">profileImageChange:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">profileImageChange:</string>
+						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">profileImageChange:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</dictionary>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="nameLabel">UILabel</string>
 						<string key="photoButtonImage">UIImageView</string>
@@ -987,10 +989,10 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">camera_icon@2x.png</string>
-			<string key="NS.object.0">{60, 60}</string>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="camera_icon@2x.png">{60, 60}</string>
+			<string key="default_user@2x.png">{300, 300}</string>
+		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

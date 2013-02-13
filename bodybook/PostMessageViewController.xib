@@ -147,11 +147,13 @@
 								<string key="IBUITitle">글 남기기</string>
 								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="397328269">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+									<int key="IBUIStyle">1</int>
 									<reference key="IBUICustomView" ref="217736793"/>
 									<reference key="IBUINavigationItem" ref="502621637"/>
 								</object>
 								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="779749173">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+									<int key="IBUIStyle">1</int>
 									<reference key="IBUICustomView" ref="872187664"/>
 									<reference key="IBUINavigationItem" ref="502621637"/>
 								</object>
@@ -176,7 +178,6 @@
 						<string key="NSFrame">{{69, 170}, {60, 60}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUIContentMode">2</int>
@@ -795,17 +796,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">PostMessageViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">imageAddTouched:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">imageAddTouched:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="closeMessage:">id</string>
+						<string key="imageAddTouched:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="closeMessage:">
+							<string key="name">closeMessage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="imageAddTouched:">
 							<string key="name">imageAddTouched:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="imageAddButton">UIButton</string>
 						<string key="messageTextField">UITextView</string>

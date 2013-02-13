@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface CustomCell : UITableViewCell  {
+@interface CustomCell : UITableViewCell <UINavigationControllerDelegate,UIPageViewControllerDelegate>{
     NSDictionary *userInfo;
     NSDictionary *postUserInfo;
     NSString *contentUUID;
@@ -25,7 +25,10 @@
     UIImageView *profileImage;
     UIButton *likeButton;
     UIButton *badButton;
-    
+    UIButton *imageContentButton;
+    UINavigationController *viewController;
+
+
     
     BOOL firstLike;
     int likeNumber;
@@ -36,9 +39,10 @@
 @property (nonatomic, retain) IBOutlet UILabel *name, *contentText, *likeLabel, *badLabel, *dateLabel;
 @property (nonatomic, retain) IBOutlet UIView *background, *bottomView;
 @property (nonatomic, retain) IBOutlet UIImageView *imageView, *profileImage;
-@property (nonatomic, retain) IBOutlet UIButton *likeButton, *badButton;
-
+@property (nonatomic, retain) IBOutlet UIButton *likeButton, *badButton, *imageContentButton;
+@property (nonatomic, retain) UINavigationController *viewController;
 
 - (void)initCustomCell:(NSDictionary*)contentDic;
+- (IBAction)imageTouched:(id)sender;
 
 @end

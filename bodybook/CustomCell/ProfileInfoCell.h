@@ -20,7 +20,6 @@
     UIImage *uploadImage;
     UILabel *userNameLabel;
     UILabel *nameLabel;
-    
 }
 
 @property (nonatomic, retain)IBOutlet UIButton *profileImageChangeButton;

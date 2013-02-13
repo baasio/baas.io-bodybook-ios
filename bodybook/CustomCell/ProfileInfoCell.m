@@ -108,12 +108,12 @@
     NSData *contentImageData = UIImageJPEGRepresentation(resizedImage, 1.0);
     BaasioFile *file = [[BaasioFile alloc] init];
     file.data = contentImageData;
-    file.filename = @"프로필사진.png";
-    file.contentType = @"application/json";
+    file.filename = @"프로필사진.jpeg";
+    file.contentType = @"image/jpeg";
     [file setObject:[[BaasioUser currentUser]objectForKey:@"username"] forKey:@"writer"];
     [file fileUploadInBackground:^(BaasioFile *file) {
         NSLog(@"프로필사진 업로드 성공 : %@", file.uuid);
-        BaasioEntity *entity = [BaasioEntity entitytWithName:@"SomeBlog"];
+        BaasioEntity *entity = [BaasioEntity entitytWithName:@"users"];
         entity.uuid = [[BaasioUser currentUser]objectForKey:@"uuid"];
         [entity setObject:[NSString stringWithFormat:@"https://blob.baas.io/gyuchan/bodybook/files/%@",file.uuid] forKey:@"picture"];
         [entity updateInBackground:^(BaasioEntity *entity) {
