@@ -21,12 +21,11 @@
     UILabel *dateLabel;
     UIView *background;
     UIView *bottomView;
-    UIImageView *imageView;
+    UIImageView *contentImageView;
     UIImageView *profileImage;
     UIButton *likeButton;
     UIButton *badButton;
     UIButton *imageContentButton;
-    UINavigationController *viewController;
 
 
     
@@ -36,13 +35,12 @@
     int badNumber;
 }
 
+@property (nonatomic, retain) NSDictionary *userInfo;
 @property (nonatomic, retain) IBOutlet UILabel *name, *contentText, *likeLabel, *badLabel, *dateLabel;
 @property (nonatomic, retain) IBOutlet UIView *background, *bottomView;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView, *profileImage;
+@property (nonatomic, retain) IBOutlet UIImageView *contentImageView, *profileImage;
 @property (nonatomic, retain) IBOutlet UIButton *likeButton, *badButton, *imageContentButton;
-@property (nonatomic, retain) UINavigationController *viewController;
 
 - (void)initCustomCell:(NSDictionary*)contentDic;
-- (IBAction)imageTouched:(id)sender;
 
 @end

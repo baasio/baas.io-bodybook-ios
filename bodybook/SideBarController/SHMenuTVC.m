@@ -33,11 +33,11 @@
     [self.view addSubview:self.tableView];
     
     UIImageView *shadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sidebarshadow"]];
-    [shadow setFrame:CGRectMake(118, 0, 43.5, [[UIScreen mainScreen] bounds].size.height - 20 - 44)];
+    [shadow setFrame:CGRectMake(118, 0, 43.5, [[UIScreen mainScreen] bounds].size.height - 20)];
     [self.view addSubview:shadow];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     UIImageView *sbg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sidebarbg"]];
-    [sbg setFrame:CGRectMake(0, 0, 161.5, [[UIScreen mainScreen] bounds].size.height - 20 - 44)];
+    [sbg setFrame:CGRectMake(0, 0, 161.5, [[UIScreen mainScreen] bounds].size.height - 20)];
     [self.tableView setBackgroundView:sbg];
     self.view.backgroundColor = [UIColor clearColor];
     [super viewDidLoad];

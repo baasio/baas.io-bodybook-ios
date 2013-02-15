@@ -7,6 +7,9 @@
 //
 
 #import "CustomCell.h"
+
+#import "PostMessageViewController.h"
+
 #import <QuartzCore/QuartzCore.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
@@ -15,7 +18,7 @@
 
 @implementation CustomCell
 
-@synthesize name, contentText, bottomView, background, likeLabel, imageView, profileImage, badLabel, dateLabel, likeButton, badButton, imageContentButton,viewController;
+@synthesize userInfo,name, contentText, bottomView, background, likeLabel, contentImageView, profileImage, badLabel, dateLabel, likeButton, badButton, imageContentButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -138,29 +141,29 @@
     
     if([[userInfo objectForKey:@"contentImagePath"] isEqualToString:@"-"]){
         //사진이 없는경우
-        self.imageView.hidden = YES;
+        self.contentImageView.hidden = YES;
         self.imageContentButton.enabled = NO;
         self.imageContentButton.hidden = YES;
         [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
-        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.contentText.frame.origin.y + self.contentText.frame.size.height)];
+        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.contentText.frame.origin.y + self.contentText.frame.size.height+12)];
     }else{
         //사진이 있는경우
         /////////////////// 이미지파일이 있는 URL주소///////////////////////////
         NSString *contentImagePath = [NSString stringWithFormat:@"%@",[userInfo objectForKey:@"contentImagePath"]];
         //////////////////////////////////////////////////////////////////
         
-        self.imageView.hidden = NO;
+        self.contentImageView.hidden = NO;
         self.imageContentButton.enabled = YES;
         self.imageContentButton.hidden = NO;
-        [self.imageView setImageWithURL:[NSURL URLWithString:contentImagePath]];
-        [self.imageView setClipsToBounds:YES];
-        [self.imageView setFrame:CGRectMake(self.imageView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.imageView.frame.size.width, 180)];
+        [self.contentImageView setImageWithURL:[NSURL URLWithString:contentImagePath]];
+        [self.contentImageView setClipsToBounds:YES];
+        [self.contentImageView setFrame:CGRectMake(self.contentImageView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.contentImageView.frame.size.width, 180)];
         [self.imageContentButton setClipsToBounds:YES];
-        [self.imageContentButton setFrame:CGRectMake(self.imageView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.imageView.frame.size.width, 180)];
+        [self.imageContentButton setFrame:CGRectMake(self.contentImageView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.contentImageView.frame.size.width, 180)];
         
-        [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height + self.imageView.frame.size.height, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
+        [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height + self.contentImageView.frame.size.height, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
         
-        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.contentText.frame.origin.y + self.contentText.frame.size.height + self.imageView.frame.size.height)];
+        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.contentText.frame.origin.y + self.contentText.frame.size.height + self.contentImageView.frame.size.height+12)];
     }
     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.background.bounds];
     self.background.layer.masksToBounds = NO;
@@ -170,9 +173,5 @@
     self.background.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     self.background.layer.shadowPath = shadowPath.CGPath;
     self.background.layer.shouldRasterize = YES;
-}
-
-- (IBAction)imageTouched:(id)sender{
-    NSLog(@"터치됨");
 }
 @end

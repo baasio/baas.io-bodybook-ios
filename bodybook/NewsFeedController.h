@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MWPhotoBrowser.h"
 
-@interface NewsFeedController : UITableViewController {
+@interface NewsFeedController : UITableViewController <MWPhotoBrowserDelegate>{
+    NSArray *photos;
     NSMutableArray *contentArray;
-    NSDictionary *postUserInfo;
 }
-
+@property (nonatomic, retain) NSArray *photos;
 @end

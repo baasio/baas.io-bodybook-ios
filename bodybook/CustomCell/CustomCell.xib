@@ -220,7 +220,7 @@
 									<object class="IBUILabel" id="106347175">
 										<reference key="NSNextResponder" ref="347280243"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{27, 1}, {30, 20}}</string>
+										<string key="NSFrame">{{216, 1}, {30, 20}}</string>
 										<reference key="NSSuperview" ref="347280243"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="34993598"/>
@@ -245,7 +245,7 @@
 									<object class="IBUIButton" id="82143146">
 										<reference key="NSNextResponder" ref="347280243"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{8, 1}, {50, 20}}</string>
+										<string key="NSFrame">{{197, 1}, {50, 20}}</string>
 										<reference key="NSSuperview" ref="347280243"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="106347175"/>
@@ -270,10 +270,9 @@
 									<object class="IBUILabel" id="531682421">
 										<reference key="NSNextResponder" ref="347280243"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{279, 1}, {30, 20}}</string>
+										<string key="NSFrame">{{274, 1}, {30, 20}}</string>
 										<reference key="NSSuperview" ref="347280243"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -295,7 +294,7 @@
 									<object class="IBUIButton" id="34993598">
 										<reference key="NSNextResponder" ref="347280243"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{260, 1}, {50, 20}}</string>
+										<string key="NSFrame">{{255, 1}, {50, 20}}</string>
 										<reference key="NSSuperview" ref="347280243"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="531682421"/>
@@ -318,14 +317,14 @@
 										<reference key="IBUIFont" ref="131656055"/>
 									</object>
 								</array>
-								<string key="NSFrame">{{5, 84}, {310, 22}}</string>
+								<string key="NSFrame">{{10, 84}, {300, 22}}</string>
 								<reference key="NSSuperview" ref="978447323"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="82143146"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC43MzM3MTUwNDk3IDAuNzIzNDkwOTA3OCAwLjgxNzgyMTI2OTEAA</bytes>
+									<bytes key="NSRGB">MC44NDQzMTk1NjggMC44MzI3MjA4NDY3IDAuOTQ3OTg3NDMyMQA</bytes>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -418,14 +417,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">imageView</string>
-						<reference key="source" ref="686591537"/>
-						<reference key="destination" ref="277175877"/>
-					</object>
-					<int key="connectionID">82</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dateLabel</string>
 						<reference key="source" ref="686591537"/>
 						<reference key="destination" ref="1004079010"/>
@@ -457,6 +448,14 @@
 					<int key="connectionID">91</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">contentImageView</string>
+						<reference key="source" ref="686591537"/>
+						<reference key="destination" ref="277175877"/>
+					</object>
+					<int key="connectionID">92</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">likeTouched:</string>
 						<reference key="source" ref="82143146"/>
@@ -473,15 +472,6 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">71</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">imageTouched:</string>
-						<reference key="source" ref="635888211"/>
-						<reference key="destination" ref="686591537"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">89</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -611,7 +601,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">91</int>
+			<int key="maxID">92</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -642,10 +632,10 @@
 						<string key="badButton">UIButton</string>
 						<string key="badLabel">UILabel</string>
 						<string key="bottomView">UIView</string>
+						<string key="contentImageView">UIImageView</string>
 						<string key="contentText">UILabel</string>
 						<string key="dateLabel">UILabel</string>
 						<string key="imageContentButton">UIButton</string>
-						<string key="imageView">UIImageView</string>
 						<string key="likeButton">UIButton</string>
 						<string key="likeLabel">UILabel</string>
 						<string key="name">UILabel</string>
@@ -668,6 +658,10 @@
 							<string key="name">bottomView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="contentImageView">
+							<string key="name">contentImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="contentText">
 							<string key="name">contentText</string>
 							<string key="candidateClassName">UILabel</string>
@@ -679,10 +673,6 @@
 						<object class="IBToOneOutletInfo" key="imageContentButton">
 							<string key="name">imageContentButton</string>
 							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="imageView">
-							<string key="name">imageView</string>
-							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="likeButton">
 							<string key="name">likeButton</string>

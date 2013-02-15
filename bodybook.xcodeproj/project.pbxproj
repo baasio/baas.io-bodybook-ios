@@ -17,10 +17,18 @@
 		DE3F505816C1D55A0073B168 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F505716C1D55A0073B168 /* AssetsLibrary.framework */; };
 		DE3F505C16C1DA420073B168 /* JoinController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3F505A16C1DA420073B168 /* JoinController.m */; };
 		DE3F505D16C1DA420073B168 /* JoinController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE3F505B16C1DA420073B168 /* JoinController.xib */; };
-		DE3F505F16C1F4490073B168 /* camera_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F505E16C1F4490073B168 /* camera_icon@2x.png */; };
 		DE3F506316C230410073B168 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3F506116C230410073B168 /* AddFriendViewController.m */; };
 		DE3F506416C230410073B168 /* AddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE3F506216C230410073B168 /* AddFriendViewController.xib */; };
 		DE3F506716C23FC70073B168 /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F506616C23FC70073B168 /* baas.io.framework */; };
+		DE8C132916CDCF0A004FD35C /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C131D16CDCF09004FD35C /* MWCaptionView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DE8C132A16CDCF0A004FD35C /* MWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C131F16CDCF09004FD35C /* MWPhoto.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DE8C132B16CDCF0A004FD35C /* MWPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C132116CDCF0A004FD35C /* MWPhotoBrowser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DE8C132C16CDCF0A004FD35C /* MWTapDetectingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C132416CDCF0A004FD35C /* MWTapDetectingImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DE8C132D16CDCF0A004FD35C /* MWTapDetectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C132616CDCF0A004FD35C /* MWTapDetectingView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DE8C132E16CDCF0A004FD35C /* MWZoomingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C132816CDCF0A004FD35C /* MWZoomingScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DE8C133016CDD023004FD35C /* MWPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE8C132F16CDD023004FD35C /* MWPhotoBrowser.bundle */; };
+		DEB3F49716CE009E00014CD8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB3F49616CE009E00014CD8 /* MBProgressHUD.m */; };
+		DEB3F49916CE00B900014CD8 /* camera_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB3F49816CE00B900014CD8 /* camera_icon@2x.png */; };
 		DED8103F16CB28AA00E8FB65 /* default_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DED8103E16CB28AA00E8FB65 /* default_user@2x.png */; };
 		DEED156C16CB70A0001F42E0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEED156B16CB70A0001F42E0 /* MessageUI.framework */; };
 		DEF7020116BFA37C008FEEA0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7020016BFA37C008FEEA0 /* UIKit.framework */; };
@@ -112,11 +120,27 @@
 		DE3F505916C1DA420073B168 /* JoinController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoinController.h; sourceTree = "<group>"; };
 		DE3F505A16C1DA420073B168 /* JoinController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoinController.m; sourceTree = "<group>"; };
 		DE3F505B16C1DA420073B168 /* JoinController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JoinController.xib; sourceTree = "<group>"; };
-		DE3F505E16C1F4490073B168 /* camera_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon@2x.png"; sourceTree = "<group>"; };
 		DE3F506016C230410073B168 /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
 		DE3F506116C230410073B168 /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		DE3F506216C230410073B168 /* AddFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendViewController.xib; sourceTree = "<group>"; };
 		DE3F506616C23FC70073B168 /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = baas.io.framework; sourceTree = "<group>"; };
+		DE8C131C16CDCF09004FD35C /* MWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWCaptionView.h; path = bodybook/PhotoBrowser/MWCaptionView.h; sourceTree = "<group>"; };
+		DE8C131D16CDCF09004FD35C /* MWCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWCaptionView.m; path = bodybook/PhotoBrowser/MWCaptionView.m; sourceTree = "<group>"; };
+		DE8C131E16CDCF09004FD35C /* MWPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWPhoto.h; path = bodybook/PhotoBrowser/MWPhoto.h; sourceTree = "<group>"; };
+		DE8C131F16CDCF09004FD35C /* MWPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWPhoto.m; path = bodybook/PhotoBrowser/MWPhoto.m; sourceTree = "<group>"; };
+		DE8C132016CDCF0A004FD35C /* MWPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWPhotoBrowser.h; path = bodybook/PhotoBrowser/MWPhotoBrowser.h; sourceTree = "<group>"; };
+		DE8C132116CDCF0A004FD35C /* MWPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWPhotoBrowser.m; path = bodybook/PhotoBrowser/MWPhotoBrowser.m; sourceTree = "<group>"; };
+		DE8C132216CDCF0A004FD35C /* MWPhotoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWPhotoProtocol.h; path = bodybook/PhotoBrowser/MWPhotoProtocol.h; sourceTree = "<group>"; };
+		DE8C132316CDCF0A004FD35C /* MWTapDetectingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWTapDetectingImageView.h; path = bodybook/PhotoBrowser/MWTapDetectingImageView.h; sourceTree = "<group>"; };
+		DE8C132416CDCF0A004FD35C /* MWTapDetectingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWTapDetectingImageView.m; path = bodybook/PhotoBrowser/MWTapDetectingImageView.m; sourceTree = "<group>"; };
+		DE8C132516CDCF0A004FD35C /* MWTapDetectingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWTapDetectingView.h; path = bodybook/PhotoBrowser/MWTapDetectingView.h; sourceTree = "<group>"; };
+		DE8C132616CDCF0A004FD35C /* MWTapDetectingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWTapDetectingView.m; path = bodybook/PhotoBrowser/MWTapDetectingView.m; sourceTree = "<group>"; };
+		DE8C132716CDCF0A004FD35C /* MWZoomingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWZoomingScrollView.h; path = bodybook/PhotoBrowser/MWZoomingScrollView.h; sourceTree = "<group>"; };
+		DE8C132816CDCF0A004FD35C /* MWZoomingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWZoomingScrollView.m; path = bodybook/PhotoBrowser/MWZoomingScrollView.m; sourceTree = "<group>"; };
+		DE8C132F16CDD023004FD35C /* MWPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MWPhotoBrowser.bundle; path = bodybook/PhotoBrowser/MWPhotoBrowser.bundle; sourceTree = "<group>"; };
+		DEB3F49516CE009E00014CD8 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = bodybook/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
+		DEB3F49616CE009E00014CD8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = bodybook/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
+		DEB3F49816CE00B900014CD8 /* camera_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera_icon@2x.png"; path = "bodybook/camera_icon@2x.png"; sourceTree = "<group>"; };
 		DED8103E16CB28AA00E8FB65 /* default_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_user@2x.png"; path = "bodybook/default_user@2x.png"; sourceTree = "<group>"; };
 		DEED156B16CB70A0001F42E0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		DEF701FD16BFA37C008FEEA0 /* bodybook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bodybook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,9 +270,40 @@
 			name = AddFriend;
 			sourceTree = "<group>";
 		};
+		DE8C12FA16CDBAD0004FD35C /* PhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				DE8C131C16CDCF09004FD35C /* MWCaptionView.h */,
+				DE8C131D16CDCF09004FD35C /* MWCaptionView.m */,
+				DE8C131E16CDCF09004FD35C /* MWPhoto.h */,
+				DE8C131F16CDCF09004FD35C /* MWPhoto.m */,
+				DE8C132016CDCF0A004FD35C /* MWPhotoBrowser.h */,
+				DE8C132116CDCF0A004FD35C /* MWPhotoBrowser.m */,
+				DE8C132216CDCF0A004FD35C /* MWPhotoProtocol.h */,
+				DE8C132316CDCF0A004FD35C /* MWTapDetectingImageView.h */,
+				DE8C132416CDCF0A004FD35C /* MWTapDetectingImageView.m */,
+				DE8C132516CDCF0A004FD35C /* MWTapDetectingView.h */,
+				DE8C132616CDCF0A004FD35C /* MWTapDetectingView.m */,
+				DE8C132716CDCF0A004FD35C /* MWZoomingScrollView.h */,
+				DE8C132816CDCF0A004FD35C /* MWZoomingScrollView.m */,
+				DE8C131816CDC38E004FD35C /* MBProgressHUD */,
+			);
+			name = PhotoBrowser;
+			sourceTree = "<group>";
+		};
+		DE8C131816CDC38E004FD35C /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				DEB3F49516CE009E00014CD8 /* MBProgressHUD.h */,
+				DEB3F49616CE009E00014CD8 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		DEF701F416BFA37C008FEEA0 = {
 			isa = PBXGroup;
 			children = (
+				DE8C12FA16CDBAD0004FD35C /* PhotoBrowser */,
 				DE3F506616C23FC70073B168 /* baas.io.framework */,
 				DE3F504916C104C00073B168 /* ImageUtilities */,
 				DE3F502A16C0F3FC0073B168 /* SDWebImage */,
@@ -272,6 +327,7 @@
 		DEF701FF16BFA37C008FEEA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE8C132F16CDD023004FD35C /* MWPhotoBrowser.bundle */,
 				DEED156B16CB70A0001F42E0 /* MessageUI.framework */,
 				DE3F505716C1D55A0073B168 /* AssetsLibrary.framework */,
 				DE3F504116C0F5230073B168 /* ImageIO.framework */,
@@ -323,8 +379,8 @@
 		DEF7022C16BFA6A8008FEEA0 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				DEB3F49816CE00B900014CD8 /* camera_icon@2x.png */,
 				DED8103E16CB28AA00E8FB65 /* default_user@2x.png */,
-				DE3F505E16C1F4490073B168 /* camera_icon@2x.png */,
 				DEF7024016BFA719008FEEA0 /* TextField */,
 				DEF7023C16BFA6F4008FEEA0 /* AppTitle */,
 				DEF7022D16BFA6B0008FEEA0 /* icon */,
@@ -491,6 +547,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE8C133016CDD023004FD35C /* MWPhotoBrowser.bundle in Resources */,
 				DEF7020B16BFA37C008FEEA0 /* InfoPlist.strings in Resources */,
 				DEF7021316BFA37C008FEEA0 /* Default.png in Resources */,
 				DEF7021516BFA37C008FEEA0 /* Default@2x.png in Resources */,
@@ -519,9 +576,9 @@
 				DEF7028216C0A0BC008FEEA0 /* ProfileInfoCell.xib in Resources */,
 				DE3F505416C105DE0073B168 /* PostMessageViewController.xib in Resources */,
 				DE3F505D16C1DA420073B168 /* JoinController.xib in Resources */,
-				DE3F505F16C1F4490073B168 /* camera_icon@2x.png in Resources */,
 				DE3F506416C230410073B168 /* AddFriendViewController.xib in Resources */,
 				DED8103F16CB28AA00E8FB65 /* default_user@2x.png in Resources */,
+				DEB3F49916CE00B900014CD8 /* camera_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +603,13 @@
 				DE3F505316C105DE0073B168 /* PostMessageViewController.m in Sources */,
 				DE3F505C16C1DA420073B168 /* JoinController.m in Sources */,
 				DE3F506316C230410073B168 /* AddFriendViewController.m in Sources */,
+				DE8C132916CDCF0A004FD35C /* MWCaptionView.m in Sources */,
+				DE8C132A16CDCF0A004FD35C /* MWPhoto.m in Sources */,
+				DE8C132B16CDCF0A004FD35C /* MWPhotoBrowser.m in Sources */,
+				DE8C132C16CDCF0A004FD35C /* MWTapDetectingImageView.m in Sources */,
+				DE8C132D16CDCF0A004FD35C /* MWTapDetectingView.m in Sources */,
+				DE8C132E16CDCF0A004FD35C /* MWZoomingScrollView.m in Sources */,
+				DEB3F49716CE009E00014CD8 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

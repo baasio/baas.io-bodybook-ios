@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MWPhotoBrowser.h"
 
-@interface UserViewController : UITableViewController {
+@interface UserViewController : UITableViewController <MWPhotoBrowserDelegate>{
+    NSArray *photos;
     NSMutableArray *contentArray;
 }
-
+@property (nonatomic, retain) NSArray *photos;
+-(void)updateFeedData;
 @end

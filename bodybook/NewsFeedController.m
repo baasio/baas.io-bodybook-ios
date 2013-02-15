@@ -19,6 +19,8 @@
 
 @implementation NewsFeedController
 
+@synthesize photos;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -115,9 +117,32 @@
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"CustomCell" owner:nil options:nil];
         cell = [nibs objectAtIndex:0];
         [cell initCustomCell:object];
+        
     }
+    [cell.imageContentButton addTarget:self action:@selector(contentImageTouched:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
+
+- (void)contentImageTouched:(id)sender{
+    CustomCell *customCell = (CustomCell *)[[sender superview] superview] ;
+
+    NSMutableArray *photoArray = [[NSMutableArray alloc] init];
+    MWPhoto *photo;
+    NSLog(@"%@",[customCell.userInfo objectForKey:@"contentImagePath"]);
+    //photo = [MWPhoto photoWithURL:[NSURL URLWithString:[customCell.userInfo objectForKey:@"contentImagePath"]]];
+    photo = [MWPhoto photoWithImage:customCell.contentImageView.image];
+    photo.caption = customCell.contentText.text;
+    [photoArray addObject:photo];
+    self.photos = photoArray;
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    browser.displayActionButton = YES;
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
+    nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:nc animated:YES completion:nil];
+    
+    NSLog(@"터치됨");
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -134,6 +159,19 @@
                               constrainedToSize:CGSizeMake(285, 9000)];
         return size.height + 265;
     }
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    NSLog(@"%d",photos.count);
+    return photos.count;
+}
+
+- (MWPhoto *)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < photos.count)
+        return [photos objectAtIndex:index];
+    return nil;
 }
 
 @end

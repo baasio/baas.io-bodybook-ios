@@ -120,6 +120,7 @@
     UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithCustomView:bt];
 
     v.navigationItem.leftBarButtonItem = src;
+    
     [self.view addSubview:self.mainVC.view];
 }
 

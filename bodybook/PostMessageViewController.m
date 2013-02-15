@@ -75,10 +75,13 @@
 -(IBAction)imageAddTouched:(id)sender{
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    picker.allowsEditing = YES;
+    //picker.allowsEditing = YES;
     picker.delegate = self;
     [self presentViewController:picker animated:YES completion:nil];
 }
+
+
+
 
 -(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info
 {
@@ -104,7 +107,9 @@
         resizedImage = croppedImage;
     }
     
-    [imageAddButton setBackgroundImage:resizedImage forState:UIControlStateNormal];
+    //[imageAddButton setBackgroundImage:resizedImage forState:UIControlStateNormal];
+    [imageAddButton setBackgroundImage:originalImage forState:UIControlStateNormal];
+
     
     NSURL *url = [info valueForKey:UIImagePickerControllerReferenceURL];
     ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
@@ -120,6 +125,7 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+
 - (IBAction)postMessage:(id)sender {
     if (![messageTextField.text isEqualToString:@""]) {
         [postButton setEnabled:NO];
@@ -134,15 +140,14 @@
             
             BaasioFile *file = [[BaasioFile alloc] init];
             file.data = contentImageData;
-            file.filename = @"사진.jpeg";
-            file.contentType = @"image/jpeg";
+            file.filename = @"사진.png";
+            file.contentType = @"image/png";
             [file setObject:[[BaasioUser currentUser]objectForKey:@"username"] forKey:@"writer"];
             [file fileUploadInBackground:^(BaasioFile *file) {
                 NSLog(@"사진올리기 성공 : %@", file.uuid);
                 BaasioEntity *entity = [BaasioEntity entitytWithName:@"feed"];
                 [entity setObject:[[BaasioUser currentUser] objectForKey:@"username"] forKey:@"username"];
                 [entity setObject:[[BaasioUser currentUser] objectForKey:@"name"] forKey:@"nameID"];
-                [entity setObject:[[BaasioUser currentUser] objectForKey:@"picture"] forKey:@"picture"];
                 [entity setObject:[messageTextField text] forKey:@"content"];
                 [entity setObject:@"0" forKey:@"like"];
                 [entity setObject:@"0" forKey:@"bad"];
