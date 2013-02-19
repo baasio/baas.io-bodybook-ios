@@ -18,7 +18,7 @@
     NSArray *photos;
     NSMutableArray *contentArray;
     
-    BOOL postingPageUP;
+    BOOL modalPageUP;
 }
 @property (nonatomic, retain) NSArray *photos;
 @end

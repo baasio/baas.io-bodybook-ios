@@ -48,8 +48,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    step = 1;
+    step = 1; 
     imageSelected = 0;
+    
+//    UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 29)];
+//    [bt setTitle:@"" forState:UIControlStateNormal];
+//    [bt setImage:[UIImage imageNamed:@"btn_prev@2x.png"] forState:UIControlStateNormal];
+//    [bt addTarget:self action:@selector(postMessage:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithCustomView:bt];
+//    [self.navigationItem setLeftBarButtonItem:src];
+    
     dictionary = [[NSMutableDictionary alloc]init];
     _uploadFileList = [NSMutableArray array];
     BaasioQuery *query = [BaasioQuery queryWithCollection:@"users"];
@@ -63,7 +71,9 @@
                 failureBlock:^(NSError *error) {
                     NSLog(@"fail : %@", error.localizedDescription);
                 }];
-    // Do any additional setup after loading the view from its nib.
+    
+
+    
 }
 
 - (void)didReceiveMemoryWarning

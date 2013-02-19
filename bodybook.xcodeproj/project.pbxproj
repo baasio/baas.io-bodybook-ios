@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		414600A816D3BEEB00E7AE8D /* image_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414600A716D3BEEB00E7AE8D /* image_add@2x.png */; };
+		414600AA16D3C2D000E7AE8D /* btn_prev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414600A916D3C2D000E7AE8D /* btn_prev@2x.png */; };
 		DE3F503A16C0F4340073B168 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F503516C0F4080073B168 /* libSDWebImage.a */; };
 		DE3F503E16C0F5180073B168 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F503D16C0F5180073B168 /* CoreImage.framework */; };
 		DE3F504016C0F51E0073B168 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F503F16C0F51E0073B168 /* MapKit.framework */; };
@@ -84,7 +86,6 @@
 		DEFD4E3E16D382B200D5043A /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD4E3616D382B200D5043A /* whiteArrow.png */; };
 		DEFD4E3F16D382B200D5043A /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD4E3716D382B200D5043A /* whiteArrow@2x.png */; };
 		DEFD4E4216D382B900D5043A /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DEFD4E4116D382B900D5043A /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		DEFD4E4816D38D5000D5043A /* image_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD4E4716D38D5000D5043A /* image_add@2x.png */; };
 		DEFD4E4B16D39B2700D5043A /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = DEFD4E4A16D39B2700D5043A /* UIImage+Resize.m */; };
 		DEFD4E4D16D39F9400D5043A /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFD4E4C16D39F9300D5043A /* baas.io.framework */; };
 /* End PBXBuildFile section */
@@ -121,6 +122,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		414600A716D3BEEB00E7AE8D /* image_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image_add@2x.png"; path = "bodybook/image_add@2x.png"; sourceTree = "<group>"; };
+		414600A916D3C2D000E7AE8D /* btn_prev@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_prev@2x.png"; path = "bodybook/btn_prev@2x.png"; sourceTree = "<group>"; };
 		DE3F502B16C0F4080073B168 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = bodybook/SDWebImage/SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		DE3F503D16C0F5180073B168 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		DE3F503F16C0F51E0073B168 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -223,7 +226,6 @@
 		DEFD4E3716D382B200D5043A /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "whiteArrow@2x.png"; path = "bodybook/RefreshTable/image/whiteArrow@2x.png"; sourceTree = "<group>"; };
 		DEFD4E4016D382B900D5043A /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EGORefreshTableHeaderView.h; path = bodybook/RefreshTable/EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		DEFD4E4116D382B900D5043A /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EGORefreshTableHeaderView.m; path = bodybook/RefreshTable/EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
-		DEFD4E4716D38D5000D5043A /* image_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image_add@2x.png"; path = "bodybook/image_add@2x.png"; sourceTree = "<group>"; };
 		DEFD4E4916D39B2700D5043A /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "bodybook/UIImage+Resize.h"; sourceTree = "<group>"; };
 		DEFD4E4A16D39B2700D5043A /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "bodybook/UIImage+Resize.m"; sourceTree = "<group>"; };
 		DEFD4E4C16D39F9300D5043A /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = baas.io.framework; sourceTree = "<group>"; };
@@ -412,7 +414,8 @@
 		DEF7022C16BFA6A8008FEEA0 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				DEFD4E4716D38D5000D5043A /* image_add@2x.png */,
+				414600A916D3C2D000E7AE8D /* btn_prev@2x.png */,
+				414600A716D3BEEB00E7AE8D /* image_add@2x.png */,
 				DEB3F49816CE00B900014CD8 /* camera_icon@2x.png */,
 				DED8103E16CB28AA00E8FB65 /* default_user@2x.png */,
 				DEF7024016BFA719008FEEA0 /* TextField */,
@@ -652,7 +655,8 @@
 				DEFD4E3D16D382B200D5043A /* grayArrow@2x.png in Resources */,
 				DEFD4E3E16D382B200D5043A /* whiteArrow.png in Resources */,
 				DEFD4E3F16D382B200D5043A /* whiteArrow@2x.png in Resources */,
-				DEFD4E4816D38D5000D5043A /* image_add@2x.png in Resources */,
+				414600A816D3BEEB00E7AE8D /* image_add@2x.png in Resources */,
+				414600AA16D3C2D000E7AE8D /* btn_prev@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

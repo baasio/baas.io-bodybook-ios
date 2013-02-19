@@ -32,6 +32,7 @@
 {
     friendTextField.text = @"";
     [checkText setText:@""];
+    [check setImage:nil];
     [super viewDidAppear:animated];
 }
 
@@ -87,29 +88,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (friendTextField.text.length >= 1) {
-        BaasioQuery *query = [BaasioQuery queryWithCollection:@"users"];
-        NSString *whereQueryString = [NSString stringWithFormat:@"username = '%@'",friendTextField.text];
-        [query setWheres:whereQueryString];
-        [query queryInBackground:^(NSArray *array) {
-            if([array count]>0){
-//                [self.navigationItem.rightBarButtonItem setEnabled:TRUE];
-            }else{
-//                [self.navigationItem.rightBarButtonItem setEnabled:FALSE];
-            }
-            
-            //NSLog(@"array : %@", contentArray);
-        }
-                    failureBlock:^(NSError *error) {
-                        [addFriend setHidden:TRUE];
-                        [self.navigationItem.rightBarButtonItem setEnabled:FALSE];
-                        NSLog(@"친구를 찾지 못함 : %@", error.localizedDescription);
-                    }];
-
-    }
-    return YES;
-}
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    if (friendTextField.text.length >= 1) {
+//        BaasioQuery *query = [BaasioQuery queryWithCollection:@"users"];
+//        NSString *whereQueryString = [NSString stringWithFormat:@"username = '%@'",friendTextField.text];
+//        [query setWheres:whereQueryString];
+//        [query queryInBackground:^(NSArray *array) {
+//            if([array count]>0){
+//            }
+//            //NSLog(@"array : %@", contentArray);
+//        }
+//                    failureBlock:^(NSError *error) {
+//                        NSLog(@"친구를 찾지 못함 : %@", error.localizedDescription);
+//                    }];
+//
+//    }
+//    return YES;
+//}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textFieldView {
     if (textFieldView == friendTextField) {

@@ -33,21 +33,22 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if(postingPageUP){
+    if(modalPageUP){
         [self updateFeedData];
-        postingPageUP = NO;
+        modalPageUP = NO;
     }
     //[self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointMake(0.0, 0.0)];
+    //[self.tableView setContentOffset:CGPointMake(0.0, 0.0)];
     //[self updateFeedData];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     [self updateFeedData];
     
+    modalPageUP = NO;
     self.navigationItem.title = [[BaasioUser currentUser] objectForKey:@"name"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -84,7 +85,7 @@
 }
 
 -(void)postingPage{
-    postingPageUP = YES;
+    modalPageUP = YES;
     PostMessageViewController *postMessageView = [[PostMessageViewController alloc] initWithNibName:@"PostMessageViewController" bundle:nil];
     [self presentViewController:postMessageView animated:YES completion:nil];
 }
