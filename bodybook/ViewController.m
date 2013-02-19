@@ -65,7 +65,8 @@
     [BaasioUser signIn:userName.text password:password.text error:&error];
     if (!error) {
         //성공
-        NSLog(@"로그인 성공");
+        NSLog(@"로그인 성공 : %@", [[BaasioUser currentUser]description] );
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
         [self goToMainPage];
     } else {
         //실패
@@ -164,5 +165,9 @@
     
     keyboardIsShown = NO;
 }
+
+
+
+
 
 @end

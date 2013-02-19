@@ -8,13 +8,14 @@
 
 #import "PostMessageViewController.h"
 #import "UIImage+Utilities.h"
+#import "UIImage+Resize.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <baas.io/Baas.h>
 
-#define IMAGE_WIDTH 612.0f
-#define IMAGE_HEIGHT 612.0f
+#define IMAGE_WIDTH 612.f
+#define IMAGE_HEIGHT 612.f
 
 @interface PostMessageViewController ()
 
@@ -91,24 +92,14 @@
     
     imageSelected = 1;
 
-    CGRect cropRect = [[info valueForKey:UIImagePickerControllerCropRect] CGRectValue];
+    //CGRect cropRect = [[info valueForKey:UIImagePickerControllerCropRect] CGRectValue];
     UIImage *originalImage = [info valueForKey:UIImagePickerControllerOriginalImage];
-    cropRect = [originalImage convertCropRect:cropRect];
-    UIImage *croppedImage = [originalImage croppedImage:cropRect];
-    UIImage *resizedImage = [[UIImage alloc]init];
-    if(croppedImage.size.width > IMAGE_WIDTH){
-        if(croppedImage.size.height > IMAGE_HEIGHT){
-            resizedImage = [croppedImage resizedImage:CGSizeMake(IMAGE_WIDTH, IMAGE_HEIGHT) imageOrientation:originalImage.imageOrientation];
-        }else{
-            resizedImage = [croppedImage resizedImage:CGSizeMake(IMAGE_WIDTH, originalImage.size.height) imageOrientation:originalImage.imageOrientation];
-        }
-    }else{
-        //resizedImage = [croppedImage resizedImage:CGSizeMake(croppedImage.size.width, croppedImage.size.height) imageOrientation:originalImage.imageOrientation];
-        resizedImage = croppedImage;
-    }
-    
-    //[imageAddButton setBackgroundImage:resizedImage forState:UIControlStateNormal];
-    [imageAddButton setBackgroundImage:originalImage forState:UIControlStateNormal];
+    //UIImage *halfSizeImage = [self resizeImage:originalImage width:originalImage.size.width * 0.5 height:originalImage.size.height * 0.5];
+    //cropRect = [originalImage convertCropRect:cropRect];
+    //UIImage *croppedImage = [originalImage croppedImage:cropRect];
+    UIImage *resizedImage = [originalImage resizedImageWithMaximumSize:CGSizeMake(IMAGE_WIDTH, IMAGE_HEIGHT)];
+
+    [imageAddButton setBackgroundImage:resizedImage forState:UIControlStateNormal];
 
     
     NSURL *url = [info valueForKey:UIImagePickerControllerReferenceURL];
@@ -125,7 +116,6 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 - (IBAction)postMessage:(id)sender {
     if (![messageTextField.text isEqualToString:@""]) {
         [postButton setEnabled:NO];
@@ -140,8 +130,8 @@
             
             BaasioFile *file = [[BaasioFile alloc] init];
             file.data = contentImageData;
-            file.filename = @"사진.png";
-            file.contentType = @"image/png";
+            file.filename = @"contentImage.jpg";
+            file.contentType = @"image/jpeg";
             [file setObject:[[BaasioUser currentUser]objectForKey:@"username"] forKey:@"writer"];
             [file fileUploadInBackground:^(BaasioFile *file) {
                 NSLog(@"사진올리기 성공 : %@", file.uuid);
@@ -155,6 +145,34 @@
                 
                 [entity saveInBackground:^(BaasioEntity *entity) {
                     NSLog(@"포스팅 성공 : %@", entity.description);
+                    BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/followers",[[BaasioUser currentUser]objectForKey:@"username"]]];
+                    //limit이 걸리나? 그럼 10개한정이면 10명이상의 친구가 있을 경우는 어쩌지? 답 : next, preview기능이 있다.
+                    [query queryInBackground:^(NSArray *array) {
+                        NSMutableArray *friendArray = [[NSMutableArray alloc]initWithArray:array];
+                        NSDictionary *friendInfo = [[NSDictionary alloc]init];
+                        
+                        BaasioPush *push = [[BaasioPush alloc] init];
+                        BaasioMessage *message = [[BaasioMessage alloc]init];
+                        message.badge = 1;
+                        message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
+                        for(int i=0;i<friendArray.count;i++){
+                            friendInfo = [friendArray objectAtIndex:i];
+                            [message.to addObject:[NSString stringWithFormat:@"t%@",[[BaasioUser currentUser] objectForKey:@"username"]]];
+                        }
+                        [push sendPushInBackground:message
+                                      successBlock:^(void) {
+                                          NSLog(@"푸시보내기 성공");
+                                          [message.to removeAllObjects];
+                                      }
+                                      failureBlock:^(NSError *error) {
+                                          NSLog(@"푸시보내기 실패 : %@", error.localizedDescription);
+                                          [message.to removeAllObjects];
+                                      }];
+                    
+                    }
+                                failureBlock:^(NSError *error) {
+                                    NSLog(@"친구목록 불러오기 실패 : %@", error.localizedDescription);
+                                }];
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }
                             failureBlock:^(NSError *error) {
@@ -181,6 +199,32 @@
             
             [entity saveInBackground:^(BaasioEntity *entity) {
                 NSLog(@"포스팅 성공 : %@", entity.description);
+                BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/followers",[[BaasioUser currentUser]objectForKey:@"username"]]];
+                //limit이 걸리나? 그럼 10개한정이면 10명이상의 친구가 있을 경우는 어쩌지? 답 : next, preview기능이 있다.
+                [query queryInBackground:^(NSArray *array) {
+                    NSMutableArray *friendArray = [[NSMutableArray alloc]initWithArray:array];
+                    NSDictionary *friendInfo = [[NSDictionary alloc]init];
+                    
+                    BaasioPush *push = [[BaasioPush alloc] init];
+                    BaasioMessage *message = [[BaasioMessage alloc]init];
+                    message.badge = 1;
+                    message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
+                    for(int i=0;i<friendArray.count;i++){
+                        friendInfo = [friendArray objectAtIndex:i];
+                        [message.to addObject:[NSString stringWithFormat:@"t%@",[[BaasioUser currentUser] objectForKey:@"username"]]];
+                    }
+                    [push sendPushInBackground:message
+                                  successBlock:^(void) {
+                                      NSLog(@"푸시보내기 성공");
+                                  }
+                                  failureBlock:^(NSError *error) {
+                                      NSLog(@"푸시보내기 실패 : %@", error.localizedDescription);
+                                  }];
+                    
+                }
+                            failureBlock:^(NSError *error) {
+                                NSLog(@"친구목록 불러오기 실패 : %@", error.localizedDescription);
+                            }];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
                         failureBlock:^(NSError *error) {

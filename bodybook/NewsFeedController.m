@@ -33,9 +33,13 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    if(postingPageUP){
+        [self updateFeedData];
+        postingPageUP = NO;
+    }
     //[self.tableView reloadData];
     //[self.tableView setContentOffset:CGPointMake(0.0, 0.0)];
-    [self updateFeedData];
+    //[self updateFeedData];
 }
 
 - (void)viewDidLoad
@@ -43,6 +47,9 @@
     [super viewDidLoad];
     //NSLog(@"%@",[BaasioUser currentUser]);
     
+    [self updateFeedData];
+    
+    postingPageUP = NO;
     self.navigationItem.title = @"뉴스피드";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -55,6 +62,13 @@
     [bt addTarget:self action:@selector(postingPage) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithCustomView:bt];
     self.navigationItem.rightBarButtonItem = src;
+    
+    if (_refreshHeaderView == nil) {
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+		view.delegate = self;
+		[self.tableView addSubview:view];
+		_refreshHeaderView = view;
+	}
 }
 
 -(void)updateFeedData{
@@ -71,11 +85,11 @@
             whereQueryString = [whereQueryString stringByAppendingFormat:@" or username = '%@'",[friendInfo objectForKey:@"username"]];
         }
         [query setWheres:whereQueryString];
-        [query setLimit:14];
+        [query setLimit:999];
         [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
         [query queryInBackground:^(NSArray *array) {
             contentArray = [[NSMutableArray alloc]initWithArray:array];
-            [self.tableView reloadData];
+            [self doneLoadingTableViewData];
             //NSLog(@"array : %@", contentArray);
         }
                     failureBlock:^(NSError *error) {
@@ -88,6 +102,7 @@
 }
 
 -(void)postingPage{
+    postingPageUP = YES;
     PostMessageViewController *postMessageView = [[PostMessageViewController alloc] initWithNibName:@"PostMessageViewController" bundle:nil];
     [self presentViewController:postMessageView animated:YES completion:nil];
 }
@@ -172,6 +187,62 @@
     if (index < photos.count)
         return [photos objectAtIndex:index];
     return nil;
+}
+
+#pragma mark -
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)reloadTableViewDataSource{
+	
+	//  should be calling your tableviews data source model to reload
+	//  put here just for demo
+	_reloading = YES;
+    [self updateFeedData];
+}
+
+- (void)doneLoadingTableViewData{
+	//  model should call this when its done loading
+	_reloading = NO;
+    [self.tableView reloadData];
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+}
+
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+	
+}
+
+
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
+	
+	[self reloadTableViewDataSource];
+    
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
+	
+	return _reloading; // should return if data source model is reloading
+	
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
+    
+	return [NSDate date]; // should return date data source was last changed
+    
 }
 
 @end

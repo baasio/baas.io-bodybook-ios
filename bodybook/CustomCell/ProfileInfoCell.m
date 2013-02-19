@@ -8,6 +8,8 @@
 
 #import "ProfileInfoCell.h"
 #import "UIImage+Utilities.h"
+#import "UIImage+Resize.h"
+
 #import <QuartzCore/QuartzCore.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -94,42 +96,33 @@
     cropRect = [originalImage convertCropRect:cropRect];
     UIImage *croppedImage = [originalImage croppedImage:cropRect];
     UIImage *resizedImage = [[UIImage alloc]init];
-    
-    if(croppedImage.size.width > 612){
-        if(croppedImage.size.height > 612){
-            resizedImage = [croppedImage resizedImage:CGSizeMake(IMAGE_WIDTH, IMAGE_HEIGHT) imageOrientation:originalImage.imageOrientation];
-        }else{
-            resizedImage = [croppedImage resizedImage:CGSizeMake(IMAGE_WIDTH, croppedImage.size.height) imageOrientation:originalImage.imageOrientation];
-        }
-    }else{
-        resizedImage = croppedImage;
-    }
-    
+    resizedImage = [croppedImage resizedImageWithMaximumSize:CGSizeMake(IMAGE_WIDTH, IMAGE_HEIGHT)];
+
     NSData *contentImageData = UIImageJPEGRepresentation(resizedImage, 1.0);
     BaasioFile *file = [[BaasioFile alloc] init];
     file.data = contentImageData;
-    file.filename = @"프로필사진.jpeg";
+    file.filename = @"ProfileImage.jpg";
     file.contentType = @"image/jpeg";
     [file setObject:[[BaasioUser currentUser]objectForKey:@"username"] forKey:@"writer"];
     [file fileUploadInBackground:^(BaasioFile *file) {
         NSLog(@"프로필사진 업로드 성공 : %@", file.uuid);
-        BaasioEntity *entity = [BaasioEntity entitytWithName:@"users"];
-        entity.uuid = [[BaasioUser currentUser]objectForKey:@"uuid"];
-        [entity setObject:[NSString stringWithFormat:@"https://blob.baas.io/gyuchan/bodybook/files/%@",file.uuid] forKey:@"picture"];
-        [entity updateInBackground:^(BaasioEntity *entity) {
-            NSLog(@"Entity수정 성공 %@",entity);
-            [picker dismissViewControllerAnimated:YES completion:nil];
-        }
-                      failureBlock:^(NSError *error) {
-                          NSLog(@"Entity수정 실패 : %@", error.localizedDescription);
-                      }];
+        
+        BaasioUser *user = [BaasioUser currentUser];
+        //user.username = [[BaasioUser currentUser]objectForKey:@"username"];
+        [user setObject:[NSString stringWithFormat:@"https://blob.baas.io/gyuchan/bodybook/files/%@",file.uuid] forKey:@"picture"];
+        [user updateInBackground:^(BaasioUser *user) {
+                            [picker dismissViewControllerAnimated:YES completion:nil];
+                        }
+                        failureBlock:^(NSError *error) {
+                            NSLog(@"error : %@", error.localizedDescription);
+                        }];
     }
-                    failureBlock:^(NSError *error) {
-                        NSLog(@"파일 올리기 에러 : %@", error.localizedDescription);
-                    }
-                   progressBlock:^(float progress) {
-                       NSLog(@"progress : %f", progress);
-                   }];
+    failureBlock:^(NSError *error) {
+        NSLog(@"파일 올리기 에러 : %@", error.localizedDescription);
+    }
+    progressBlock:^(float progress) {
+       NSLog(@"progress : %f", progress);
+    }];
     
 }
 

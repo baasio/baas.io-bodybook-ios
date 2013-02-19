@@ -799,6 +799,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="closeMessage:">id</string>
 						<string key="imageAddTouched:">id</string>
+						<string key="postMessage:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="closeMessage:">
@@ -807,6 +808,10 @@
 						</object>
 						<object class="IBActionInfo" key="imageAddTouched:">
 							<string key="name">imageAddTouched:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="postMessage:">
+							<string key="name">postMessage:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

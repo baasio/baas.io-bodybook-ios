@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "MWPhotoBrowser.h"
+#import "EGORefreshTableHeaderView.h"
 
-@interface UserViewController : UITableViewController <MWPhotoBrowserDelegate>{
+
+@interface UserViewController : UITableViewController <MWPhotoBrowserDelegate,EGORefreshTableHeaderDelegate>{
+    EGORefreshTableHeaderView *_refreshHeaderView;
+    BOOL _reloading;
+    
     NSArray *photos;
     NSMutableArray *contentArray;
+    BOOL postingPageUP;
 }
 @property (nonatomic, retain) NSArray *photos;
 -(void)updateFeedData;
