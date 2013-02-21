@@ -11,19 +11,36 @@
 #import <QuartzCore/QuartzCore.h>
 #import <baas.io/Baas.h>
 
-@interface JoinController ()
+@interface JoinController (){
+    UITableView *_tableView;
+}
 
 @end
 
 @implementation JoinController
 
-@synthesize userName, name, email, password, passwordRepeat, scrollView, cancelButton, joinButton;;
+@synthesize userName, name, email, password, scrollView, cancelButton, joinButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        UINavigationBar* navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:@"가입하기"];
+        UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithTitle:@"취소" style:UIBarButtonItemStyleBordered target:nil action:@selector(cancelTouched)];
+        navigationItem.leftBarButtonItem = buttonItem;
+        [navigationBar pushNavigationItem:navigationItem animated:NO];
+        [self.view addSubview:navigationBar];
+        
+        CGRect frame = CGRectMake(0, 44, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+        _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
+        _tableView.scrollEnabled = NO;
+        _tableView.allowsSelection = NO;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundView = nil;
+        _tableView.backgroundColor = [UIColor clearColor];
+        [self.scrollView addSubview:_tableView];
     }
     return self;
 }
@@ -31,20 +48,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    joinButton.layer.cornerRadius = 6;
-    joinButton.clipsToBounds = YES;
-    
-    cancelButton.layer.cornerRadius = 6;
-    cancelButton.clipsToBounds = YES;
-    
-    password.secureTextEntry = YES;
-    passwordRepeat.secureTextEntry = YES;
-    
-    [self.userName setReturnKeyType:UIReturnKeyNext];
-    [self.name setReturnKeyType:UIReturnKeyNext];
-    [self.email setReturnKeyType:UIReturnKeyNext];
-    [self.password setReturnKeyType:UIReturnKeyNext];
-    [self.passwordRepeat setReturnKeyType:UIReturnKeyGo];
+    [scrollView setScrollEnabled:YES];
+    CGSize scrollableSize = CGSizeMake(320, self.view.frame.size.height);
+    [scrollView setContentSize:scrollableSize];
+//    joinButton.layer.cornerRadius = 6;
+//    joinButton.clipsToBounds = YES;
+//    
+//    cancelButton.layer.cornerRadius = 6;
+//    cancelButton.clipsToBounds = YES;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -71,12 +82,8 @@
     return [emailTest evaluateWithObject:checkString];
 }
 
--(IBAction)cancelTouched:(id)sender{
+-(void)cancelTouched{
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
--(IBAction)joinTouched:(id)sender{
-    [self join];
 }
 
 -(void)join{
@@ -88,7 +95,7 @@
         [alert show];
     }else{
         
-        if([password.text isEqualToString:passwordRepeat.text]&&(![password.text isEqualToString:@""])) {
+        if(![password.text isEqualToString:@""]){
             [BaasioUser signUpInBackground:userName.text
                                   password:password.text
                                       name:name.text
@@ -103,7 +110,7 @@
         } else {
             UIAlertView* alert = [[UIAlertView alloc]
                                   initWithTitle:[NSString stringWithFormat:@"비밀번호 확인"]
-                                  message:[NSString stringWithFormat:@"비밀번호 올바르게 입력하세요"]
+                                  message:[NSString stringWithFormat:@"비밀번호를 입력하세요"]
                                   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
@@ -115,11 +122,32 @@
     [name resignFirstResponder];
     [email resignFirstResponder];
     [password resignFirstResponder];
-    [passwordRepeat resignFirstResponder];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textFieldView {
+- (BOOL)checkButtonEnable
+{
+    if (![userName.text isEqualToString:@""] && ![name.text isEqualToString:@""] && ![email.text isEqualToString:@""] && ![password.text isEqualToString:@""]){
+        joinButton.enabled = YES;
+    }else{
+        joinButton.enabled = NO;
+    }
+    return joinButton.enabled;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textFieldView{
     currentTextField = textFieldView;
+    //[self checkButtonEnable];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textFieldView{
+    [textFieldView resignFirstResponder];
+    //[self checkButtonEnable];
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:
+(NSRange)range replacementString:(NSString *)string
+{
+    [self checkButtonEnable];
+    return true;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textFieldView {
@@ -131,20 +159,12 @@
         [self.email becomeFirstResponder];
     } else if (textFieldView == self.email) {
         [self.email resignFirstResponder];
-        [self.passwordRepeat becomeFirstResponder];
         [self.password becomeFirstResponder];
     } else if (textFieldView == self.password) {
-        //[self.password resignFirstResponder];
-        [self.passwordRepeat becomeFirstResponder];
-    } else if (textFieldView == self.passwordRepeat) {
-        [self.passwordRepeat resignFirstResponder];
+        [self.password resignFirstResponder];
         [self join];
     }
     return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textFieldView {
-    [textFieldView resignFirstResponder];
 }
 
 - (void)keyboardDidShow:(NSNotification *) notification {
@@ -178,5 +198,118 @@
     keyboardIsShown = NO;
 }
 
+
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 300;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 90)];
+    footerView.backgroundColor = [UIColor clearColor];
+    
+    joinButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    joinButton.frame = CGRectMake(10, 10, 300, 44);
+    [joinButton setTitle:@"가입하기" forState:UIControlStateNormal];
+    [joinButton addTarget:self action:@selector(join) forControlEvents:UIControlEventTouchUpInside];
+    joinButton.enabled = false;
+    joinButton.tag = 11;
+    [footerView addSubview:joinButton];
+    
+    UILabel *joinInfo = [[UILabel alloc]init];
+    joinInfo.frame = CGRectMake(10, 40, 300, 44);
+    joinInfo.font = [UIFont systemFontOfSize:13.];
+    joinInfo.text = @"baas.io를 이용한 SNS세계에 동참하세요";
+    joinInfo.textColor = [UIColor whiteColor];
+    joinInfo.textAlignment = NSTextAlignmentCenter;
+    joinInfo.backgroundColor = [UIColor clearColor];
+    [footerView addSubview:joinInfo];
+    
+    return footerView;
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 4;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellName = @"entityCell";
+    
+    UITableViewCell *entityCell = [tableView dequeueReusableCellWithIdentifier:cellName];
+    if (entityCell == nil) {
+        entityCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellName];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, 44)];
+        label.backgroundColor = [UIColor clearColor];
+        label.tag = 1;
+        [entityCell addSubview:label];
+
+        switch (indexPath.row) {
+            case 0:
+                userName = [[UITextField alloc] initWithFrame:CGRectMake(120, 10, 200, 44)];
+                userName.delegate = self;
+                userName.backgroundColor = [UIColor clearColor];
+                userName.tag = 20 + indexPath.row;
+                userName.placeholder = @"Username";
+                userName.returnKeyType = UIReturnKeyNext;
+                userName.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                [entityCell addSubview:userName];
+                break;
+            case 1:
+                name = [[UITextField alloc] initWithFrame:CGRectMake(120, 10, 200, 44)];
+                name.delegate = self;
+                name.backgroundColor = [UIColor clearColor];
+                name.tag = 20 + indexPath.row;
+                name.placeholder = @"전규찬";
+                name.returnKeyType = UIReturnKeyNext;
+                name.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                [entityCell addSubview:name];
+                break;
+            case 2:
+                email = [[UITextField alloc] initWithFrame:CGRectMake(120, 10, 200, 44)];
+                email.delegate = self;
+                email.backgroundColor = [UIColor clearColor];
+                email.tag = 20 + indexPath.row;
+                email.placeholder = @"email@example.com";
+                email.returnKeyType = UIReturnKeyNext;
+                email.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                [entityCell addSubview:email];
+                break;
+            case 3:
+                password = [[UITextField alloc] initWithFrame:CGRectMake(120, 10, 200, 44)];
+                password.delegate = self;
+                password.backgroundColor = [UIColor clearColor];
+                password.tag = 20 + indexPath.row;
+                password.placeholder = @"필수입력";
+                password.secureTextEntry = YES;
+                password.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                password.returnKeyType = UIReturnKeyGo;
+                [entityCell addSubview:password];
+            default:
+                break;
+        }
+    }
+    
+    UILabel *label = (UILabel*)[entityCell viewWithTag:1];
+    UITextField *field = (UITextField*)[entityCell viewWithTag:2 + indexPath.row];
+    field.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    switch (indexPath.row){
+        case 0:
+            label.text = @"아이디";
+            break;
+        case 1:
+            label.text = @"이름";
+            break;
+        case 2:
+            label.text = @"이메일";
+            break;
+        case 3:
+            label.text = @"비밀번호";
+            break;
+    }
+    return entityCell;
+}
 
 @end

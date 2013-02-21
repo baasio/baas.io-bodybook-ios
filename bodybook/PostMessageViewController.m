@@ -163,20 +163,17 @@
                         
                         BaasioPush *push = [[BaasioPush alloc] init];
                         BaasioMessage *message = [[BaasioMessage alloc]init];
-                        message.badge = 1;
                         message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
                         for(int i=0;i<friendArray.count;i++){
                             friendInfo = [friendArray objectAtIndex:i];
-                            [message.to addObject:[NSString stringWithFormat:@"t%@",[[BaasioUser currentUser] objectForKey:@"username"]]];
+                            [message.to addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
                         }
                         [push sendPushInBackground:message
                                       successBlock:^(void) {
                                           NSLog(@"푸시보내기 성공");
-                                          [message.to removeAllObjects];
                                       }
                                       failureBlock:^(NSError *error) {
                                           NSLog(@"푸시보내기 실패 : %@", error.localizedDescription);
-                                          [message.to removeAllObjects];
                                       }];
                     
                     }
@@ -217,11 +214,10 @@
                     
                     BaasioPush *push = [[BaasioPush alloc] init];
                     BaasioMessage *message = [[BaasioMessage alloc]init];
-                    message.badge = 1;
                     message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
                     for(int i=0;i<friendArray.count;i++){
                         friendInfo = [friendArray objectAtIndex:i];
-                        [message.to addObject:[NSString stringWithFormat:@"t%@",[[BaasioUser currentUser] objectForKey:@"username"]]];
+                        [message.to addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
                     }
                     [push sendPushInBackground:message
                                   successBlock:^(void) {

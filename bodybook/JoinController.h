@@ -8,21 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JoinController : UIViewController {
+@interface JoinController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>{
     BOOL keyboardIsShown;
     UITextField *currentTextField;
     
     UIScrollView *scrollView;
-    
 }
 
 @property (retain, nonatomic) IBOutlet UIButton *cancelButton, *joinButton;
-@property (retain, nonatomic) IBOutlet UITextField *userName, *name, *email, *password, *passwordRepeat;
+@property (retain, nonatomic) IBOutlet UITextField *userName, *name, *email, *password;
 @property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
 
-
--(IBAction)cancelTouched:(id)sender;
-
--(IBAction)joinTouched:(id)sender;
 
 @end

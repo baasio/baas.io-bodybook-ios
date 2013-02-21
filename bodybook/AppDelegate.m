@@ -24,9 +24,9 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
-    NSDictionary *dictionary = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
-    NSDictionary *aps = [dictionary objectForKey:@"aps"];
-	application.applicationIconBadgeNumber = [[aps objectForKey:@"badge"] intValue];
+//    NSDictionary *dictionary = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
+//    NSDictionary *aps = [dictionary objectForKey:@"aps"];
+//    application.applicationIconBadgeNumber = application.applicationIconBadgeNumber + [aps objectForKey:@"badge"];
     
     return YES;
 }
@@ -50,6 +50,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+//    [application setApplicationIconBadgeNumber: 0];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -65,13 +66,11 @@
 	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
 }
 
-// 애플리케이션 실행 중에 RemoteNotification 을 수신
+//앱을 실행하고 있는 도중에 RemoteNotification 을 수신
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     //	NSLog(@"1. didReceiveRemoteNotification");
 	// push 메시지 추출
-    NSDictionary *aps = [userInfo objectForKey:@"aps"];
-    
-	application.applicationIconBadgeNumber = [[aps objectForKey:@"badge"] intValue];
+//    NSDictionary *aps = [userInfo objectForKey:@"aps"];
 	
     // alert 추출
 //    NSString *alertMessage = [aps objectForKey:@"alert"];
@@ -83,6 +82,7 @@
 //                                          otherButtonTitles:nil];
 //	[alert show];
 }
+
 
 // RemoteNotification 등록 성공. deviceToken을 수신
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {

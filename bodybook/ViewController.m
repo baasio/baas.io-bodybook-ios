@@ -57,7 +57,7 @@
     [self login];
 }
 -(IBAction)joinTouched:(id)sender{
-    JoinController *joinView = [[JoinController alloc] init];
+    JoinController *joinView = [[JoinController alloc] initWithNibName:@"JoinController" bundle:nil];
     [self presentViewController:joinView animated:YES completion:nil];
 }
 - (void)login{
