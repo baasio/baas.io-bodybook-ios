@@ -40,7 +40,7 @@
 {
     self.navigationItem.title = @"친구";
     [checkText setText:@""];
-    [friendTextField setReturnKeyType:UIReturnKeyGo];
+    [friendTextField setReturnKeyType:UIReturnKeyGo];    
     
 //    UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 29)];
 //    [bt setBackgroundImage:[UIImage imageNamed:@"rightButton@2x.png"] forState:UIControlStateNormal];

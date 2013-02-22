@@ -51,12 +51,14 @@
     step = 1; 
     imageSelected = 0;
     
-//    UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 29)];
-//    [bt setTitle:@"" forState:UIControlStateNormal];
-//    [bt setImage:[UIImage imageNamed:@"btn_prev@2x.png"] forState:UIControlStateNormal];
-//    [bt addTarget:self action:@selector(postMessage:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithCustomView:bt];
-//    [self.navigationItem setLeftBarButtonItem:src];
+    UINavigationBar *naviBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UINavigationItem *buttonCarrier = [[UINavigationItem alloc]initWithTitle:@"글 올리기"];
+    [buttonCarrier setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"올리기" style:UIBarButtonItemStyleBordered target:self action:@selector(postMessage)]];
+    [buttonCarrier setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"뒤로" style:UIBarButtonItemStyleBordered target:self action:@selector(closeMessage)]];
+    NSArray *barItemArray = [[NSArray alloc]initWithObjects:buttonCarrier,nil];
+    [naviBar setItems:barItemArray];
+    [self.view addSubview:naviBar];
+    
     
     dictionary = [[NSMutableDictionary alloc]init];
     _uploadFileList = [NSMutableArray array];
@@ -126,7 +128,7 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)postMessage:(id)sender {
+- (void)postMessage{
     if (![messageTextField.text isEqualToString:@""]) {
         [postButton setEnabled:NO];
         if(imageSelected == 1){
@@ -145,8 +147,14 @@
             [file setObject:[[BaasioUser currentUser]objectForKey:@"username"] forKey:@"writer"];
             [file fileUploadInBackground:^(BaasioFile *file) {
                 NSLog(@"사진올리기 성공 : %@", file.uuid);
-                BaasioEntity *entity = [BaasioEntity entitytWithName:@"feed"];
-                [entity setObject:[[BaasioUser currentUser] objectForKey:@"username"] forKey:@"username"];
+                BaasioEntity *entity = [BaasioEntity entitytWithName:[NSString stringWithFormat:@"users/%@/activities",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
+//                [entity setObject:[[BaasioUser currentUser] objectForKey:@"username"] forKey:@"username"];
+                
+                ///////////////////////////////////꼭 등록되어있어야함////////////////////////////////////////
+                [entity setObject:[BaasioUser currentUser] forKey:@"actor"];
+                [entity setObject:@"post" forKey:@"verb"];
+                /////////////////////////////////////////////////////////////////////////////////////////
+
                 [entity setObject:[[BaasioUser currentUser] objectForKey:@"name"] forKey:@"nameID"];
                 [entity setObject:[messageTextField text] forKey:@"content"];
                 [entity setObject:@"0" forKey:@"like"];
@@ -164,10 +172,13 @@
                         BaasioPush *push = [[BaasioPush alloc] init];
                         BaasioMessage *message = [[BaasioMessage alloc]init];
                         message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
+                        NSMutableArray *messageTO = [[NSMutableArray alloc]init];
                         for(int i=0;i<friendArray.count;i++){
                             friendInfo = [friendArray objectAtIndex:i];
-                            [message.to addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
+                            [messageTO addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
                         }
+                        message.to = messageTO;
+                        NSLog(@"message.to.description:%@",message.to.description);
                         [push sendPushInBackground:message
                                       successBlock:^(void) {
                                           NSLog(@"푸시보내기 성공");
@@ -196,8 +207,14 @@
  
         }else{
             //이미지를 선택하지 않았을 경우.
-            BaasioEntity *entity = [BaasioEntity entitytWithName:@"feed"];
-            [entity setObject:[[BaasioUser currentUser] objectForKey:@"username"] forKey:@"username"];
+            BaasioEntity *entity = [BaasioEntity entitytWithName:[NSString stringWithFormat:@"users/%@/activities",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
+//            [entity setObject:[[BaasioUser currentUser] objectForKey:@"username"] forKey:@"username"];
+
+            ///////////////////////////////////꼭 등록되어있어야함////////////////////////////////////////
+            [entity setObject:[BaasioUser currentUser] forKey:@"actor"];
+            [entity setObject:@"post" forKey:@"verb"];
+            /////////////////////////////////////////////////////////////////////////////////////////
+            
             [entity setObject:[[BaasioUser currentUser] objectForKey:@"name"] forKey:@"nameID"];
             [entity setObject:[messageTextField text] forKey:@"content"];
             [entity setObject:@"0" forKey:@"like"];
@@ -206,7 +223,7 @@
             
             [entity saveInBackground:^(BaasioEntity *entity) {
                 NSLog(@"포스팅 성공 : %@", entity.description);
-                BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/followers",[[BaasioUser currentUser]objectForKey:@"username"]]];
+                BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/followers",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
                 //limit이 걸리나? 그럼 10개한정이면 10명이상의 친구가 있을 경우는 어쩌지? 답 : next, preview기능이 있다.
                 [query queryInBackground:^(NSArray *array) {
                     NSMutableArray *friendArray = [[NSMutableArray alloc]initWithArray:array];
@@ -215,10 +232,13 @@
                     BaasioPush *push = [[BaasioPush alloc] init];
                     BaasioMessage *message = [[BaasioMessage alloc]init];
                     message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
+                    NSMutableArray *messageTO = [[NSMutableArray alloc]init];
                     for(int i=0;i<friendArray.count;i++){
                         friendInfo = [friendArray objectAtIndex:i];
-                        [message.to addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
+                        [messageTO addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
                     }
+                    message.to = messageTO;
+                    NSLog(@"message.to.description:%@",message.to.description);
                     [push sendPushInBackground:message
                                   successBlock:^(void) {
                                       NSLog(@"푸시보내기 성공");
@@ -248,7 +268,7 @@
     }
 }
 
-- (IBAction)closeMessage:(id)sender {
+- (void)closeMessage{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

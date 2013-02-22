@@ -55,12 +55,8 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.opaque = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:1.0 alpha:1];
-    
-    UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 29)];
-    [bt setTitle:@"게시" forState:UIControlStateNormal];
-    //[bt setImage:[UIImage imageNamed:@"newMessage@2x.png"] forState:UIControlStateNormal];
-    [bt addTarget:self action:@selector(postingPage) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithCustomView:bt];
+
+    UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithTitle:@"게시" style:UIBarButtonItemStyleBordered target:self action:@selector(postingPage)];
     self.navigationItem.rightBarButtonItem = src;
     
     if (_refreshHeaderView == nil) {
@@ -72,32 +68,17 @@
 }
 
 -(void)updateFeedData{
-    BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/following/user/",[[BaasioUser currentUser]objectForKey:@"username"]]];
-    //limit이 걸리나? 그럼 10개한정이면 10명이상의 친구가 있을 경우는 어쩌지? 답 : next, preview기능이 있다.
+    BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/feed",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
+    //[query setWheres:[NSString stringWithFormat:@"username = '%@'",[[BaasioUser currentUser] objectForKey:@"username"]]];
+    //[query setLimit:999];
+    [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
     [query queryInBackground:^(NSArray *array) {
-        NSMutableArray *friendArray = [[NSMutableArray alloc]initWithArray:array];
-        NSDictionary *friendInfo = [[NSDictionary alloc]init];
-        
-        BaasioQuery *query = [BaasioQuery queryWithCollection:@"feed"];
-        NSString *whereQueryString = [NSString stringWithFormat:@"username = '%@'",[[BaasioUser currentUser] objectForKey:@"username"]];
-        for(int i=0;i<friendArray.count;i++){
-            friendInfo = [friendArray objectAtIndex:i];
-            whereQueryString = [whereQueryString stringByAppendingFormat:@" or username = '%@'",[friendInfo objectForKey:@"username"]];
-        }
-        [query setWheres:whereQueryString];
-        [query setLimit:999];
-        [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
-        [query queryInBackground:^(NSArray *array) {
-            contentArray = [[NSMutableArray alloc]initWithArray:array];
-            [self doneLoadingTableViewData];
-            //NSLog(@"array : %@", contentArray);
-        }
-                    failureBlock:^(NSError *error) {
-                        NSLog(@"뉴스피드 불러오기 실패 : %@", error.localizedDescription);
-                    }];
+        contentArray = [[NSMutableArray alloc]initWithArray:array];
+        [self doneLoadingTableViewData];
+        NSLog(@"뉴스피드 컨텐츠 : %@", contentArray);
     }
                 failureBlock:^(NSError *error) {
-                    NSLog(@"친구목록 불러오기 실패 : %@", error.localizedDescription);
+                    NSLog(@"피드 불러오기 실패 : %@", error.localizedDescription);
                 }];
 }
 

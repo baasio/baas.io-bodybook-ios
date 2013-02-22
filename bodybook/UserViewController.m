@@ -55,10 +55,7 @@
     self.tableView.opaque = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:1.0 alpha:1];
     
-    UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 29)];
-    //[bt setImage:[UIImage imageNamed:@"newMessage@2x.png"] forState:UIControlStateNormal];
-    [bt addTarget:self action:@selector(postingPage) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithCustomView:bt];
+    UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithTitle:@"게시" style:UIBarButtonItemStyleBordered target:self action:@selector(postingPage)];
     self.navigationItem.rightBarButtonItem = src;
     
     if (_refreshHeaderView == nil) {
@@ -70,14 +67,13 @@
 }
 
 -(void)updateFeedData{
-    BaasioQuery *query = [BaasioQuery queryWithCollection:@"feed"];
-    [query setWheres:[NSString stringWithFormat:@"username = '%@'",[[BaasioUser currentUser] objectForKey:@"username"]]];
-    [query setLimit:999];
+    BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/activities",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
+//    [query setLimit:999];
     [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
     [query queryInBackground:^(NSArray *array) {
         contentArray = [[NSMutableArray alloc]initWithArray:array];
         [self doneLoadingTableViewData];
-        //NSLog(@"array : %@", contentArray);
+        NSLog(@"유저 액티비티 : %@", contentArray);
     }
                 failureBlock:^(NSError *error) {
                     NSLog(@"fail : %@", error.localizedDescription);

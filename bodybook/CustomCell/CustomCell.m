@@ -39,7 +39,7 @@
 - (IBAction)likeTouched:(id)sender{
     [likeButton setEnabled:NO];
     likeNumber++;
-    BaasioEntity *entity = [BaasioEntity entitytWithName:@"feed"];
+    BaasioEntity *entity = [BaasioEntity entitytWithName:[NSString stringWithFormat:@"users/%@/feed",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
     entity.uuid = contentUUID;
     [entity setObject:[NSString stringWithFormat:@"%d", likeNumber] forKey:@"like"];
     [entity updateInBackground:^(BaasioEntity *entity) {
@@ -64,7 +64,7 @@
 - (IBAction)badTouched:(id)sender{
     [badButton setEnabled:NO];
     badNumber++;
-    BaasioEntity *entity = [BaasioEntity entitytWithName:@"feed"];
+    BaasioEntity *entity = [BaasioEntity entitytWithName:[NSString stringWithFormat:@"users/%@/feed",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
     entity.uuid = contentUUID;
     [entity setObject:[NSString stringWithFormat:@"%d", badNumber] forKey:@"bad"];
     [entity updateInBackground:^(BaasioEntity *entity) {
@@ -88,11 +88,12 @@
 
 - (void)initCustomCell:(NSDictionary*)contentDic{
     userInfo = contentDic;
+    NSDictionary *actorInfo = [userInfo objectForKey:@"actor"];
     contentUUID = [userInfo objectForKey:@"uuid"];
     
     if(postUserInfo == nil){
         BaasioQuery *query = [BaasioQuery queryWithCollection:@"users"];
-        [query setWheres:[NSString stringWithFormat:@"username = '%@'",[userInfo objectForKey:@"username"]]];
+        [query setWheres:[NSString stringWithFormat:@"username = '%@'",[actorInfo objectForKey:@"username"]]];
         [query queryInBackground:^(NSArray *array) {
             NSMutableArray *postUser = [NSMutableArray arrayWithArray:array];
             postUserInfo = [[NSDictionary alloc]init];
@@ -104,6 +105,7 @@
                         NSLog(@"fail : %@", error.localizedDescription);
                     }];
     }
+    
     [contentText setText:[userInfo objectForKey:@"content"]];
     [name setText:[userInfo objectForKey:@"nameID"]];
     
