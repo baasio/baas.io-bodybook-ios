@@ -168,25 +168,26 @@
                     [query queryInBackground:^(NSArray *array) {
                         NSMutableArray *friendArray = [[NSMutableArray alloc]initWithArray:array];
                         NSDictionary *friendInfo = [[NSDictionary alloc]init];
-                        
-                        BaasioPush *push = [[BaasioPush alloc] init];
-                        BaasioMessage *message = [[BaasioMessage alloc]init];
-                        message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
-                        NSMutableArray *messageTO = [[NSMutableArray alloc]init];
-                        for(int i=0;i<friendArray.count;i++){
-                            friendInfo = [friendArray objectAtIndex:i];
-                            [messageTO addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
+                        if(friendArray.count>=1){
+                            BaasioPush *push = [[BaasioPush alloc] init];
+                            BaasioMessage *message = [[BaasioMessage alloc]init];
+                            message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
+                            
+                            NSMutableArray *messageTO = [[NSMutableArray alloc]init];
+                            for(int i=0;i<friendArray.count;i++){
+                                friendInfo = [friendArray objectAtIndex:i];
+                                [messageTO addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
+                            }
+                            message.to = messageTO;
+                            NSLog(@"message.to.description:%@",message.to.description);
+                            [push sendPushInBackground:message
+                                          successBlock:^(void) {
+                                              NSLog(@"푸시보내기 성공");
+                                          }
+                                          failureBlock:^(NSError *error) {
+                                              NSLog(@"푸시보내기 실패 : %@", error.localizedDescription);
+                                          }];
                         }
-                        message.to = messageTO;
-                        NSLog(@"message.to.description:%@",message.to.description);
-                        [push sendPushInBackground:message
-                                      successBlock:^(void) {
-                                          NSLog(@"푸시보내기 성공");
-                                      }
-                                      failureBlock:^(NSError *error) {
-                                          NSLog(@"푸시보내기 실패 : %@", error.localizedDescription);
-                                      }];
-                    
                     }
                                 failureBlock:^(NSError *error) {
                                     NSLog(@"친구목록 불러오기 실패 : %@", error.localizedDescription);
@@ -228,25 +229,27 @@
                 [query queryInBackground:^(NSArray *array) {
                     NSMutableArray *friendArray = [[NSMutableArray alloc]initWithArray:array];
                     NSDictionary *friendInfo = [[NSDictionary alloc]init];
-                    
-                    BaasioPush *push = [[BaasioPush alloc] init];
-                    BaasioMessage *message = [[BaasioMessage alloc]init];
-                    message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
-                    NSMutableArray *messageTO = [[NSMutableArray alloc]init];
-                    for(int i=0;i<friendArray.count;i++){
-                        friendInfo = [friendArray objectAtIndex:i];
-                        [messageTO addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
+                    NSLog(@"%d",friendArray.count);
+                    if(friendArray.count>=1){
+                        BaasioPush *push = [[BaasioPush alloc] init];
+                        BaasioMessage *message = [[BaasioMessage alloc]init];
+                        message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
+                        
+                        NSMutableArray *messageTO = [[NSMutableArray alloc]init];
+                        for(int i=0;i<friendArray.count;i++){
+                            friendInfo = [friendArray objectAtIndex:i];
+                            [messageTO addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
+                        }
+                        message.to = messageTO;
+                        NSLog(@"message.to.description:%@",message.to.description);
+                        [push sendPushInBackground:message
+                                      successBlock:^(void) {
+                                          NSLog(@"푸시보내기 성공");
+                                      }
+                                      failureBlock:^(NSError *error) {
+                                          NSLog(@"푸시보내기 실패 : %@", error.localizedDescription);
+                                      }];
                     }
-                    message.to = messageTO;
-                    NSLog(@"message.to.description:%@",message.to.description);
-                    [push sendPushInBackground:message
-                                  successBlock:^(void) {
-                                      NSLog(@"푸시보내기 성공");
-                                  }
-                                  failureBlock:^(NSError *error) {
-                                      NSLog(@"푸시보내기 실패 : %@", error.localizedDescription);
-                                  }];
-                    
                 }
                             failureBlock:^(NSError *error) {
                                 NSLog(@"친구목록 불러오기 실패 : %@", error.localizedDescription);

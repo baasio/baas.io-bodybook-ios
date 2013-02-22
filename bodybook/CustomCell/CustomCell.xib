@@ -63,7 +63,7 @@
 							<object class="IBUIImageView" id="277175877">
 								<reference key="NSNextResponder" ref="978447323"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{10, 68}, {300, 14}}</string>
+								<string key="NSFrame">{{5, 68}, {310, 14}}</string>
 								<reference key="NSSuperview" ref="978447323"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="635888211"/>
@@ -273,6 +273,7 @@
 										<string key="NSFrame">{{274, 1}, {30, 20}}</string>
 										<reference key="NSSuperview" ref="347280243"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -608,6 +609,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">CustomCell</string>
 					<string key="superclassName">UITableViewCell</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">likeTouched:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">likeTouched:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">likeTouched:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="background">UIView</string>
 						<string key="badButton">UIButton</string>

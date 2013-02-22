@@ -76,9 +76,7 @@
         //[bt setBackgroundImage:[UIImage imageNamed:@"lines"] forState:UIControlStateNormal];
         [bt addTarget:self action:@selector(menuChange) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithCustomView:bt];
-        
-    
-        
+
         v.navigationItem.leftBarButtonItem = src;
         self.mainVC = nav;
     }];

@@ -37,7 +37,7 @@
         [self updateFeedData];
         modalPageUP = NO;
     }
-    //[self.tableView reloadData];
+    [self.tableView reloadData];
     //[self.tableView setContentOffset:CGPointMake(0.0, 0.0)];
     //[self updateFeedData];
 }
@@ -47,7 +47,7 @@
     [super viewDidLoad];
 
     [self updateFeedData];
-    
+    pageNumber = 10;
     modalPageUP = NO;
     self.navigationItem.title = [[BaasioUser currentUser] objectForKey:@"name"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -68,12 +68,15 @@
 
 -(void)updateFeedData{
     BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/activities",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
-//    [query setLimit:999];
-    [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
+    [query setLimit:pageNumber];
+//    [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
     [query queryInBackground:^(NSArray *array) {
         contentArray = [[NSMutableArray alloc]initWithArray:array];
-        [self doneLoadingTableViewData];
-        NSLog(@"유저 액티비티 : %@", contentArray);
+        [self.tableView reloadData];
+        if(_reloading == YES){
+            [self doneLoadingTableViewData];
+        }
+        //NSLog(@"유저 액티비티 : %@", contentArray);
     }
                 failureBlock:^(NSError *error) {
                     NSLog(@"fail : %@", error.localizedDescription);
@@ -178,6 +181,25 @@
     }
 }
 
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //    NSLog(@"끝이보임! 보이는 테이블 %d pageNumber:%d",((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row,pageNumber);
+    //    if(((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row <= 8){
+    //        NSLog(@"리로드활성화");
+    //        pageNumber = pageNumber+10;
+    //        [self updateFeedData];
+    //    }
+    
+    NSInteger sectionsAmount = [tableView numberOfSections];
+    NSInteger rowsAmount = [tableView numberOfRowsInSection:[indexPath section]];
+    if ([indexPath section] == sectionsAmount - 2 && [indexPath row] == rowsAmount - 3) {
+        pageNumber = pageNumber+10;
+        [self updateFeedData];
+        NSLog(@"리로드활성화");
+        // This is the last cell in the table
+    }
+}
+
 #pragma mark - MWPhotoBrowserDelegate
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
@@ -200,6 +222,7 @@
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
 	_reloading = YES;
+    pageNumber = 10;
     [self updateFeedData];
 }
 

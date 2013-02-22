@@ -46,7 +46,7 @@
 {
     [super viewDidLoad];
     //NSLog(@"%@",[BaasioUser currentUser]);
-    
+    pageNumber = 10;
     [self updateFeedData];
     
     modalPageUP = NO;
@@ -69,13 +69,16 @@
 
 -(void)updateFeedData{
     BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/feed",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
-    //[query setWheres:[NSString stringWithFormat:@"username = '%@'",[[BaasioUser currentUser] objectForKey:@"username"]]];
-    //[query setLimit:999];
-    [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
+//    [query setWheres:[NSString stringWithFormat:@"username = '%@'",[[BaasioUser currentUser] objectForKey:@"username"]]];
+    [query setLimit:pageNumber];
+//    [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
     [query queryInBackground:^(NSArray *array) {
         contentArray = [[NSMutableArray alloc]initWithArray:array];
-        [self doneLoadingTableViewData];
-        NSLog(@"뉴스피드 컨텐츠 : %@", contentArray);
+        [self.tableView reloadData];
+        if(_reloading == YES){
+            [self doneLoadingTableViewData];
+        }
+        //NSLog(@"뉴스피드 컨텐츠 : %@", contentArray);
     }
                 failureBlock:^(NSError *error) {
                     NSLog(@"피드 불러오기 실패 : %@", error.localizedDescription);
@@ -121,7 +124,6 @@
 
 - (void)contentImageTouched:(id)sender{
     CustomCell *customCell = (CustomCell *)[[sender superview] superview] ;
-
     NSMutableArray *photoArray = [[NSMutableArray alloc] init];
     MWPhoto *photo;
     NSLog(@"%@",[customCell.userInfo objectForKey:@"contentImagePath"]);
@@ -135,8 +137,6 @@
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
     nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:nc animated:YES completion:nil];
-    
-    NSLog(@"터치됨");
 }
 
 
@@ -153,7 +153,26 @@
         //사진이 있는경우
         CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
                               constrainedToSize:CGSizeMake(285, 9000)];
-        return size.height + 265;
+        return size.height + 275;
+    }
+}
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    NSLog(@"끝이보임! 보이는 테이블 %d pageNumber:%d",((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row,pageNumber);
+//    if(((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row <= 8){
+//        NSLog(@"리로드활성화");
+//        pageNumber = pageNumber+10;
+//        [self updateFeedData];
+//    }
+    
+    NSInteger sectionsAmount = [tableView numberOfSections];
+    NSInteger rowsAmount = [tableView numberOfRowsInSection:[indexPath section]];
+    if ([indexPath section] == sectionsAmount - 1 && [indexPath row] == rowsAmount - 3) {
+        pageNumber = pageNumber+10;
+        [self updateFeedData];
+        NSLog(@"리로드활성화");
+        // This is the last cell in the table
     }
 }
 
@@ -178,6 +197,7 @@
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
 	_reloading = YES;
+    pageNumber = 10;
     [self updateFeedData];
 }
 

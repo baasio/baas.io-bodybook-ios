@@ -17,6 +17,7 @@
     
     NSArray *photos;
     NSMutableArray *contentArray;
+    int pageNumber;
     
     BOOL modalPageUP;
 }
