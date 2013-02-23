@@ -148,12 +148,12 @@
         //사진이 없는경우
         CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
                               constrainedToSize:CGSizeMake(285, 9000)];
-        return size.height + 85;
+        return size.height + 100;
     }else{
         //사진이 있는경우
         CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
                               constrainedToSize:CGSizeMake(285, 9000)];
-        return size.height + 275;
+        return size.height + 290;
     }
 }
 

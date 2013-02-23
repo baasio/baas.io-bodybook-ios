@@ -146,7 +146,7 @@
         self.contentImageView.hidden = YES;
         self.imageContentButton.enabled = NO;
         self.imageContentButton.hidden = YES;
-        [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
+        [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height+10, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
         [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.contentText.frame.origin.y + self.contentText.frame.size.height+12)];
     }else{
         //사진이 있는경우
@@ -159,11 +159,11 @@
         self.imageContentButton.hidden = NO;
         [self.contentImageView setImageWithURL:[NSURL URLWithString:contentImagePath]];
         [self.contentImageView setClipsToBounds:YES];
-        [self.contentImageView setFrame:CGRectMake(self.contentImageView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.contentImageView.frame.size.width, 180)];
+        [self.contentImageView setFrame:CGRectMake(self.contentImageView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height+10, self.contentImageView.frame.size.width, 180)];
         [self.imageContentButton setClipsToBounds:YES];
         [self.imageContentButton setFrame:CGRectMake(self.contentImageView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height, self.contentImageView.frame.size.width, 180)];
         
-        [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height + self.contentImageView.frame.size.height+10, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
+        [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, contentImageView.frame.origin.y + self.contentImageView.frame.size.height+10, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
         
         [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.contentText.frame.origin.y + self.contentText.frame.size.height + self.contentImageView.frame.size.height+12)];
     }

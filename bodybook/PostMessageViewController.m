@@ -172,7 +172,7 @@
                             BaasioPush *push = [[BaasioPush alloc] init];
                             BaasioMessage *message = [[BaasioMessage alloc]init];
                             message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
-                            
+                            message.target = @"tag";
                             NSMutableArray *messageTO = [[NSMutableArray alloc]init];
                             for(int i=0;i<friendArray.count;i++){
                                 friendInfo = [friendArray objectAtIndex:i];
@@ -234,7 +234,7 @@
                         BaasioPush *push = [[BaasioPush alloc] init];
                         BaasioMessage *message = [[BaasioMessage alloc]init];
                         message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
-                        
+                        message.target = @"tag";
                         NSMutableArray *messageTO = [[NSMutableArray alloc]init];
                         for(int i=0;i<friendArray.count;i++){
                             friendInfo = [friendArray objectAtIndex:i];

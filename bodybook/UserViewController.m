@@ -172,13 +172,16 @@
     NSString *contentText = [object objectForKey:@"content"];
     if([[object objectForKey:@"contentImagePath"] isEqualToString:@"-"]){
         //사진이 없는경우
-        CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(285, 9000)];
-        return size.height + 85;
+        CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
+                              constrainedToSize:CGSizeMake(285, 9000)];
+        return size.height + 100;
     }else{
         //사진이 있는경우
-        CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(285, 9000)];
-        return size.height + 265;
+        CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
+                              constrainedToSize:CGSizeMake(285, 9000)];
+        return size.height + 290;
     }
+    
 }
 
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

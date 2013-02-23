@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4123D96416D8600500A4C1B6 /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4123D96316D8600500A4C1B6 /* baas.io.framework */; };
 		414600A816D3BEEB00E7AE8D /* image_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414600A716D3BEEB00E7AE8D /* image_add@2x.png */; };
 		414600AA16D3C2D000E7AE8D /* btn_prev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414600A916D3C2D000E7AE8D /* btn_prev@2x.png */; };
 		DE3F503A16C0F4340073B168 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F503516C0F4080073B168 /* libSDWebImage.a */; };
@@ -87,7 +88,6 @@
 		DEFD4E3F16D382B200D5043A /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD4E3716D382B200D5043A /* whiteArrow@2x.png */; };
 		DEFD4E4216D382B900D5043A /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DEFD4E4116D382B900D5043A /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DEFD4E4B16D39B2700D5043A /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = DEFD4E4A16D39B2700D5043A /* UIImage+Resize.m */; };
-		DEFD4E4D16D39F9400D5043A /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFD4E4C16D39F9300D5043A /* baas.io.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +122,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4123D96316D8600500A4C1B6 /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = baas.io.framework; sourceTree = "<group>"; };
 		414600A716D3BEEB00E7AE8D /* image_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image_add@2x.png"; path = "bodybook/image_add@2x.png"; sourceTree = "<group>"; };
 		414600A916D3C2D000E7AE8D /* btn_prev@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_prev@2x.png"; path = "bodybook/btn_prev@2x.png"; sourceTree = "<group>"; };
 		DE3F502B16C0F4080073B168 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = bodybook/SDWebImage/SDWebImage.xcodeproj; sourceTree = "<group>"; };
@@ -228,7 +229,6 @@
 		DEFD4E4116D382B900D5043A /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EGORefreshTableHeaderView.m; path = bodybook/RefreshTable/EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		DEFD4E4916D39B2700D5043A /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "bodybook/UIImage+Resize.h"; sourceTree = "<group>"; };
 		DEFD4E4A16D39B2700D5043A /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "bodybook/UIImage+Resize.m"; sourceTree = "<group>"; };
-		DEFD4E4C16D39F9300D5043A /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = baas.io.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,7 +236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEFD4E4D16D39F9400D5043A /* baas.io.framework in Frameworks */,
+				4123D96416D8600500A4C1B6 /* baas.io.framework in Frameworks */,
 				DEED156C16CB70A0001F42E0 /* MessageUI.framework in Frameworks */,
 				DE3F505816C1D55A0073B168 /* AssetsLibrary.framework in Frameworks */,
 				DE3F504216C0F5230073B168 /* ImageIO.framework in Frameworks */,
@@ -337,7 +337,7 @@
 		DEF701F416BFA37C008FEEA0 = {
 			isa = PBXGroup;
 			children = (
-				DEFD4E4C16D39F9300D5043A /* baas.io.framework */,
+				4123D96316D8600500A4C1B6 /* baas.io.framework */,
 				DEFD4E2E16D382A200D5043A /* RefreshTable */,
 				DE8C12FA16CDBAD0004FD35C /* PhotoBrowser */,
 				DE3F504916C104C00073B168 /* ImageUtilities */,

@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.SystemVersion">12C3012</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
@@ -188,7 +188,7 @@
 							<object class="IBUILabel" id="383019518">
 								<reference key="NSNextResponder" ref="978447323"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{17, 54}, {285, 11}}</string>
+								<string key="NSFrame">{{17, 59}, {285, 11}}</string>
 								<reference key="NSSuperview" ref="978447323"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1004079010"/>
@@ -273,7 +273,6 @@
 										<string key="NSFrame">{{274, 1}, {30, 20}}</string>
 										<reference key="NSSuperview" ref="347280243"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -609,17 +608,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">CustomCell</string>
 					<string key="superclassName">UITableViewCell</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">likeTouched:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">likeTouched:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="badTouched:">id</string>
+						<string key="likeTouched:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="badTouched:">
+							<string key="name">badTouched:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="likeTouched:">
 							<string key="name">likeTouched:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="background">UIView</string>
 						<string key="badButton">UIButton</string>
