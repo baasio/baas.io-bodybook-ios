@@ -147,7 +147,7 @@
         self.imageContentButton.enabled = NO;
         self.imageContentButton.hidden = YES;
         [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height+10, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
-        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.contentText.frame.origin.y + self.contentText.frame.size.height+12)];
+        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.bottomView.frame.origin.y + 12)];
     }else{
         //사진이 있는경우
         /////////////////// 이미지파일이 있는 URL주소///////////////////////////
@@ -165,7 +165,7 @@
         
         [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, contentImageView.frame.origin.y + self.contentImageView.frame.size.height+10, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
         
-        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.contentText.frame.origin.y + self.contentText.frame.size.height + self.contentImageView.frame.size.height+12)];
+        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.bottomView.frame.origin.y + 12)];
     }
     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.background.bounds];
     self.background.layer.masksToBounds = NO;

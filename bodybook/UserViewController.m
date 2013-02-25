@@ -167,7 +167,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0)return 245;
+    if(indexPath.row == 0)return 292;
     NSDictionary *object = [contentArray objectAtIndex:indexPath.row-1];
     NSString *contentText = [object objectForKey:@"content"];
     if([[object objectForKey:@"contentImagePath"] isEqualToString:@"-"]){

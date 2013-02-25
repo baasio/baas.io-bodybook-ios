@@ -16,12 +16,12 @@
 #import <baas.io/Baas.h>
 
 #define PROFILEBIGIMAGE_HEIGHT 175.0f
-#define IMAGE_WIDTH 612.0f
-#define IMAGE_HEIGHT 612.0f
+#define IMAGE_WIDTH 400.0f
+#define IMAGE_HEIGHT 400.0f
 
 @implementation ProfileInfoCell
 
-@synthesize profileImage, profileBigImage, userNameLabel, profileImageBackground, profileImageChangeButton, photoButtonImage,nameLabel,viewController;
+@synthesize profileImage, profileBigImage, userNameLabel, profileImageBackground, profileImageChangeButton, photoButtonImage,nameLabel,viewController,followingCount,followersCount,friendCountView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -78,6 +78,35 @@
     self.profileImageBackground.layer.shouldRasterize = YES;
     
     [self.userNameLabel setFrame:CGRectMake(self.userNameLabel.frame.origin.x, PROFILEBIGIMAGE_HEIGHT+10, self.userNameLabel.frame.size.width, self.userNameLabel.frame.size.height)];
+    
+
+    BaasioQuery *query1 = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/followers",[[BaasioUser currentUser]objectForKey:@"username"]]];
+    [query1 setLimit:999];
+    [query1 queryInBackground:^(NSArray *array) {
+        NSMutableArray *friendArray = [[NSMutableArray alloc]initWithArray:array];
+        [followersCount setText:[NSString stringWithFormat:@"%d",[friendArray count]]];
+        [followersCount setBackgroundColor:[UIColor clearColor]];
+        [followersCount setShadowColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7]];
+        [followersCount setShadowOffset:CGSizeMake(1, 1)];
+        //[followersCount setAlpha:0.0];
+    }
+                 failureBlock:^(NSError *error) {
+                     NSLog(@"팔로워 친구목록 불러오기 실패 : %@", error.localizedDescription);
+                 }];
+    
+    BaasioQuery *query2 = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/following",[[BaasioUser currentUser]objectForKey:@"username"]]];
+    [query2 setLimit:999];
+    [query2 queryInBackground:^(NSArray *array) {
+        NSMutableArray *friendArray = [[NSMutableArray alloc]initWithArray:array];
+        [followingCount setText:[NSString stringWithFormat:@"%d",[friendArray count]]];
+        [followingCount setBackgroundColor:[UIColor clearColor]];
+        [followingCount setShadowColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7]];
+        [followingCount setShadowOffset:CGSizeMake(1, 1)];
+        //[followingCount setAlpha:0.0];
+    }
+                 failureBlock:^(NSError *error) {
+                     NSLog(@"팔로잉 친구목록 불러오기 실패 : %@", error.localizedDescription);
+                 }];
 }
 
 - (IBAction)profileImageChange:(id)sender{

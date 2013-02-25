@@ -30,7 +30,6 @@
 		DE8C132E16CDCF0A004FD35C /* MWZoomingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C132816CDCF0A004FD35C /* MWZoomingScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		DE8C133016CDD023004FD35C /* MWPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE8C132F16CDD023004FD35C /* MWPhotoBrowser.bundle */; };
 		DEB3F49716CE009E00014CD8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB3F49616CE009E00014CD8 /* MBProgressHUD.m */; };
-		DEB3F49916CE00B900014CD8 /* camera_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB3F49816CE00B900014CD8 /* camera_icon@2x.png */; };
 		DED8103F16CB28AA00E8FB65 /* default_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DED8103E16CB28AA00E8FB65 /* default_user@2x.png */; };
 		DEED156C16CB70A0001F42E0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEED156B16CB70A0001F42E0 /* MessageUI.framework */; };
 		DEF7020116BFA37C008FEEA0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7020016BFA37C008FEEA0 /* UIKit.framework */; };
@@ -157,7 +156,6 @@
 		DE8C132F16CDD023004FD35C /* MWPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MWPhotoBrowser.bundle; path = bodybook/PhotoBrowser/MWPhotoBrowser.bundle; sourceTree = "<group>"; };
 		DEB3F49516CE009E00014CD8 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = bodybook/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		DEB3F49616CE009E00014CD8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = bodybook/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
-		DEB3F49816CE00B900014CD8 /* camera_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera_icon@2x.png"; path = "bodybook/camera_icon@2x.png"; sourceTree = "<group>"; };
 		DED8103E16CB28AA00E8FB65 /* default_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_user@2x.png"; path = "bodybook/default_user@2x.png"; sourceTree = "<group>"; };
 		DEED156B16CB70A0001F42E0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		DEF701FD16BFA37C008FEEA0 /* bodybook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bodybook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -416,7 +414,6 @@
 			children = (
 				414600A916D3C2D000E7AE8D /* btn_prev@2x.png */,
 				414600A716D3BEEB00E7AE8D /* image_add@2x.png */,
-				DEB3F49816CE00B900014CD8 /* camera_icon@2x.png */,
 				DED8103E16CB28AA00E8FB65 /* default_user@2x.png */,
 				DEF7024016BFA719008FEEA0 /* TextField */,
 				DEF7023C16BFA6F4008FEEA0 /* AppTitle */,
@@ -643,7 +640,6 @@
 				DE3F505D16C1DA420073B168 /* JoinController.xib in Resources */,
 				DE3F506416C230410073B168 /* AddFriendViewController.xib in Resources */,
 				DED8103F16CB28AA00E8FB65 /* default_user@2x.png in Resources */,
-				DEB3F49916CE00B900014CD8 /* camera_icon@2x.png in Resources */,
 				DEFD4E1616D1E85B00D5043A /* sign_in_correct@2x.png in Resources */,
 				DEFD4E2316D2F81B00D5043A /* addFriendButton.png in Resources */,
 				DEFD4E2516D2F8DE00D5043A /* sign_in_wrong@2x.png in Resources */,
