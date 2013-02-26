@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 
 #import "ViewController.h"
+#import "SHSidebarController.h"
+#import "UserViewController.h"
+#import "NewsFeedController.h"
+#import "AddFriendViewController.h"
 
 #import <baas.io/Baas.h>
 
@@ -21,15 +25,67 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
     
+    //BaasioUser *currentUser = [BaasioUser currentUser];
+    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"userID"] == nil) {
+        self.window.rootViewController = self.viewController;
+    }else{
+        [self login];
+    }
+    [self.window makeKeyAndVisible];
 
     NSDictionary *dictionary = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
     NSDictionary *aps = [dictionary objectForKey:@"aps"];
 	application.applicationIconBadgeNumber = [[aps objectForKey:@"badge"] intValue];
     
     return YES;
+}
+
+- (void)login{
+    NSError *error;
+    [BaasioUser signIn:[[NSUserDefaults standardUserDefaults] stringForKey:@"userID"] password:[[NSUserDefaults standardUserDefaults] stringForKey:@"userPW"] error:&error];
+    if (!error) {
+        //성공
+        NSLog(@"로그인 성공 : %@", [[BaasioUser currentUser]description] );
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+        [self goToMainPage];
+    } else {
+        //실패
+        NSLog(@"Error: %@", error.localizedDescription);
+    }
+}
+-(void)goToMainPage{
+    NSMutableArray *vcs = [NSMutableArray array];
+    
+    //Creating view
+    UserViewController *userView = [[UserViewController alloc] init];
+    //Navigation Controller is required
+    UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:userView];
+    //Dictionary of the view and title
+    NSDictionary *view1 = [NSDictionary dictionaryWithObjectsAndKeys:nav1, @"vc", [[BaasioUser currentUser] objectForKey:@"name"], @"title", nil];
+    //And we finally add it to the array
+    [vcs addObject:view1];
+    
+    //Creating view
+    NewsFeedController *feedView = [[NewsFeedController alloc] init];
+    //Navigation Controller is required
+    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:feedView];
+    //Dictionary of the view and title
+    NSDictionary *view2 = [NSDictionary dictionaryWithObjectsAndKeys:nav2, @"vc", @"뉴스피드", @"title", nil];
+    //And we finally add it to the array
+    [vcs addObject:view2];
+    
+    //Creating view
+    AddFriendViewController *addFriendView = [[AddFriendViewController alloc] init];
+    //Navigation Controller is required
+    UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:addFriendView];
+    //Dictionary of the view and title
+    NSDictionary *view3 = [NSDictionary dictionaryWithObjectsAndKeys:nav3, @"vc", @"친구추가", @"title", nil];
+    //And we finally add it to the array
+    [vcs addObject:view3];
+    
+    SHSidebarController *sidebar = [[SHSidebarController alloc] initWithArrayOfVC:vcs];
+    self.window.rootViewController = sidebar;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

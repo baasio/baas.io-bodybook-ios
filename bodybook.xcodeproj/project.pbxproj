@@ -32,6 +32,9 @@
 		DEB3F49716CE009E00014CD8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB3F49616CE009E00014CD8 /* MBProgressHUD.m */; };
 		DED8103F16CB28AA00E8FB65 /* default_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DED8103E16CB28AA00E8FB65 /* default_user@2x.png */; };
 		DEED156C16CB70A0001F42E0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEED156B16CB70A0001F42E0 /* MessageUI.framework */; };
+		DEF6638816DC7A2A0011972A /* SideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF6638716DC7A2A0011972A /* SideMenuCell.m */; };
+		DEF6638E16DC87EE0011972A /* friend_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF6638C16DC87ED0011972A /* friend_search@2x.png */; };
+		DEF6638F16DC87EE0011972A /* newsfeed_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF6638D16DC87EE0011972A /* newsfeed_btn@2x.png */; };
 		DEF7020116BFA37C008FEEA0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7020016BFA37C008FEEA0 /* UIKit.framework */; };
 		DEF7020316BFA37C008FEEA0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7020216BFA37C008FEEA0 /* Foundation.framework */; };
 		DEF7020516BFA37C008FEEA0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEF7020416BFA37C008FEEA0 /* CoreGraphics.framework */; };
@@ -74,6 +77,8 @@
 		DEF7028016C0A0BC008FEEA0 /* like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEF7027816C0A0BC008FEEA0 /* like@2x.png */; };
 		DEF7028116C0A0BC008FEEA0 /* ProfileInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF7027A16C0A0BC008FEEA0 /* ProfileInfoCell.m */; };
 		DEF7028216C0A0BC008FEEA0 /* ProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEF7027B16C0A0BC008FEEA0 /* ProfileInfoCell.xib */; };
+		DEF932AC16DB244A0046FB66 /* SearchUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF932AA16DB244A0046FB66 /* SearchUserInfoViewController.m */; };
+		DEF932AD16DB244A0046FB66 /* SearchUserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEF932AB16DB244A0046FB66 /* SearchUserInfoViewController.xib */; };
 		DEFD4E1616D1E85B00D5043A /* sign_in_correct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD4E1516D1E85B00D5043A /* sign_in_correct@2x.png */; };
 		DEFD4E2316D2F81B00D5043A /* addFriendButton.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD4E2216D2F81B00D5043A /* addFriendButton.png */; };
 		DEFD4E2516D2F8DE00D5043A /* sign_in_wrong@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD4E2416D2F8DE00D5043A /* sign_in_wrong@2x.png */; };
@@ -158,6 +163,10 @@
 		DEB3F49616CE009E00014CD8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = bodybook/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		DED8103E16CB28AA00E8FB65 /* default_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_user@2x.png"; path = "bodybook/default_user@2x.png"; sourceTree = "<group>"; };
 		DEED156B16CB70A0001F42E0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		DEF6638616DC7A2A0011972A /* SideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideMenuCell.h; path = bodybook/CustomCell/SideMenuCell.h; sourceTree = "<group>"; };
+		DEF6638716DC7A2A0011972A /* SideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideMenuCell.m; path = bodybook/CustomCell/SideMenuCell.m; sourceTree = "<group>"; };
+		DEF6638C16DC87ED0011972A /* friend_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "friend_search@2x.png"; path = "bodybook/friend_search@2x.png"; sourceTree = "<group>"; };
+		DEF6638D16DC87EE0011972A /* newsfeed_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newsfeed_btn@2x.png"; path = "bodybook/newsfeed_btn@2x.png"; sourceTree = "<group>"; };
 		DEF701FD16BFA37C008FEEA0 /* bodybook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bodybook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEF7020016BFA37C008FEEA0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DEF7020216BFA37C008FEEA0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -212,6 +221,9 @@
 		DEF7027916C0A0BC008FEEA0 /* ProfileInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileInfoCell.h; path = bodybook/CustomCell/ProfileInfoCell.h; sourceTree = "<group>"; };
 		DEF7027A16C0A0BC008FEEA0 /* ProfileInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileInfoCell.m; path = bodybook/CustomCell/ProfileInfoCell.m; sourceTree = "<group>"; };
 		DEF7027B16C0A0BC008FEEA0 /* ProfileInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileInfoCell.xib; path = bodybook/CustomCell/ProfileInfoCell.xib; sourceTree = "<group>"; };
+		DEF932A916DB244A0046FB66 /* SearchUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchUserInfoViewController.h; sourceTree = "<group>"; };
+		DEF932AA16DB244A0046FB66 /* SearchUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchUserInfoViewController.m; sourceTree = "<group>"; };
+		DEF932AB16DB244A0046FB66 /* SearchUserInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchUserInfoViewController.xib; sourceTree = "<group>"; };
 		DEFD4E1516D1E85B00D5043A /* sign_in_correct@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sign_in_correct@2x.png"; path = "bodybook/sign_in_correct@2x.png"; sourceTree = "<group>"; };
 		DEFD4E2216D2F81B00D5043A /* addFriendButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = addFriendButton.png; path = bodybook/addFriendButton.png; sourceTree = "<group>"; };
 		DEFD4E2416D2F8DE00D5043A /* sign_in_wrong@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sign_in_wrong@2x.png"; path = "bodybook/sign_in_wrong@2x.png"; sourceTree = "<group>"; };
@@ -298,6 +310,9 @@
 				DE3F506016C230410073B168 /* AddFriendViewController.h */,
 				DE3F506116C230410073B168 /* AddFriendViewController.m */,
 				DE3F506216C230410073B168 /* AddFriendViewController.xib */,
+				DEF932A916DB244A0046FB66 /* SearchUserInfoViewController.h */,
+				DEF932AA16DB244A0046FB66 /* SearchUserInfoViewController.m */,
+				DEF932AB16DB244A0046FB66 /* SearchUserInfoViewController.xib */,
 			);
 			name = AddFriend;
 			sourceTree = "<group>";
@@ -459,6 +474,8 @@
 		DEF7024E16C09E5D008FEEA0 /* SideBarController */ = {
 			isa = PBXGroup;
 			children = (
+				DEF6638C16DC87ED0011972A /* friend_search@2x.png */,
+				DEF6638D16DC87EE0011972A /* newsfeed_btn@2x.png */,
 				DEF7024F16C09E69008FEEA0 /* lines@2x.png */,
 				DEF7025016C09E69008FEEA0 /* SHMenuTVC.h */,
 				DEF7025116C09E69008FEEA0 /* SHMenuTVC.m */,
@@ -469,6 +486,8 @@
 				DEF7025616C09E69008FEEA0 /* sidebarshadow@2x.png */,
 				DEF7025716C09E69008FEEA0 /* UIView+Origami.h */,
 				DEF7025816C09E69008FEEA0 /* UIView+Origami.m */,
+				DEF6638616DC7A2A0011972A /* SideMenuCell.h */,
+				DEF6638716DC7A2A0011972A /* SideMenuCell.m */,
 			);
 			name = SideBarController;
 			sourceTree = "<group>";
@@ -653,6 +672,9 @@
 				DEFD4E3F16D382B200D5043A /* whiteArrow@2x.png in Resources */,
 				414600A816D3BEEB00E7AE8D /* image_add@2x.png in Resources */,
 				414600AA16D3C2D000E7AE8D /* btn_prev@2x.png in Resources */,
+				DEF932AD16DB244A0046FB66 /* SearchUserInfoViewController.xib in Resources */,
+				DEF6638E16DC87EE0011972A /* friend_search@2x.png in Resources */,
+				DEF6638F16DC87EE0011972A /* newsfeed_btn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,6 +708,8 @@
 				DEB3F49716CE009E00014CD8 /* MBProgressHUD.m in Sources */,
 				DEFD4E4216D382B900D5043A /* EGORefreshTableHeaderView.m in Sources */,
 				DEFD4E4B16D39B2700D5043A /* UIImage+Resize.m in Sources */,
+				DEF932AC16DB244A0046FB66 /* SearchUserInfoViewController.m in Sources */,
+				DEF6638816DC7A2A0011972A /* SideMenuCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

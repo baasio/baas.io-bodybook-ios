@@ -43,7 +43,6 @@
     [self.password setSecureTextEntry:YES];
     [self.userName setReturnKeyType:UIReturnKeyNext];
     [self.password setReturnKeyType:UIReturnKeyGo];
-    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -67,6 +66,9 @@
         //성공
         NSLog(@"로그인 성공 : %@", [[BaasioUser currentUser]description] );
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+        [[NSUserDefaults standardUserDefaults] setObject:userName.text forKey:@"userID"];
+        [[NSUserDefaults standardUserDefaults] setObject:password.text forKey:@"userPW"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [self goToMainPage];
     } else {
         //실패

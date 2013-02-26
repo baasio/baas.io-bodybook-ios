@@ -21,7 +21,7 @@
 
 @implementation ProfileInfoCell
 
-@synthesize profileImage, profileBigImage, userNameLabel, profileImageBackground, profileImageChangeButton, photoButtonImage,nameLabel,viewController,followingCount,followersCount,friendCountView;
+@synthesize profileImage, profileBigImage, userNameLabel, profileImageBackground, profileImageChangeButton,nameLabel,viewController,followingCount,followersCount,friendCountView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -58,14 +58,12 @@
     [self.profileBigImage setClipsToBounds:YES];
     [self.profileBigImage setFrame:CGRectMake(self.profileBigImage.frame.origin.x, self.profileBigImage.frame.origin.y, self.profileBigImage.frame.size.width, PROFILEBIGIMAGE_HEIGHT)];
     
-    [self.photoButtonImage setFrame:CGRectMake(self.profileImage.frame.origin.x, self.profileImage.frame.origin.y, 30, 30)];
-    
     [self.profileImage setClipsToBounds:YES];
     [self.profileImage setFrame:CGRectMake(self.profileImage.frame.origin.x, self.profileImage.frame.origin.y, 90, 90)];
     
-    [self.profileImageChangeButton setFrame:CGRectMake(self.profileImageChangeButton.frame.origin.x,  PROFILEBIGIMAGE_HEIGHT-50, 90, 90)];
+    [self.profileImageChangeButton setFrame:CGRectMake(self.profileImageChangeButton.frame.origin.x, self.profileImageChangeButton.frame.origin.y, 90, 90)];
     
-    [self.profileImageBackground setFrame:CGRectMake(self.profileImageBackground.frame.origin.x, PROFILEBIGIMAGE_HEIGHT-50, 100, 100)];
+    [self.profileImageBackground setFrame:CGRectMake(self.profileImageBackground.frame.origin.x, self.profileImageBackground.frame.origin.y, 100, 100)];
     
     
     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.profileImageBackground.bounds];
@@ -77,7 +75,7 @@
     self.profileImageBackground.layer.shadowPath = shadowPath.CGPath;
     self.profileImageBackground.layer.shouldRasterize = YES;
     
-    [self.userNameLabel setFrame:CGRectMake(self.userNameLabel.frame.origin.x, PROFILEBIGIMAGE_HEIGHT+10, self.userNameLabel.frame.size.width, self.userNameLabel.frame.size.height)];
+    [self.userNameLabel setFrame:CGRectMake(self.userNameLabel.frame.origin.x, self.userNameLabel.frame.origin.y, self.userNameLabel.frame.size.width, self.userNameLabel.frame.size.height)];
     
 
     BaasioQuery *query1 = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/followers",[[BaasioUser currentUser]objectForKey:@"username"]]];
@@ -107,9 +105,19 @@
                  failureBlock:^(NSError *error) {
                      NSLog(@"팔로잉 친구목록 불러오기 실패 : %@", error.localizedDescription);
                  }];
+    
+    UIBezierPath *shadowPath2 = [UIBezierPath bezierPathWithRect:friendCountView.bounds];
+    friendCountView.layer.masksToBounds = NO;
+    friendCountView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    friendCountView.layer.shadowOpacity = 1.0;
+    friendCountView.layer.shadowRadius = 1.5;
+    friendCountView.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    friendCountView.layer.shadowPath = shadowPath2.CGPath;
+    friendCountView.layer.shouldRasterize = YES;
 }
 
 - (IBAction)profileImageChange:(id)sender{
+    NSLog(@"imageChange버튼");
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     picker.allowsEditing = YES;

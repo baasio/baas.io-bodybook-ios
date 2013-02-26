@@ -36,6 +36,7 @@
     if(modalPageUP){
         [self updateFeedData];
         modalPageUP = NO;
+        contentEndCheck = NO;
     }
     [self.tableView reloadData];
     //[self.tableView setContentOffset:CGPointMake(0.0, 0.0)];
@@ -45,10 +46,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [self updateFeedData];
+    
     pageNumber = 10;
+    [self updateFeedData];
+    
     modalPageUP = NO;
+    contentEndCheck = NO;
     self.navigationItem.title = [[BaasioUser currentUser] objectForKey:@"name"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -69,14 +72,17 @@
 -(void)updateFeedData{
     BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/activities",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
     [query setLimit:pageNumber];
-//    [query setOrderBy:@"created" order:BaasioQuerySortOrderDESC];
     [query queryInBackground:^(NSArray *array) {
-        contentArray = [[NSMutableArray alloc]initWithArray:array];
-        [self.tableView reloadData];
+        if([contentArray isEqual:[[NSMutableArray alloc]initWithArray:array]] && pageNumber != 10){
+            contentEndCheck = YES;
+        }else{
+            contentEndCheck = NO;
+            contentArray = [[NSMutableArray alloc]initWithArray:array];
+            [self.tableView reloadData];
+        }
         if(_reloading == YES){
             [self doneLoadingTableViewData];
         }
-        //NSLog(@"유저 액티비티 : %@", contentArray);
     }
                 failureBlock:^(NSError *error) {
                     NSLog(@"fail : %@", error.localizedDescription);
@@ -195,10 +201,12 @@
     
     NSInteger sectionsAmount = [tableView numberOfSections];
     NSInteger rowsAmount = [tableView numberOfRowsInSection:[indexPath section]];
-    if ([indexPath section] == sectionsAmount - 2 && [indexPath row] == rowsAmount - 3) {
-        pageNumber = pageNumber+10;
-        [self updateFeedData];
-        NSLog(@"리로드활성화");
+    if ([indexPath section] == sectionsAmount - 1 && [indexPath row] == rowsAmount - 3) {
+        if(!contentEndCheck){
+            pageNumber = pageNumber+10;
+            [self updateFeedData];
+            NSLog(@"리로드활성화");
+        }
         // This is the last cell in the table
     }
 }

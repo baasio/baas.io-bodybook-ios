@@ -62,7 +62,7 @@
 
 -(void)closeAndPop{
     if (menuOpened){
-    [self.mainVC.view hideOrigamiTransitionWith:self.menuVC.view NumberOfFolds:1 Duration:.3 Direction:XYOrigamiDirectionFromLeft completion:^(BOOL finished) {
+    [self.mainVC.view hideOrigamiTransitionWith:self.menuVC.view NumberOfFolds:1 Duration:.2 Direction:XYOrigamiDirectionFromLeft completion:^(BOOL finished) {
         
         menuOpened = !menuOpened;
         UINavigationController *nav = (UINavigationController*)self.mainVC;
@@ -85,7 +85,7 @@
 -(void)closeAndChange:(UIViewController *)vc{
     
     
-    [self.mainVC.view hideOrigamiTransitionWith:self.menuVC.view NumberOfFolds:1 Duration:.3 Direction:XYOrigamiDirectionFromLeft completion:^(BOOL finished) {
+    [self.mainVC.view hideOrigamiTransitionWith:self.menuVC.view NumberOfFolds:1 Duration:.2 Direction:XYOrigamiDirectionFromLeft completion:^(BOOL finished) {
         
         menuOpened = !menuOpened;
         [self.mainVC.view removeGestureRecognizer:tap];

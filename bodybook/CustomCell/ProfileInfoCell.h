@@ -16,7 +16,6 @@
     UIView *profileImageBackground;
     UIImageView *profileImage;
     UIImageView *profileBigImage;
-    UIImageView *photoButtonImage;
     UIImage *uploadImage;
     UILabel *userNameLabel;
     UILabel *nameLabel;
@@ -28,7 +27,7 @@
 
 @property (nonatomic, retain)IBOutlet UIButton *profileImageChangeButton;
 @property (nonatomic, retain)IBOutlet UIView *profileImageBackground,*friendCountView;
-@property (nonatomic, retain)IBOutlet UIImageView *profileImage, *profileBigImage, *photoButtonImage;
+@property (nonatomic, retain)IBOutlet UIImageView *profileImage, *profileBigImage;
 @property (nonatomic, retain)IBOutlet UILabel *userNameLabel,*nameLabel,*followingCount,*followersCount;
 @property (nonatomic, retain)UIViewController *viewController;
 

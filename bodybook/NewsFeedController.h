@@ -20,6 +20,7 @@
     int pageNumber;
     
     BOOL modalPageUP;
+    BOOL contentEndCheck;
 }
 @property (nonatomic, retain) NSArray *photos;
 @end

@@ -86,11 +86,91 @@
                   }];
 }
 
+-(NSString *)calculateDate:(NSDate *)date{
+    NSString *interval;
+    int diffSecond = (int)[date timeIntervalSinceNow];
+    
+    if (diffSecond < 0) { //입력날짜가 과거
+        
+        //날짜 차이부터 체크
+        int valueInterval;
+        int valueOfToday, valueOfTheDate;
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSArray *languages = [defaults objectForKey:@"AppleLanguages"];
+        NSString *currentLanguage = [languages objectAtIndex:0];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+        [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:currentLanguage]];
+        
+        [formatter setDateFormat:@"yyyyMMdd"];
+        
+        NSDate *now = [NSDate date];
+        valueOfToday = [[formatter stringFromDate:now] intValue]; //오늘날짜
+        valueOfTheDate = [[formatter stringFromDate:date] intValue]; //입력날짜
+        valueInterval = valueOfToday - valueOfTheDate; //두 날짜 차이
+        
+        
+        if(valueInterval == 1){
+            [formatter setDateFormat:@"어제 a h:mm"];
+            interval = [formatter stringFromDate:date];
+        }else if(valueInterval == 2){
+            [formatter setDateFormat:@"2일전 a h:mm"];
+            interval = [formatter stringFromDate:date];
+        }else if(valueInterval == 3){
+            [formatter setDateFormat:@"3일전 a h:mm"];
+            interval = [formatter stringFromDate:date];
+        }
+        else if(valueInterval > 3) { //4일 이상일때는 그냥 요일, 날짜 표시
+            if ([currentLanguage compare:@"ko"] == NSOrderedSame)
+                [formatter setDateFormat:@"MMM d일, EEEE"]; //locale 한국일 경우 "년, 일" 붙이기
+            else
+                [formatter setDateFormat:@"yyyy. MMM d, EEEE"];
+            interval = [formatter stringFromDate:date];
+        }
+        else { //날짜가 같은경우 시간 비교
+            
+            [formatter setDateFormat:@"HH"];
+            
+            valueOfToday = [[formatter stringFromDate:now] intValue]; //오늘시간
+            valueOfTheDate = [[formatter stringFromDate:date] intValue]; //입력시간
+            valueInterval = valueOfToday - valueOfTheDate; //두 시간 차이
+            
+            if(valueInterval == 1)
+                interval = @"1시간전";
+            else if(valueInterval >= 2)
+                interval = [NSString stringWithFormat:@"%i시간전", valueInterval];
+            else { //시간이 같은 경우 분 비교
+                
+                [formatter setDateFormat:@"mm"];
+                
+                valueOfToday = [[formatter stringFromDate:now] intValue]; //오늘분
+                valueOfTheDate = [[formatter stringFromDate:date] intValue]; //입력분
+                valueInterval = valueOfToday - valueOfTheDate; //두 분 차이    
+                
+                if(valueInterval == 1)
+                    interval = @"1분전";
+                else if(valueInterval >= 2)
+                    interval = [NSString stringWithFormat:@"%i분전", valueInterval];
+                else //분이 같은 경우 차이가 1분 이내
+                    interval = @"지금 등록";
+                
+            }
+            
+        }
+        
+    }
+    else { //입력날짜가 미래
+        NSLog(@"%s, 입력된 날짜가 미래임", __func__);
+        interval = @"지금 등록";
+    }
+    return interval;
+}
+
 - (void)initCustomCell:(NSDictionary*)contentDic{
     userInfo = contentDic;
-    NSDictionary *actorInfo = [userInfo objectForKey:@"actor"];
     contentUUID = [userInfo objectForKey:@"uuid"];
-    
+    NSDictionary *actorInfo = [userInfo objectForKey:@"actor"];
     if(postUserInfo == nil){
         BaasioQuery *query = [BaasioQuery queryWithCollection:@"users"];
         [query setWheres:[NSString stringWithFormat:@"username = '%@'",[actorInfo objectForKey:@"username"]]];
@@ -106,6 +186,7 @@
                     }];
     }
     
+    
     [contentText setText:[userInfo objectForKey:@"content"]];
     [name setText:[userInfo objectForKey:@"nameID"]];
     
@@ -113,9 +194,11 @@
     long long timeStamp = [[userInfo objectForKey:@"created"] longLongValue];
     NSTimeInterval timeInterval = (double)(timeStamp/1000);
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
-    [dateFormat setDateFormat:@"yyyy년 MM월 dd일 HH시 mm분 ss초-에 작성됨"];
-    [dateLabel setText:[[dateFormat stringFromDate:date]uppercaseString]];
+//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
+//    [dateFormat setDateFormat:@"yyyy년 MM월 dd일 HH시 mm분 ss초-에 작성됨"];
+//    [dateLabel setText:[[dateFormat stringFromDate:date]uppercaseString]];
+    [dateLabel setText:[self calculateDate:date]];
+    
     if([[userInfo objectForKey:@"like"] isEqualToString:@"0"]){
         likeNumber = 0;
         [likeLabel setText:@"-"];
