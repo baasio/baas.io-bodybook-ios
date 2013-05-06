@@ -171,6 +171,12 @@
     userInfo = contentDic;
     contentUUID = [userInfo objectForKey:@"uuid"];
     NSDictionary *actorInfo = [userInfo objectForKey:@"actor"];
+    
+//    실시간 유저프로필 미반영
+//    [profileImage setClipsToBounds:YES];
+//    [profileImage setImageWithURL:[NSURL URLWithString:[actorInfo objectForKey:@"picture"]] placeholderImage:nil];
+    
+    //실시간 유저프로필 반영 (셀이 reuse될때마다 이미지를 부르게 된다)
     if(postUserInfo == nil){
         BaasioQuery *query = [BaasioQuery queryWithCollection:@"users"];
         [query setWheres:[NSString stringWithFormat:@"username = '%@'",[actorInfo objectForKey:@"username"]]];
@@ -185,7 +191,6 @@
                         NSLog(@"fail : %@", error.localizedDescription);
                     }];
     }
-    
     
     [contentText setText:[userInfo objectForKey:@"content"]];
     [name setText:[userInfo objectForKey:@"nameID"]];

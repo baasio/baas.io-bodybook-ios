@@ -22,6 +22,11 @@
 {
     [Baasio setApplicationInfo:@"ceffba5f-3514-11e2-a2c1-02003a570010" applicationName:@"d31a99ec-3514-11e2-a2c1-02003a570010"];
     
+//    [Baasio setApplicationInfo:@"https://stgapi.baas.io/" baasioID:@"d485c0b8-b2e0-11e2-9392-02004d450054" applicationName:@"de0257ae-b2e0-11e2-9392-02004d450054"];
+    
+//    [Baasio setApplicationInfo:@"https://devapi.baas.io/" baasioID:@"7fd4547c-b2c1-11e2-b08a-02004d17003f" applicationName:@"80094718-b2c1-11e2-b08a-02004d17003f"];
+
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];

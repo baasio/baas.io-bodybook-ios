@@ -118,12 +118,9 @@
     
     static NSString *CellIdentifier = @"Cell";
     CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil){
-        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"CustomCell" owner:nil options:nil];
-        cell = [nibs objectAtIndex:0];
-        [cell initCustomCell:object];
-        
-    }
+    NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"CustomCell" owner:nil options:nil];
+    cell = [nibs objectAtIndex:0];
+    [cell initCustomCell:object];
     [cell.imageContentButton addTarget:self action:@selector(contentImageTouched:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
