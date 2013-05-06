@@ -7,7 +7,7 @@
 //
 
 #import "CustomCell.h"
-
+#import "CommentViewController.h"
 #import "PostMessageViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -18,7 +18,7 @@
 
 @implementation CustomCell
 
-@synthesize userInfo,name, contentText, bottomView, background, likeLabel, contentImageView, profileImage, badLabel, dateLabel, likeButton, badButton, imageContentButton;
+@synthesize userInfo,name, contentText, bottomView, background, likeLabel, contentImageView, profileImage, badLabel, dateLabel, likeButton, badButton, imageContentButton, commentButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -235,7 +235,7 @@
         self.imageContentButton.enabled = NO;
         self.imageContentButton.hidden = YES;
         [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, self.contentText.frame.origin.y + self.contentText.frame.size.height+10, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
-        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.bottomView.frame.origin.y + 12)];
+        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.bottomView.frame.origin.y + 22)];
     }else{
         //사진이 있는경우
         /////////////////// 이미지파일이 있는 URL주소///////////////////////////
@@ -253,7 +253,7 @@
         
         [self.bottomView setFrame:CGRectMake(self.bottomView.frame.origin.x, contentImageView.frame.origin.y + self.contentImageView.frame.size.height+10, self.bottomView.frame.size.width, self.bottomView.frame.size.height)];
         
-        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.bottomView.frame.origin.y + 12)];
+        [self.background setFrame:CGRectMake(self.background.frame.origin.x, self.background.frame.origin.y, self.background.frame.size.width, self.bottomView.frame.origin.y + 22)];
     }
     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.background.bounds];
     self.background.layer.masksToBounds = NO;

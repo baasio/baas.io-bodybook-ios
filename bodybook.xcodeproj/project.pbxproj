@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4123D96416D8600500A4C1B6 /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4123D96316D8600500A4C1B6 /* baas.io.framework */; };
 		414600A816D3BEEB00E7AE8D /* image_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414600A716D3BEEB00E7AE8D /* image_add@2x.png */; };
 		414600AA16D3C2D000E7AE8D /* btn_prev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414600A916D3C2D000E7AE8D /* btn_prev@2x.png */; };
+		4183772E17373B4A001EFA6D /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4183772D17373B4A001EFA6D /* baas.io.framework */; };
+		4183773017374F89001EFA6D /* comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4183772F17374F89001EFA6D /* comment@2x.png */; };
+		4183779017376F33001EFA6D /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4183778E17376F33001EFA6D /* CommentViewController.m */; };
+		4183779117376F33001EFA6D /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4183778F17376F33001EFA6D /* CommentViewController.xib */; };
 		DE3F503A16C0F4340073B168 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F503516C0F4080073B168 /* libSDWebImage.a */; };
 		DE3F503E16C0F5180073B168 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F503D16C0F5180073B168 /* CoreImage.framework */; };
 		DE3F504016C0F51E0073B168 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F503F16C0F51E0073B168 /* MapKit.framework */; };
@@ -126,9 +129,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4123D96316D8600500A4C1B6 /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = baas.io.framework; sourceTree = "<group>"; };
 		414600A716D3BEEB00E7AE8D /* image_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image_add@2x.png"; path = "bodybook/image_add@2x.png"; sourceTree = "<group>"; };
 		414600A916D3C2D000E7AE8D /* btn_prev@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_prev@2x.png"; path = "bodybook/btn_prev@2x.png"; sourceTree = "<group>"; };
+		4183772D17373B4A001EFA6D /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = baas.io.framework; sourceTree = "<group>"; };
+		4183772F17374F89001EFA6D /* comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "comment@2x.png"; path = "bodybook/comment@2x.png"; sourceTree = "<group>"; };
+		4183778D17376F33001EFA6D /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		4183778E17376F33001EFA6D /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		4183778F17376F33001EFA6D /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewController.xib; sourceTree = "<group>"; };
 		DE3F502B16C0F4080073B168 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = bodybook/SDWebImage/SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		DE3F503D16C0F5180073B168 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		DE3F503F16C0F51E0073B168 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -246,7 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4123D96416D8600500A4C1B6 /* baas.io.framework in Frameworks */,
+				4183772E17373B4A001EFA6D /* baas.io.framework in Frameworks */,
 				DEED156C16CB70A0001F42E0 /* MessageUI.framework in Frameworks */,
 				DE3F505816C1D55A0073B168 /* AssetsLibrary.framework in Frameworks */,
 				DE3F504216C0F5230073B168 /* ImageIO.framework in Frameworks */,
@@ -350,7 +357,6 @@
 		DEF701F416BFA37C008FEEA0 = {
 			isa = PBXGroup;
 			children = (
-				4123D96316D8600500A4C1B6 /* baas.io.framework */,
 				DEFD4E2E16D382A200D5043A /* RefreshTable */,
 				DE8C12FA16CDBAD0004FD35C /* PhotoBrowser */,
 				DE3F504916C104C00073B168 /* ImageUtilities */,
@@ -375,6 +381,7 @@
 		DEF701FF16BFA37C008FEEA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4183772D17373B4A001EFA6D /* baas.io.framework */,
 				DE8C132F16CDD023004FD35C /* MWPhotoBrowser.bundle */,
 				DEED156B16CB70A0001F42E0 /* MessageUI.framework */,
 				DE3F505716C1D55A0073B168 /* AssetsLibrary.framework */,
@@ -405,6 +412,9 @@
 				DE3F505916C1DA420073B168 /* JoinController.h */,
 				DE3F505A16C1DA420073B168 /* JoinController.m */,
 				DE3F505B16C1DA420073B168 /* JoinController.xib */,
+				4183778D17376F33001EFA6D /* CommentViewController.h */,
+				4183778E17376F33001EFA6D /* CommentViewController.m */,
+				4183778F17376F33001EFA6D /* CommentViewController.xib */,
 				DEF7020716BFA37C008FEEA0 /* Supporting Files */,
 			);
 			path = bodybook;
@@ -508,6 +518,7 @@
 		DEF7027216C0A071008FEEA0 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				4183772F17374F89001EFA6D /* comment@2x.png */,
 				DEF7027316C0A0BC008FEEA0 /* bad@2x.png */,
 				DEF7027416C0A0BC008FEEA0 /* ballon.png */,
 				DEF7027516C0A0BC008FEEA0 /* CustomCell.h */,
@@ -675,6 +686,8 @@
 				DEF932AD16DB244A0046FB66 /* SearchUserInfoViewController.xib in Resources */,
 				DEF6638E16DC87EE0011972A /* friend_search@2x.png in Resources */,
 				DEF6638F16DC87EE0011972A /* newsfeed_btn@2x.png in Resources */,
+				4183773017374F89001EFA6D /* comment@2x.png in Resources */,
+				4183779117376F33001EFA6D /* CommentViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +723,7 @@
 				DEFD4E4B16D39B2700D5043A /* UIImage+Resize.m in Sources */,
 				DEF932AC16DB244A0046FB66 /* SearchUserInfoViewController.m in Sources */,
 				DEF6638816DC7A2A0011972A /* SideMenuCell.m in Sources */,
+				4183779017376F33001EFA6D /* CommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

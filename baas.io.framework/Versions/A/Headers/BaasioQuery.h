@@ -12,7 +12,7 @@ typedef enum {
 #import "BaasioGroup.h"
 
 /**
- A bass.io Framework Query Object.
+ A baas.io Framework Query Object.
  */
 @interface BaasioQuery : NSObject
 /**
@@ -30,10 +30,14 @@ typedef enum {
 
 /**
  Relationship용 Query 생성
-
- @param name name
+ 
+ @param entityName entityName
+ @param uuid uuid
+ @param relationName relationName
  */
-+ (BaasioQuery *)queryWithRelationship:(NSString *)name;
++ (BaasioQuery *)queryWithRelationship:(NSString *)entityName
+                              withUUID:(NSString *)uuid
+                          withRelation:(NSString*)relationName;
 
 /**
  가져올 property

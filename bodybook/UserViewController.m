@@ -10,6 +10,7 @@
 #import "CustomCell.h"
 #import "ProfileInfoCell.h"
 #import "PostMessageViewController.h"
+#import "CommentViewController.h"
 
 #import <baas.io/Baas.h>
 
@@ -146,9 +147,17 @@
                 }
             }
             [cell.imageContentButton addTarget:self action:@selector(contentImageTouched:) forControlEvents:UIControlEventTouchUpInside];
+            [[cell.commentButton layer]setValue:object forKey:@"object"];
+            [cell.commentButton addTarget:self action:@selector(commentButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
             return cell;
             break;
     }
+}
+- (void)commentButtonTouched:(id)sender{
+    CommentViewController *commentView = [[CommentViewController alloc]init];
+    [commentView initWithData:[[sender layer]valueForKey:@"object"]];
+    [self.navigationController pushViewController:commentView animated:YES];
+    //    [self presentViewController:commentView animated:YES completion:nil];
 }
 
 - (void)contentImageTouched:(id)sender{
@@ -180,12 +189,12 @@
         //사진이 없는경우
         CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
                               constrainedToSize:CGSizeMake(285, 9000)];
-        return size.height + 100;
+        return size.height + 105;
     }else{
         //사진이 있는경우
         CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
                               constrainedToSize:CGSizeMake(285, 9000)];
-        return size.height + 290;
+        return size.height + 295;
     }
     
 }

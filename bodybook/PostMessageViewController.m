@@ -68,6 +68,7 @@
         NSMutableArray *postUser = [NSMutableArray arrayWithArray:array];
         NSDictionary *userProfileInfo = [[NSDictionary alloc]init];
         userProfileInfo = [postUser objectAtIndex:0];
+        [profileImage setClipsToBounds:YES];
         [profileImage setImageWithURL:[NSURL URLWithString:[userProfileInfo objectForKey:@"picture"]] placeholderImage:nil];
     }
                 failureBlock:^(NSError *error) {
