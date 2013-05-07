@@ -129,7 +129,7 @@
 }
 
 - (void)commentButtonTouched:(id)sender{
-    CommentViewController *commentView = [[CommentViewController alloc]init];
+    CommentViewController *commentView = [[CommentViewController alloc]initWithNibName:@"CommentViewController" bundle:nil];
     [commentView initWithData:[[sender layer]valueForKey:@"object"]];
     [self.navigationController pushViewController:commentView animated:YES];
 //    [self presentViewController:commentView animated:YES completion:nil];

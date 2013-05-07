@@ -10,36 +10,114 @@
 #import "CustomCell.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import <baas.io/Baas.h>
 
 @interface CommentViewController ()
 
 @end
 
 @implementation CommentViewController
-@synthesize customTableView, photos;
+@synthesize customTableView, photos, doneBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-
-//        if([[UIScreen mainScreen] bounds].size.width > 480.){
-//            [customTableView setFrame:CGRectMake(10,54,300,494)];
-//        }else{
-//            [customTableView setFrame:CGRectMake(10,54,300,426)];
-//        }
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self
+                                       action:@selector(dismissKeyboard)];
+        
+        [self.view addGestureRecognizer:tap];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(keyboardWillShow:)
+													 name:UIKeyboardWillShowNotification
+												   object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(keyboardWillHide:)
+													 name:UIKeyboardWillHideNotification
+												   object:nil];
     }
     return self;
 }
 
+-(void)dismissKeyboard {
+    [textView resignFirstResponder];
+}
+
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadSetView
+{
+    containerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 40, 320, 40)];
+    textView = [[HPGrowingTextView alloc] initWithFrame:CGRectMake(6, 3, 240, 40)];
+    textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
+    
+	textView.minNumberOfLines = 1;
+	textView.maxNumberOfLines = 3;
+	textView.returnKeyType = UIReturnKeyGo; //just as an example
+	textView.font = [UIFont systemFontOfSize:15.0f];
+	textView.delegate = self;
+    textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 5, 0);
+    textView.backgroundColor = [UIColor whiteColor];
+    
+//    textView. = @"댓글을 달아보세요.";
+	// textView.animateHeightChange = NO; //turns off animation
+    
+    [self.view addSubview:containerView];
+    UIImage *rawEntryBackground = [UIImage imageNamed:@"MessageEntryInputField.png"];
+    UIImage *entryBackground = [rawEntryBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
+    UIImageView *entryImageView = [[UIImageView alloc] initWithImage:entryBackground];
+    entryImageView.frame = CGRectMake(5, 0, 248, 40);
+    entryImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    
+    UIImage *rawBackground = [UIImage imageNamed:@"MessageEntryBackground.png"];
+    UIImage *background = [rawBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:background];
+    imageView.frame = CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height);
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    
+    textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
+    // view hierachy
+    [containerView addSubview:imageView];
+    [containerView addSubview:textView];
+    [containerView addSubview:entryImageView];
+    
+    UIImage *sendBtnBackground = [[UIImage imageNamed:@"MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
+    UIImage *selectedSendBtnBackground = [[UIImage imageNamed:@"MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
+    
+	doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+	doneBtn.frame = CGRectMake(containerView.frame.size.width - 69, 8, 63, 27);
+    doneBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
+	[doneBtn setTitle:@"게시" forState:UIControlStateNormal];
+
+    [doneBtn setTitleShadowColor:[UIColor colorWithWhite:0 alpha:0.4] forState:UIControlStateNormal];
+    doneBtn.titleLabel.shadowOffset = CGSizeMake (0.0, -1.0);
+    doneBtn.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
+    
+    [doneBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	[doneBtn addTarget:self action:@selector(resignTextView) forControlEvents:UIControlEventTouchUpInside];
+    [doneBtn setBackgroundImage:sendBtnBackground forState:UIControlStateNormal];
+    [doneBtn setBackgroundImage:selectedSendBtnBackground forState:UIControlStateSelected];
+    [doneBtn setEnabled:NO];
+    
+	[containerView addSubview:doneBtn];
+    containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    
+    [self.view addSubview:containerView];
+
+}
 - (void)initWithData:(NSDictionary *)object{
     contentArray = object;
+    NSLog(@"%@",contentArray);
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self loadSetView];
     self.customTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // Do any additional setup after loading the view from its nib.
 }
@@ -48,6 +126,106 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)resignTextView
+{
+    [doneBtn setEnabled:NO];
+    BaasioEntity *entity = [BaasioEntity entitytWithName:@"Comments"];
+    [entity setObject:textView.text forKey:@"content"];
+    [entity setObject:[contentArray objectForKey:@"uuid"] forKey:@"FeedUUID"];
+    [entity setObject:[BaasioUser currentUser] forKey:@"writer"];
+    [entity saveInBackground:^(BaasioEntity *entity) {
+        NSLog(@"success : %@", entity.description);
+        [textView setText:@""];
+        [textView resignFirstResponder];
+    }
+                failureBlock:^(NSError *error) {
+                    NSLog(@"fail : %@", error.localizedDescription);
+                }];
+}
+
+
+//Code from Brett Schumann
+-(void) keyboardWillShow:(NSNotification *)note{
+    // get keyboard size and loctaion
+	CGRect keyboardBounds;
+    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+    NSNumber *duration = [note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    
+    // Need to translate the bounds to account for rotation.
+    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
+    
+	// get a rect for the textView frame
+	CGRect containerFrame = containerView.frame;
+    containerFrame.origin.y = self.view.bounds.size.height - (keyboardBounds.size.height + containerFrame.size.height);
+    
+	// animations settings
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:[duration doubleValue]];
+    [UIView setAnimationCurve:[curve intValue]];
+	[customTableView setFrame:CGRectMake(customTableView.frame.origin.x, customTableView.frame.origin.y, customTableView.frame.size.width, customTableView.frame.size.height - (keyboardBounds.size.height + containerFrame.size.height))];
+	// set views with new info
+	containerView.frame = containerFrame;
+
+    if (customTableView.contentSize.height > customTableView.frame.size.height)
+    {
+        CGPoint offset = CGPointMake(0, customTableView.contentSize.height - customTableView.frame.size.height);
+        [customTableView setContentOffset:offset animated:YES];
+    }
+
+	// commit animations
+	[UIView commitAnimations];
+
+}
+
+-(void) keyboardWillHide:(NSNotification *)note{
+    NSNumber *duration = [note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+	
+    CGRect keyboardBounds;
+    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
+    
+	// get a rect for the textView frame
+	CGRect containerFrame = containerView.frame;
+    containerFrame.origin.y = self.view.bounds.size.height - containerFrame.size.height;
+    
+	// animations settings
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:[duration doubleValue]];
+    [UIView setAnimationCurve:[curve intValue]];
+    containerView.frame = containerFrame;
+    
+	[customTableView setFrame:CGRectMake(customTableView.frame.origin.x, customTableView.frame.origin.y, customTableView.frame.size.width, customTableView.frame.size.height + (keyboardBounds.size.height + containerFrame.size.height))];
+	
+	// commit animations
+	[UIView commitAnimations];
+}
+
+- (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height
+{
+    float diff = (growingTextView.frame.size.height - height);
+    
+	CGRect r = containerView.frame;
+    r.size.height -= diff;
+    r.origin.y += diff;
+	containerView.frame = r;
+}
+
+- (BOOL)growingTextView:(HPGrowingTextView *)growingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    int lenght = growingTextView.text.length - range.length + text.length;
+    if (lenght >0) {
+        [doneBtn setEnabled:YES];
+    }
+    else {
+        [doneBtn setEnabled:NO];
+    }
+    return YES;
 }
 
 #pragma mark - Table view data source
@@ -73,8 +251,9 @@
 }
 
 - (void)commentButtonTouched:(id)sender{
-    
+    [textView becomeFirstResponder];
 }
+
 - (void)contentImageTouched:(id)sender{
     CustomCell *customCell = (CustomCell *)[[sender superview] superview] ;
     NSMutableArray *photoArray = [[NSMutableArray alloc] init];
