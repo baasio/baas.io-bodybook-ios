@@ -8,6 +8,7 @@
 
 #import "CommentViewController.h"
 #import "CustomCell.h"
+#import "CommentCell.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import <baas.io/Baas.h>
@@ -44,6 +45,7 @@
 }
 
 -(void)dismissKeyboard {
+    [textView setText:@""];
     [textView resignFirstResponder];
 }
 
@@ -111,14 +113,36 @@
 }
 - (void)initWithData:(NSDictionary *)object{
     contentArray = object;
-    NSLog(@"%@",contentArray);
+    
+    NSLog(@"원글 UUID : %@", [contentArray objectForKey:@"uuid"]);
+    BaasioQuery *query = [BaasioQuery queryWithCollection:@"Comments"];
+    [query setLimit:999];
+    [query setWheres:[NSString stringWithFormat:@"feedUUID = %@",[contentArray objectForKey:@"uuid"]]];
+    [query queryInBackground:^(NSArray *array) {
+        commentArray = [[NSMutableArray alloc]initWithArray:array];
+        NSLog(@"댓글 : %@", array.description);
+        [customTableView reloadData];
+        if (customTableView.contentSize.height > customTableView.frame.size.height)
+        {
+            CGPoint offset = CGPointMake(0, customTableView.contentSize.height - customTableView.frame.size.height);
+            [customTableView setContentOffset:offset animated:NO];
+        }
+//        NSLog(@"%d",commentArray.count);
+    }
+                failureBlock:^(NSError *error) {
+                    NSLog(@"fail : %@", error.localizedDescription);
+                }];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self loadSetView];
+    
     self.customTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.customTableView.backgroundColor = [UIColor clearColor];
+    self.customTableView.opaque = NO;
+    self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:1.0 alpha:1];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -132,13 +156,13 @@
 {
     [doneBtn setEnabled:NO];
     BaasioEntity *entity = [BaasioEntity entitytWithName:@"Comments"];
-    [entity setObject:textView.text forKey:@"content"];
-    [entity setObject:[contentArray objectForKey:@"uuid"] forKey:@"FeedUUID"];
+    [entity setObject:[textView text] forKey:@"content"];
+    [entity setObject:[contentArray objectForKey:@"uuid"] forKey:@"feedUUID"];
     [entity setObject:[BaasioUser currentUser] forKey:@"writer"];
     [entity saveInBackground:^(BaasioEntity *entity) {
-        NSLog(@"success : %@", entity.description);
         [textView setText:@""];
         [textView resignFirstResponder];
+        [self initWithData:contentArray];
     }
                 failureBlock:^(NSError *error) {
                     NSLog(@"fail : %@", error.localizedDescription);
@@ -166,19 +190,18 @@
 	[UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:[duration doubleValue]];
     [UIView setAnimationCurve:[curve intValue]];
-	[customTableView setFrame:CGRectMake(customTableView.frame.origin.x, customTableView.frame.origin.y, customTableView.frame.size.width, customTableView.frame.size.height - (keyboardBounds.size.height + containerFrame.size.height))];
+	[customTableView setFrame:CGRectMake(customTableView.frame.origin.x, customTableView.frame.origin.y, customTableView.frame.size.width, customTableView.frame.size.height - (keyboardBounds.size.height))];
 	// set views with new info
 	containerView.frame = containerFrame;
 
     if (customTableView.contentSize.height > customTableView.frame.size.height)
     {
         CGPoint offset = CGPointMake(0, customTableView.contentSize.height - customTableView.frame.size.height);
-        [customTableView setContentOffset:offset animated:YES];
+        [customTableView setContentOffset:offset animated:NO];
     }
 
 	// commit animations
 	[UIView commitAnimations];
-
 }
 
 -(void) keyboardWillHide:(NSNotification *)note{
@@ -200,7 +223,7 @@
     [UIView setAnimationCurve:[curve intValue]];
     containerView.frame = containerFrame;
     
-	[customTableView setFrame:CGRectMake(customTableView.frame.origin.x, customTableView.frame.origin.y, customTableView.frame.size.width, customTableView.frame.size.height + (keyboardBounds.size.height + containerFrame.size.height))];
+	[customTableView setFrame:CGRectMake(customTableView.frame.origin.x, customTableView.frame.origin.y, customTableView.frame.size.width, customTableView.frame.size.height + (keyboardBounds.size.height))];
 	
 	// commit animations
 	[UIView commitAnimations];
@@ -237,17 +260,28 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *object = [[NSDictionary alloc]init];
-//    object = [contentArray objectAtIndex:indexPath.row];
-    object = contentArray;
-    
     static NSString *CellIdentifier = @"Cell";
     CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"CustomCell" owner:nil options:nil];
-    cell = [nibs objectAtIndex:0];
-    [cell initCustomCell:object];
-    [cell.imageContentButton addTarget:self action:@selector(contentImageTouched:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.commentButton addTarget:self action:@selector(commentButtonTouched:) forControlEvents:UIControlEventTouchUpInside];    
-    return cell;
+    static NSString *CellIdentifier2 = @"CommentCell";
+    CommentCell *commentCell = (CommentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier2];
+    if(indexPath.row == 0){
+        object = contentArray;
+        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"CustomCell" owner:nil options:nil];
+        cell = [nibs objectAtIndex:0];
+        [cell initCustomCell:object];
+        [cell.imageContentButton addTarget:self action:@selector(contentImageTouched:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.commentButton addTarget:self action:@selector(commentButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
+    }else{
+        if([commentArray objectAtIndex:indexPath.row-1]){
+            object = [commentArray objectAtIndex:indexPath.row-1];
+            NSArray *nibs2 = [[NSBundle mainBundle] loadNibNamed:@"CommentCell" owner:nil options:nil];
+            commentCell = [nibs2 objectAtIndex:0];
+            [commentCell initCommentCell:object];
+            return commentCell;
+        }
+        return nil;
+    }
 }
 
 - (void)commentButtonTouched:(id)sender{
@@ -275,17 +309,25 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *object = contentArray;
-    NSString *contentText = [object objectForKey:@"content"];
-    if([[object objectForKey:@"contentImagePath"] isEqualToString:@"-"]){
-        //사진이 없는경우
-        CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
-                              constrainedToSize:CGSizeMake(285, 9000)];
-        return size.height + 105;
+    NSString *contentText = [object objectForKey:@"content"];    
+    if(indexPath.row == 0){
+        if([[object objectForKey:@"contentImagePath"] isEqualToString:@"-"]){
+            //사진이 없는경우
+            CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
+                                  constrainedToSize:CGSizeMake(285, 9000)];
+            return size.height + 108;
+        }else{
+            //사진이 있는경우
+            CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
+                                  constrainedToSize:CGSizeMake(285, 9000)];
+            return size.height + 298;
+        }
     }else{
-        //사진이 있는경우
-        CGSize size = [contentText sizeWithFont:[UIFont systemFontOfSize:13]
-                              constrainedToSize:CGSizeMake(285, 9000)];
-        return size.height + 295;
+        NSDictionary *comment = [commentArray objectAtIndex:indexPath.row-1];
+        NSString *commentText = [comment objectForKey:@"content"];
+        CGSize size = [commentText sizeWithFont:[UIFont systemFontOfSize:13]
+                              constrainedToSize:CGSizeMake(245, 9000)];
+        return size.height + 52;
     }
 }
 

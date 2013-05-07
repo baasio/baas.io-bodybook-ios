@@ -17,6 +17,8 @@
 		4111D74B1738869C00363399 /* MessageEntrySendButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4111D7431738869C00363399 /* MessageEntrySendButton@2x.png */; };
 		4111D74C1738869C00363399 /* MessageEntrySendButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4111D7441738869C00363399 /* MessageEntrySendButtonPressed.png */; };
 		4111D74D1738869C00363399 /* MessageEntrySendButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4111D7451738869C00363399 /* MessageEntrySendButtonPressed@2x.png */; };
+		4111D75017389C2F00363399 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4111D74F17389C2F00363399 /* CommentCell.m */; };
+		4111D75417389C7B00363399 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4111D75317389C7B00363399 /* CommentCell.xib */; };
 		414600A816D3BEEB00E7AE8D /* image_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414600A716D3BEEB00E7AE8D /* image_add@2x.png */; };
 		414600AA16D3C2D000E7AE8D /* btn_prev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414600A916D3C2D000E7AE8D /* btn_prev@2x.png */; };
 		4183772E17373B4A001EFA6D /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4183772D17373B4A001EFA6D /* baas.io.framework */; };
@@ -151,6 +153,9 @@
 		4111D7431738869C00363399 /* MessageEntrySendButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MessageEntrySendButton@2x.png"; path = "bodybook/HPGrowingTextView/MessageEntrySendButton@2x.png"; sourceTree = "<group>"; };
 		4111D7441738869C00363399 /* MessageEntrySendButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MessageEntrySendButtonPressed.png; path = bodybook/HPGrowingTextView/MessageEntrySendButtonPressed.png; sourceTree = "<group>"; };
 		4111D7451738869C00363399 /* MessageEntrySendButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MessageEntrySendButtonPressed@2x.png"; path = "bodybook/HPGrowingTextView/MessageEntrySendButtonPressed@2x.png"; sourceTree = "<group>"; };
+		4111D74E17389C2F00363399 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = bodybook/CustomCell/CommentCell.h; sourceTree = "<group>"; };
+		4111D74F17389C2F00363399 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentCell.m; path = bodybook/CustomCell/CommentCell.m; sourceTree = "<group>"; };
+		4111D75317389C7B00363399 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentCell.xib; path = bodybook/CustomCell/CommentCell.xib; sourceTree = "<group>"; };
 		414600A716D3BEEB00E7AE8D /* image_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image_add@2x.png"; path = "bodybook/image_add@2x.png"; sourceTree = "<group>"; };
 		414600A916D3C2D000E7AE8D /* btn_prev@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_prev@2x.png"; path = "bodybook/btn_prev@2x.png"; sourceTree = "<group>"; };
 		4183772D17373B4A001EFA6D /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = baas.io.framework; sourceTree = "<group>"; };
@@ -570,6 +575,9 @@
 				DEF7027916C0A0BC008FEEA0 /* ProfileInfoCell.h */,
 				DEF7027A16C0A0BC008FEEA0 /* ProfileInfoCell.m */,
 				DEF7027B16C0A0BC008FEEA0 /* ProfileInfoCell.xib */,
+				4111D74E17389C2F00363399 /* CommentCell.h */,
+				4111D74F17389C2F00363399 /* CommentCell.m */,
+				4111D75317389C7B00363399 /* CommentCell.xib */,
 			);
 			name = CustomCell;
 			sourceTree = "<group>";
@@ -738,6 +746,7 @@
 				4111D74B1738869C00363399 /* MessageEntrySendButton@2x.png in Resources */,
 				4111D74C1738869C00363399 /* MessageEntrySendButtonPressed.png in Resources */,
 				4111D74D1738869C00363399 /* MessageEntrySendButtonPressed@2x.png in Resources */,
+				4111D75417389C7B00363399 /* CommentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +785,7 @@
 				4183779017376F33001EFA6D /* CommentViewController.m in Sources */,
 				4111D73C1738832600363399 /* HPGrowingTextView.m in Sources */,
 				4111D73D1738832600363399 /* HPTextViewInternal.m in Sources */,
+				4111D75017389C2F00363399 /* CommentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
