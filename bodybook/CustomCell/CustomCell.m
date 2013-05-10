@@ -39,11 +39,21 @@
 - (IBAction)likeTouched:(id)sender{
     [likeButton setEnabled:NO];
     likeNumber++;
+    
+    NSMutableDictionary *likeMembers;
+    if([userInfo objectForKey:@"likeMembers"]){
+        likeMembers = [[NSMutableDictionary alloc]initWithDictionary:[userInfo objectForKey:@"likeMembers"]];
+    }else{
+        likeMembers = [[NSMutableDictionary alloc]init];
+    }
+    [likeMembers setObject:[[BaasioUser currentUser]objectForKey:@"username"] forKey:[[BaasioUser currentUser]objectForKey:@"username"]];
+    
     BaasioEntity *entity = [BaasioEntity entitytWithName:[NSString stringWithFormat:@"users/%@/feed",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
     entity.uuid = contentUUID;
     [entity setObject:[NSString stringWithFormat:@"%d", likeNumber] forKey:@"like"];
+    [entity setObject:likeMembers forKey:@"likeMembers"];
     [entity updateInBackground:^(BaasioEntity *entity) {
-        //NSLog(@"entity : %@", entity.description);
+        NSLog(@"entity : %@", entity.description);
         NSLog(@"좋아요!+1");
         if(likeNumber>0){
             [likeLabel setText:[NSString stringWithFormat:@"%d",likeNumber]];
@@ -64,9 +74,19 @@
 - (IBAction)badTouched:(id)sender{
     [badButton setEnabled:NO];
     badNumber++;
+    
+    NSMutableDictionary *badMembers;
+    if([userInfo objectForKey:@"badMembers"]){
+        badMembers = [[NSMutableDictionary alloc]initWithDictionary:[userInfo objectForKey:@"badMembers"]];
+    }else{
+        badMembers = [[NSMutableDictionary alloc]init];
+    }
+    [badMembers setObject:[[BaasioUser currentUser]objectForKey:@"username"] forKey:[[BaasioUser currentUser]objectForKey:@"username"]];
+    
     BaasioEntity *entity = [BaasioEntity entitytWithName:[NSString stringWithFormat:@"users/%@/feed",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
     entity.uuid = contentUUID;
     [entity setObject:[NSString stringWithFormat:@"%d", badNumber] forKey:@"bad"];
+    [entity setObject:badMembers forKey:@"badMembers"];
     [entity updateInBackground:^(BaasioEntity *entity) {
         //NSLog(@"entity : %@", entity.description);
         NSLog(@"싫어요!+1");
@@ -191,6 +211,24 @@
                         NSLog(@"fail : %@", error.localizedDescription);
                     }];
     }
+    
+    //사용자가 좋아요를 누른 상태인지 확인
+    if([[userInfo objectForKey:@"likeMembers"] objectForKey:[[BaasioUser currentUser]objectForKey:@"username"]]){
+        [likeButton setEnabled:NO];
+    }else{
+        [likeButton setEnabled:YES];
+    }
+    
+    //사용자가 싫어요를 누른 상태인지 확인
+    if([[userInfo objectForKey:@"badMembers"] objectForKey:[[BaasioUser currentUser]objectForKey:@"username"]]){
+        [badButton setEnabled:NO];
+    }else{
+        [badButton setEnabled:YES];
+    }
+    
+    
+    
+    
     
     [contentText setText:[userInfo objectForKey:@"content"]];
     [name setText:[userInfo objectForKey:@"nameID"]];

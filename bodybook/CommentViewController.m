@@ -49,6 +49,51 @@
     [textView resignFirstResponder];
 }
 
+-(void)loadingViewStart{
+    indecatorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 115.0f, 35.0f)];
+    //indecatorView.backgroundColor = [UIColor colorWithRed:245.0f green:245.0f blue:245.0f alpha:1.0f];
+    indecatorView.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.9f];;
+    indecatorView.layer.masksToBounds = YES;
+    indecatorView.layer.cornerRadius = 5.0f;
+    indecatorView.alpha = 0;
+    
+    [self.view addSubview:indecatorView];
+    
+    //indicator
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    activityIndicator.frame = CGRectMake(10.0f, 8.0f, 20.0f, 20.0f);
+    activityIndicator.hidesWhenStopped = YES;
+    
+    [indecatorView addSubview:activityIndicator];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(45.0f, 11.0f, 100.0f, 15.0f)];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = @"로딩중입니다";
+    label.font = [UIFont systemFontOfSize:12.0f];
+    label.textColor = [UIColor whiteColor];
+    
+    [indecatorView addSubview:label];
+    indecatorView.center = self.view.center;
+    indecatorView.transform = CGAffineTransformMakeScale(1.2f,1.2f);
+    
+    //애니메이션 구현
+    [UIProgressView beginAnimations:nil context:nil];
+    [UIProgressView setAnimationDuration:0.5];
+    [UIProgressView setAnimationDelay:0.3];
+    indecatorView.transform = CGAffineTransformMakeScale(1.0f,1.0f);
+    indecatorView.alpha = 1;
+    [UIProgressView commitAnimations];
+    [activityIndicator startAnimating];
+}
+-(void)loadingViewEnd{
+    //애니메이션 구현
+    [UIProgressView beginAnimations:nil context:nil];
+    [UIProgressView setAnimationDuration:0.5];
+    indecatorView.transform = CGAffineTransformMakeScale(1.2f,1.2f);
+    indecatorView.alpha = 0;
+    [UIProgressView commitAnimations];
+    [activityIndicator startAnimating];
+}
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadSetView
 {
@@ -112,6 +157,8 @@
 
 }
 - (void)initWithData:(NSDictionary *)object{
+    [self loadingViewStart];
+    
     contentArray = object;
     
     NSLog(@"원글 UUID : %@", [contentArray objectForKey:@"uuid"]);
@@ -119,17 +166,19 @@
     [query setLimit:999];
     [query setWheres:[NSString stringWithFormat:@"feedUUID = %@",[contentArray objectForKey:@"uuid"]]];
     [query queryInBackground:^(NSArray *array) {
+        [self loadingViewEnd];
         commentArray = [[NSMutableArray alloc]initWithArray:array];
         NSLog(@"댓글 : %@", array.description);
         [customTableView reloadData];
         if (customTableView.contentSize.height > customTableView.frame.size.height)
         {
             CGPoint offset = CGPointMake(0, customTableView.contentSize.height - customTableView.frame.size.height);
-            [customTableView setContentOffset:offset animated:NO];
+            [customTableView setContentOffset:offset animated:YES];
         }
 //        NSLog(@"%d",commentArray.count);
     }
                 failureBlock:^(NSError *error) {
+                    [self loadingViewEnd];
                     NSLog(@"fail : %@", error.localizedDescription);
                 }];
 }

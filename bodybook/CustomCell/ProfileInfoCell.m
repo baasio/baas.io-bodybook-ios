@@ -142,7 +142,7 @@
     file.contentType = @"image/jpeg";
     [file setObject:[[BaasioUser currentUser]objectForKey:@"username"] forKey:@"writer"];
     [file fileUploadInBackground:^(BaasioFile *file) {
-        NSLog(@"프로필사진 업로드 성공 : %@", file.uuid);
+        NSLog(@"프로필사진 업로드 성공 : %@", file);
         
         BaasioUser *user = [BaasioUser currentUser];
         //user.username = [[BaasioUser currentUser]objectForKey:@"username"];

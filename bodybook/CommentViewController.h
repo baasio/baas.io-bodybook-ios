@@ -22,6 +22,11 @@
     UIButton *doneBtn;
     UIView *containerView;
     HPGrowingTextView *textView;
+    
+    //////////////////////////////////////////////////
+    UIActivityIndicatorView *activityIndicator;
+    UIView *indecatorView;
+    //////////////////////////////////////////////////
 }
 
 @property (nonatomic, retain)UIButton *doneBtn;
