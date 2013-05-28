@@ -11,7 +11,8 @@
 #import "UserViewController.h"
 #import "NewsFeedController.h"
 #import "JoinController.h"
-#import "AddFriendViewController.h"
+//#import "AddFriendViewController.h"
+#import "AddFriendController.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import <baas.io/Baas.h>
@@ -98,7 +99,7 @@
     [vcs addObject:view2];
     
     //Creating view
-    AddFriendViewController *addFriendView = [[AddFriendViewController alloc] init];
+    AddFriendController *addFriendView = [[AddFriendController alloc] init];
     //Navigation Controller is required
     UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:addFriendView];
     //Dictionary of the view and title

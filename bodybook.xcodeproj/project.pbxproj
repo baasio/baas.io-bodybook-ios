@@ -21,10 +21,18 @@
 		4111D75417389C7B00363399 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4111D75317389C7B00363399 /* CommentCell.xib */; };
 		414600A816D3BEEB00E7AE8D /* image_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414600A716D3BEEB00E7AE8D /* image_add@2x.png */; };
 		414600AA16D3C2D000E7AE8D /* btn_prev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414600A916D3C2D000E7AE8D /* btn_prev@2x.png */; };
+		414EFD90174A1C25004CE965 /* navigationBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 414EFD8F174A1C25004CE965 /* navigationBar@2x.png */; };
+		41637127173CB18D0063C4C1 /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41637125173CB18D0063C4C1 /* backButton@2x.png */; };
+		41637128173CB18D0063C4C1 /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41637126173CB18D0063C4C1 /* button@2x.png */; };
+		4163712A173CBB2B0063C4C1 /* sideMenuHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41637129173CBB2B0063C4C1 /* sideMenuHeader@2x.png */; };
 		4183772E17373B4A001EFA6D /* baas.io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4183772D17373B4A001EFA6D /* baas.io.framework */; };
 		4183773017374F89001EFA6D /* comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4183772F17374F89001EFA6D /* comment@2x.png */; };
 		4183779017376F33001EFA6D /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4183778E17376F33001EFA6D /* CommentViewController.m */; };
 		4183779117376F33001EFA6D /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4183778F17376F33001EFA6D /* CommentViewController.xib */; };
+		4190D298174C4268004B41CE /* AddFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4190D296174C4268004B41CE /* AddFriendController.m */; };
+		4190D299174C4268004B41CE /* AddFriendController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4190D297174C4268004B41CE /* AddFriendController.xib */; };
+		4190D2A3174C51ED004B41CE /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4190D2A2174C51ED004B41CE /* FriendTableViewCell.m */; };
+		4190D2A5174C51FD004B41CE /* FriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4190D2A4174C51FD004B41CE /* FriendTableViewCell.xib */; };
 		DE3F503A16C0F4340073B168 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F503516C0F4080073B168 /* libSDWebImage.a */; };
 		DE3F503E16C0F5180073B168 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F503D16C0F5180073B168 /* CoreImage.framework */; };
 		DE3F504016C0F51E0073B168 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F503F16C0F51E0073B168 /* MapKit.framework */; };
@@ -158,11 +166,21 @@
 		4111D75317389C7B00363399 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentCell.xib; path = bodybook/CustomCell/CommentCell.xib; sourceTree = "<group>"; };
 		414600A716D3BEEB00E7AE8D /* image_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image_add@2x.png"; path = "bodybook/image_add@2x.png"; sourceTree = "<group>"; };
 		414600A916D3C2D000E7AE8D /* btn_prev@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_prev@2x.png"; path = "bodybook/btn_prev@2x.png"; sourceTree = "<group>"; };
+		414EFD8F174A1C25004CE965 /* navigationBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navigationBar@2x.png"; path = "bodybook/navigationBar@2x.png"; sourceTree = "<group>"; };
+		41637125173CB18D0063C4C1 /* backButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backButton@2x.png"; path = "bodybook/backButton@2x.png"; sourceTree = "<group>"; };
+		41637126173CB18D0063C4C1 /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button@2x.png"; path = "bodybook/button@2x.png"; sourceTree = "<group>"; };
+		41637129173CBB2B0063C4C1 /* sideMenuHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sideMenuHeader@2x.png"; path = "bodybook/sideMenuHeader@2x.png"; sourceTree = "<group>"; };
 		4183772D17373B4A001EFA6D /* baas.io.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = baas.io.framework; sourceTree = "<group>"; };
 		4183772F17374F89001EFA6D /* comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "comment@2x.png"; path = "bodybook/comment@2x.png"; sourceTree = "<group>"; };
 		4183778D17376F33001EFA6D /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		4183778E17376F33001EFA6D /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		4183778F17376F33001EFA6D /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewController.xib; sourceTree = "<group>"; };
+		4190D295174C4268004B41CE /* AddFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendController.h; sourceTree = "<group>"; };
+		4190D296174C4268004B41CE /* AddFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendController.m; sourceTree = "<group>"; };
+		4190D297174C4268004B41CE /* AddFriendController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendController.xib; sourceTree = "<group>"; };
+		4190D2A1174C51ED004B41CE /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
+		4190D2A2174C51ED004B41CE /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
+		4190D2A4174C51FD004B41CE /* FriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendTableViewCell.xib; sourceTree = "<group>"; };
 		DE3F502B16C0F4080073B168 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = bodybook/SDWebImage/SDWebImage.xcodeproj; sourceTree = "<group>"; };
 		DE3F503D16C0F5180073B168 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		DE3F503F16C0F51E0073B168 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -366,6 +384,12 @@
 				DEF932A916DB244A0046FB66 /* SearchUserInfoViewController.h */,
 				DEF932AA16DB244A0046FB66 /* SearchUserInfoViewController.m */,
 				DEF932AB16DB244A0046FB66 /* SearchUserInfoViewController.xib */,
+				4190D295174C4268004B41CE /* AddFriendController.h */,
+				4190D296174C4268004B41CE /* AddFriendController.m */,
+				4190D297174C4268004B41CE /* AddFriendController.xib */,
+				4190D2A1174C51ED004B41CE /* FriendTableViewCell.h */,
+				4190D2A2174C51ED004B41CE /* FriendTableViewCell.m */,
+				4190D2A4174C51FD004B41CE /* FriendTableViewCell.xib */,
 			);
 			name = AddFriend;
 			sourceTree = "<group>";
@@ -484,6 +508,9 @@
 		DEF7022C16BFA6A8008FEEA0 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				414EFD8F174A1C25004CE965 /* navigationBar@2x.png */,
+				41637125173CB18D0063C4C1 /* backButton@2x.png */,
+				41637126173CB18D0063C4C1 /* button@2x.png */,
 				414600A916D3C2D000E7AE8D /* btn_prev@2x.png */,
 				414600A716D3BEEB00E7AE8D /* image_add@2x.png */,
 				DED8103E16CB28AA00E8FB65 /* default_user@2x.png */,
@@ -531,6 +558,7 @@
 		DEF7024E16C09E5D008FEEA0 /* SideBarController */ = {
 			isa = PBXGroup;
 			children = (
+				41637129173CBB2B0063C4C1 /* sideMenuHeader@2x.png */,
 				DEF6638C16DC87ED0011972A /* friend_search@2x.png */,
 				DEF6638D16DC87EE0011972A /* newsfeed_btn@2x.png */,
 				DEF7024F16C09E69008FEEA0 /* lines@2x.png */,
@@ -747,6 +775,12 @@
 				4111D74C1738869C00363399 /* MessageEntrySendButtonPressed.png in Resources */,
 				4111D74D1738869C00363399 /* MessageEntrySendButtonPressed@2x.png in Resources */,
 				4111D75417389C7B00363399 /* CommentCell.xib in Resources */,
+				41637127173CB18D0063C4C1 /* backButton@2x.png in Resources */,
+				41637128173CB18D0063C4C1 /* button@2x.png in Resources */,
+				4163712A173CBB2B0063C4C1 /* sideMenuHeader@2x.png in Resources */,
+				414EFD90174A1C25004CE965 /* navigationBar@2x.png in Resources */,
+				4190D299174C4268004B41CE /* AddFriendController.xib in Resources */,
+				4190D2A5174C51FD004B41CE /* FriendTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,6 +820,8 @@
 				4111D73C1738832600363399 /* HPGrowingTextView.m in Sources */,
 				4111D73D1738832600363399 /* HPTextViewInternal.m in Sources */,
 				4111D75017389C2F00363399 /* CommentCell.m in Sources */,
+				4190D298174C4268004B41CE /* AddFriendController.m in Sources */,
+				4190D2A3174C51ED004B41CE /* FriendTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

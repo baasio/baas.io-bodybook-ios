@@ -41,19 +41,29 @@
     self.navigationItem.title = @"친구";
     [friendTextField setReturnKeyType:UIReturnKeyGo];    
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:1.0 alpha:1];
-//    UIButton *bt = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 29)];
-//    [bt setBackgroundImage:[UIImage imageNamed:@"rightButton@2x.png"] forState:UIControlStateNormal];
-//    [bt setTitle:@"+" forState:UIControlStateNormal];
-//    [bt addTarget:self action:@selector(addPeople) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithCustomView:bt];
-//    [bt setEnabled:FALSE];
-//    self.navigationItem.rightBarButtonItem = src;
+    
+    UIImage *navBackground =[[UIImage imageNamed:@"navigationBar@2x.png"]
+                             resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.navigationController.navigationBar setBackgroundImage:navBackground forBarMetrics:UIBarMetricsDefault];
     
     [friendTextField setEnablesReturnKeyAutomatically:YES];
     [closeTextField addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventTouchUpInside];
     
-    UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithTitle:@"찾기" style:UIBarButtonItemStyleBordered target:self action:@selector(addMyFriend)];
-    self.navigationItem.rightBarButtonItem = src;
+    UIButton *btnSearch =[[UIButton alloc] init];
+    [btnSearch setBackgroundImage:[UIImage imageNamed:@"button@2x.png"] forState:UIControlStateNormal];
+    UILabel *btnText = [[UILabel alloc]init];
+    [btnText setText:@"검색"];
+    [btnText setFont:[UIFont boldSystemFontOfSize:13]];
+    [btnText setTextColor:[UIColor whiteColor]];
+    [btnText setFrame:CGRectMake(0, 0, 50, 30)];
+    [btnText setTextAlignment:NSTextAlignmentCenter];
+    [btnText setBackgroundColor:[UIColor clearColor]];
+    [btnSearch addSubview:btnText];
+    
+    btnSearch.frame = CGRectMake(100, 100, 50, 30);
+    UIBarButtonItem *searchBarButton =[[UIBarButtonItem alloc] initWithCustomView:btnSearch];
+    [btnSearch addTarget:self action:@selector(addMyFriend) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = searchBarButton;
     
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

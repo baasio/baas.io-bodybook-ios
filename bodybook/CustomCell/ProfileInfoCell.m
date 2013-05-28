@@ -53,7 +53,8 @@
                 failureBlock:^(NSError *error) {
                     NSLog(@"fail : %@", error.localizedDescription);
                 }];
-    [userNameLabel setText:[[BaasioUser currentUser] objectForKey:@"name"]];
+    [nameLabel setText:[[BaasioUser currentUser] objectForKey:@"name"]];
+    [userNameLabel setText:[[BaasioUser currentUser] objectForKey:@"username"]];
     
     [self.profileBigImage setClipsToBounds:YES];
     [self.profileBigImage setFrame:CGRectMake(self.profileBigImage.frame.origin.x, self.profileBigImage.frame.origin.y, self.profileBigImage.frame.size.width, PROFILEBIGIMAGE_HEIGHT)];
@@ -75,7 +76,7 @@
     self.profileImageBackground.layer.shadowPath = shadowPath.CGPath;
     self.profileImageBackground.layer.shouldRasterize = YES;
     
-    [self.userNameLabel setFrame:CGRectMake(self.userNameLabel.frame.origin.x, self.userNameLabel.frame.origin.y, self.userNameLabel.frame.size.width, self.userNameLabel.frame.size.height)];
+    [self.nameLabel setFrame:CGRectMake(self.nameLabel.frame.origin.x, self.nameLabel.frame.origin.y, self.nameLabel.frame.size.width, self.nameLabel.frame.size.height)];
     
 
     BaasioQuery *query1 = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/followers",[[BaasioUser currentUser]objectForKey:@"username"]]];
@@ -146,7 +147,7 @@
         
         BaasioUser *user = [BaasioUser currentUser];
         //user.username = [[BaasioUser currentUser]objectForKey:@"username"];
-        [user setObject:[NSString stringWithFormat:@"https://blob.baas.io/gyuchan/bodybook/files/%@",file.uuid] forKey:@"picture"];
+        [user setObject:[NSString stringWithFormat:@"https://api.baas.io/gyuchan/bodybook/files/%@/data",file.uuid] forKey:@"picture"];
         [user updateInBackground:^(BaasioUser *user) {
                             [picker dismissViewControllerAnimated:YES completion:nil];
                         }

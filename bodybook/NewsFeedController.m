@@ -13,6 +13,7 @@
 #import "CommentViewController.h"
 
 #import <baas.io/Baas.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface NewsFeedController ()
 
@@ -49,19 +50,78 @@
     [super viewDidLoad];
     //NSLog(@"%@",[BaasioUser currentUser]);
     
+    
+    BaasioPush *push = [[BaasioPush alloc] init];
+    BaasioMessage *message = [[BaasioMessage alloc]init];
+    message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
+    message.target = @"tag";
+    NSMutableArray *messageTO = [[NSMutableArray alloc]init];
+    [messageTO addObject:@"ttestuser1"];
+    message.to = messageTO;
+    NSLog(@"message.to.description:%@",message.to.description);
+    [push sendPushInBackground:message
+                  successBlock:^(void) {
+                      NSLog(@"푸시보내기 성공");
+                  }
+                  failureBlock:^(NSError *error) {
+                      NSLog(@"푸시보내기 실패 : %@", error.localizedDescription);
+                  }];
+    
+    
+    
+    
     pageNumber = 10;
-    [self updateFeedData];
+    [self loadingViewStart];
+    BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/feed",[[BaasioUser currentUser]objectForKey:@"uuid"]]];
+    [query setLimit:pageNumber];
+    [query queryInBackground:^(NSArray *array) {
+        if([contentArray isEqual:[[NSMutableArray alloc]initWithArray:array]] && pageNumber != 10){
+            contentEndCheck = YES;
+        }else{
+            contentEndCheck = NO;
+            contentArray = [[NSMutableArray alloc]initWithArray:array];
+            [self.tableView reloadData];
+        }
+        if(_reloading == YES){
+            [self doneLoadingTableViewData];
+        }
+        //NSLog(@"뉴스피드 컨텐츠 : %@", contentArray);
+        [self loadingViewEnd];
+    }
+                failureBlock:^(NSError *error) {
+                    [self loadingViewEnd];
+                    NSLog(@"피드 불러오기 실패 : %@", error.localizedDescription);
+                }];
     
     modalPageUP = NO;
     contentEndCheck = NO;
     self.navigationItem.title = @"뉴스피드";
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.opaque = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:1.0 alpha:1];
 
-    UIBarButtonItem *src = [[UIBarButtonItem alloc] initWithTitle:@"게시" style:UIBarButtonItemStyleBordered target:self action:@selector(postingPage)];
-    self.navigationItem.rightBarButtonItem = src;
+    UIImage *navBackground =[[UIImage imageNamed:@"navigationBar@2x.png"]
+                             resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.navigationController.navigationBar setBackgroundImage:navBackground forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:navBackground forBarMetrics:UIBarMetricsDefault];
+    
+    UIButton *btnPost =[[UIButton alloc] init];
+    [btnPost setBackgroundImage:[UIImage imageNamed:@"button@2x.png"] forState:UIControlStateNormal];
+    UILabel *btnText = [[UILabel alloc]init];
+    [btnText setText:@"게시"];
+    [btnText setFont:[UIFont boldSystemFontOfSize:13]];
+    [btnText setTextColor:[UIColor whiteColor]];
+    [btnText setFrame:CGRectMake(0, 0, 50, 30)];
+    [btnText setTextAlignment:NSTextAlignmentCenter];
+    [btnText setBackgroundColor:[UIColor clearColor]];
+    [btnPost addSubview:btnText];
+    
+    btnPost.frame = CGRectMake(100, 100, 50, 30);
+    UIBarButtonItem *postButton =[[UIBarButtonItem alloc] initWithCustomView:btnPost];
+    [btnPost addTarget:self action:@selector(postingPage) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = postButton;
     
     if (_refreshHeaderView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
@@ -69,6 +129,51 @@
 		[self.tableView addSubview:view];
 		_refreshHeaderView = view;
 	}
+}
+-(void)loadingViewStart{
+    indecatorView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 115.0f, 35.0f)];
+    //indecatorView.backgroundColor = [UIColor colorWithRed:245.0f green:245.0f blue:245.0f alpha:1.0f];
+    indecatorView.backgroundColor = [UIColor colorWithWhite:0.1f alpha:0.9f];;
+    indecatorView.layer.masksToBounds = YES;
+    indecatorView.layer.cornerRadius = 5.0f;
+    indecatorView.alpha = 0;
+    
+    [self.view addSubview:indecatorView];
+    
+    //indicator
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    activityIndicator.frame = CGRectMake(10.0f, 8.0f, 20.0f, 20.0f);
+    activityIndicator.hidesWhenStopped = YES;
+    
+    [indecatorView addSubview:activityIndicator];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(45.0f, 11.0f, 100.0f, 15.0f)];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = @"로딩중입니다";
+    label.font = [UIFont systemFontOfSize:12.0f];
+    label.textColor = [UIColor whiteColor];
+    
+    [indecatorView addSubview:label];
+    indecatorView.center = self.view.center;
+    indecatorView.transform = CGAffineTransformMakeScale(1.2f,1.2f);
+    
+    //애니메이션 구현
+    [UIProgressView beginAnimations:nil context:nil];
+    [UIProgressView setAnimationDuration:0.5];
+    [UIProgressView setAnimationDelay:0.3];
+    indecatorView.transform = CGAffineTransformMakeScale(1.0f,1.0f);
+    indecatorView.alpha = 1;
+    [UIProgressView commitAnimations];
+    [activityIndicator startAnimating];
+}
+-(void)loadingViewEnd{
+    //애니메이션 구현
+    [UIProgressView beginAnimations:nil context:nil];
+    [UIProgressView setAnimationDuration:0.5];
+    indecatorView.transform = CGAffineTransformMakeScale(1.2f,1.2f);
+    indecatorView.alpha = 0;
+    [UIProgressView commitAnimations];
+    [activityIndicator startAnimating];
 }
 
 -(void)updateFeedData{
@@ -125,6 +230,7 @@
     [cell.imageContentButton addTarget:self action:@selector(contentImageTouched:) forControlEvents:UIControlEventTouchUpInside];
     [[cell.commentButton layer]setValue:object forKey:@"object"];
     [cell.commentButton addTarget:self action:@selector(commentButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.profileImageButton addTarget:self action:@selector(profileImageTouched:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
@@ -152,6 +258,22 @@
     [self presentViewController:nc animated:YES completion:nil];
 }
 
+- (void)profileImageTouched:(id)sender{
+    CustomCell *customCell = (CustomCell *)[[sender superview] superview] ;
+    NSMutableArray *photoArray = [[NSMutableArray alloc] init];
+    MWPhoto *photo;
+    NSLog(@"%@",[customCell.userInfo objectForKey:@"contentImagePath"]);
+    //photo = [MWPhoto photoWithURL:[NSURL URLWithString:[customCell.userInfo objectForKey:@"contentImagePath"]]];
+    photo = [MWPhoto photoWithImage:customCell.profileImage.image];
+    photo.caption = customCell.name.text;
+    [photoArray addObject:photo];
+    self.photos = photoArray;
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    browser.displayActionButton = YES;
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
+    nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:nc animated:YES completion:nil];
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

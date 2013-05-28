@@ -21,6 +21,11 @@
     
     BOOL modalPageUP;
     BOOL contentEndCheck;
+    
+    //////////////////////////////////////////////////
+    UIActivityIndicatorView *activityIndicator;
+    UIView *indecatorView;
+    //////////////////////////////////////////////////
 }
 @property (nonatomic, retain) NSArray *photos;
 @end

@@ -36,6 +36,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIImage *navBackground =[[UIImage imageNamed:@"navigationBar@2x.png"]
+                             resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.navigationController.navigationBar setBackgroundImage:navBackground forBarMetrics:UIBarMetricsDefault];
+    
+    UIButton *btnBack =[[UIButton alloc] init];
+    [btnBack setBackgroundImage:[UIImage imageNamed:@"backButton@2x.png"] forState:UIControlStateNormal];
+    UILabel *btnText2 = [[UILabel alloc]init];
+    [btnText2 setText:@"뒤로"];
+    [btnText2 setFont:[UIFont boldSystemFontOfSize:13]];
+    [btnText2 setTextColor:[UIColor whiteColor]];
+    [btnText2 setFrame:CGRectMake(3, 0, 50, 30)];
+    [btnText2 setTextAlignment:NSTextAlignmentCenter];
+    [btnText2 setBackgroundColor:[UIColor clearColor]];
+    [btnBack addSubview:btnText2];
+    
+    btnBack.frame = CGRectMake(100, 100, 50, 30);
+    UIBarButtonItem *backBarButton =[[UIBarButtonItem alloc] initWithCustomView:btnBack];
+    [btnBack addTarget:self action:@selector(backButtonTouched) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.navigationItem setLeftBarButtonItem:backBarButton];
+
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:1.0 alpha:1];
     [profileImageTouched addTarget:self action:@selector(profileImageView) forControlEvents:UIControlEventTouchUpInside];
     [profileImage setImageWithURL:[NSURL URLWithString:[userInfo objectForKey:@"picture"]] placeholderImage:nil];
@@ -44,6 +65,10 @@
     
     [addFriend addTarget:self action:@selector(addFriendTouched) forControlEvents:UIControlEventTouchUpInside];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)backButtonTouched{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

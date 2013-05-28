@@ -18,6 +18,11 @@
     //이미지 정보 저장을 위한
     NSMutableDictionary *dictionary;
     NSMutableArray *_uploadFileList;
+    
+    //////////////////////////////////////////////////
+    UIActivityIndicatorView *activityIndicator;
+    UIView *indecatorView;
+    //////////////////////////////////////////////////
 }
 
 @property (weak, nonatomic) IBOutlet UITextView *messageTextField;

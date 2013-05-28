@@ -128,6 +128,11 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     switch (section) {
@@ -143,6 +148,8 @@
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 30)];
     
+    UIImageView *image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"sideMenuHeader@2x.png"]];
+    [image setFrame:CGRectMake(0, -2, 300, 32)];
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 50, 20)];
     [title setTextColor:[UIColor whiteColor]];
     [title setFont:[UIFont systemFontOfSize:13]];
@@ -160,8 +167,8 @@
             break;
     }
 
-    
-    [headerView addSubview:title];
+    [image addSubview:title];
+    [headerView addSubview:image];
     headerView.backgroundColor = [UIColor brownColor];
     //headerImage.frame = CGRectMake(0, 0, self.tableView.bounds.size.width, 30);
     
