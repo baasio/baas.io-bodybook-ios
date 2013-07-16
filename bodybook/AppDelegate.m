@@ -22,7 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Baasio setApplicationInfo:@"ceffba5f-3514-11e2-a2c1-02003a570010" applicationName:@"d31a99ec-3514-11e2-a2c1-02003a570010"];
-    
+    [[Baasio sharedInstance]isDebugMode:YES];
 //    [Baasio setApplicationInfo:@"https://stgapi.baas.io/" baasioID:@"d485c0b8-b2e0-11e2-9392-02004d450054" applicationName:@"de0257ae-b2e0-11e2-9392-02004d450054"];
     
 //    [Baasio setApplicationInfo:@"https://devapi.baas.io/" baasioID:@"7fd4547c-b2c1-11e2-b08a-02004d17003f" applicationName:@"80094718-b2c1-11e2-b08a-02004d17003f"];
@@ -53,7 +53,8 @@
     if (!error) {
         //성공
         NSLog(@"로그인 성공 : %@", [[BaasioUser currentUser]description] );
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+        [BaasioPush registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert];
+
         [self goToMainPage];
     } else {
         //실패
@@ -151,32 +152,22 @@
 // RemoteNotification 등록 성공. deviceToken을 수신
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 	NSLog(@"2. didRegisterForRemoteNotificationsWithDeviceToken");
-	
-	NSMutableString *deviceId = [NSMutableString string];
-	const unsigned char* ptr = (const unsigned char*) [deviceToken bytes];
-	
-	for(int i = 0 ; i < 32 ; i++)
-	{
-		[deviceId appendFormat:@"%02x", ptr[i]];
-        
-	}
-    NSLog(@"디바이스 아이디 : %@", deviceId);
-    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"deviceID"]){
-        NSLog(@"저장되어있지않음");
-        BaasioPush *push = [[BaasioPush alloc] init];
-        NSArray *tags = @[[NSString stringWithFormat:@"t%@",[[BaasioUser currentUser] objectForKey:@"username"]]];
-        NSString *deviceIDString = [NSString stringWithFormat:@"%@",deviceId];
-        [push registerInBackground:deviceIDString
-                              tags:(NSArray *)tags
-                      successBlock:^(void) {
-                          NSLog(@"baas.io에 device가 등록됨");
-                          [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceID"];
-                          [[NSUserDefaults standardUserDefaults] synchronize];
-                      }
-                      failureBlock:^(NSError *error) {
-                          NSLog(@"device등록 실패 : %@", error.localizedDescription);
-                      }];
-    }
+    
+    //tag가 필요하면 추가합니다
+    NSArray *tags = @[[NSString stringWithFormat:@"t%@",[[BaasioUser currentUser] objectForKey:@"username"]]];
+    
+    //push를 보냅니다
+    BaasioPush *push = [[BaasioPush alloc] init];
+    [push didRegisterForRemoteNotifications:deviceToken
+                                       tags:tags
+                               successBlock:^(void) {
+                                   NSLog(@"baas.io에 device가 등록됨");
+                               }
+                               failureBlock:^(NSError *error) {
+                                   NSLog(@"e id : %@", error.uuid);
+                                   NSLog(@"device등록 실패 : %@", error.localizedDescription);
+                                   
+                               }];
 }
 
 // APNS 에 RemoteNotification 등록 실패

@@ -66,7 +66,8 @@
     if (!error) {
         //성공
         NSLog(@"로그인 성공 : %@", [[BaasioUser currentUser]description] );
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+        [BaasioPush registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert];
+
         [[NSUserDefaults standardUserDefaults] setObject:userName.text forKey:@"userID"];
         [[NSUserDefaults standardUserDefaults] setObject:password.text forKey:@"userPW"];
         [[NSUserDefaults standardUserDefaults] synchronize];
