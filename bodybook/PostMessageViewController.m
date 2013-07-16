@@ -166,7 +166,7 @@
                         message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
                         for(int i=0;i<friendArray.count;i++){
                             friendInfo = [friendArray objectAtIndex:i];
-                            [message.to addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
+                            message.to = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
                         }
                         [push sendPushInBackground:message
                                       successBlock:^(void) {
@@ -217,7 +217,7 @@
                     message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
                     for(int i=0;i<friendArray.count;i++){
                         friendInfo = [friendArray objectAtIndex:i];
-                        [message.to addObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
+                        message.to = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"t%@",[friendInfo objectForKey:@"username"]]];
                     }
                     [push sendPushInBackground:message
                                   successBlock:^(void) {

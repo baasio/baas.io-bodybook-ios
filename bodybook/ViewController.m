@@ -66,7 +66,7 @@
     if (!error) {
         //성공
         NSLog(@"로그인 성공 : %@", [[BaasioUser currentUser]description] );
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+        [BaasioPush registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert];
         [self goToMainPage];
     } else {
         //실패
