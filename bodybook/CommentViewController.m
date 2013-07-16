@@ -160,8 +160,6 @@
     [self loadingViewStart];
     
     contentArray = object;
-    
-    NSLog(@"원글 UUID : %@", [contentArray objectForKey:@"uuid"]);
     BaasioQuery *query = [BaasioQuery queryWithCollection:@"Comments"];
     [query setLimit:999];
     [query setWheres:[NSString stringWithFormat:@"feedUUID = %@",[contentArray objectForKey:@"uuid"]]];
@@ -236,6 +234,26 @@
         [textView setText:@""];
         [textView resignFirstResponder];
         [self initWithData:contentArray];
+        
+        
+        BaasioPush *push = [[BaasioPush alloc] init];
+        BaasioMessage *message = [[BaasioMessage alloc]init];
+        message.alert = [NSString stringWithFormat:@"%@님이 댓글을 달았습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
+        message.target = @"tag";
+        NSMutableArray *messageTO = [[NSMutableArray alloc]init];
+        NSDictionary *actor = [contentArray objectForKey:@"actor"];
+        if(![[actor objectForKey:@"username"] isEqualToString:[[BaasioUser currentUser] objectForKey:@"username"]]){
+            [messageTO addObject:[NSString stringWithFormat:@"t%@",[actor objectForKey:@"username"]]];
+            message.to = messageTO;
+            NSLog(@"message.to.description:%@",message.to.description);
+            [push sendPushInBackground:message
+                          successBlock:^(void) {
+                              NSLog(@"푸시보내기 성공");
+                          }
+                          failureBlock:^(NSError *error) {
+                              NSLog(@"푸시보내기 실패 : %@", error.localizedDescription);
+                          }];
+        }
     }
                 failureBlock:^(NSError *error) {
                     NSLog(@"fail : %@", error.localizedDescription);

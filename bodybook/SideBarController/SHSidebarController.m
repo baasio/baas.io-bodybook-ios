@@ -9,7 +9,8 @@
 #import "SHSidebarController.h"
 #import "SHMenuTVC.h"
 #import "UIView+Origami.h"
-
+#import "AppDelegate.h"
+#import "ViewController.h"
 
 @implementation SHSidebarController
 @synthesize mainVC, menuVC, viewsArray, context, swipeR;
@@ -45,18 +46,22 @@
 
 - (void)didSelectElementAtIndex:(NSInteger)index{
     
-    /*if (index == current){
+    if (index == 99){
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userID"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userPW"];
         
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        delegate.window.rootViewController = [[ViewController alloc]init];
         
         [self closeAndPop];
     }
-    else {*/
+    else {
         
         current = index;
         UIViewController *vc = [[viewsArray objectAtIndex:index] objectForKey:@"vc"];
         [self closeAndChange:vc];
         
-    //}
+    }
     
 }
 

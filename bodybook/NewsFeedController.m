@@ -50,26 +50,6 @@
     [super viewDidLoad];
     //NSLog(@"%@",[BaasioUser currentUser]);
     
-    
-    BaasioPush *push = [[BaasioPush alloc] init];
-    BaasioMessage *message = [[BaasioMessage alloc]init];
-    message.alert = [NSString stringWithFormat:@"%@님이 글을 올렸습니다",[[BaasioUser currentUser] objectForKey:@"name"]];
-    message.target = @"tag";
-    NSMutableArray *messageTO = [[NSMutableArray alloc]init];
-    [messageTO addObject:@"ttestuser1"];
-    message.to = messageTO;
-    NSLog(@"message.to.description:%@",message.to.description);
-    [push sendPushInBackground:message
-                  successBlock:^(void) {
-                      NSLog(@"푸시보내기 성공");
-                  }
-                  failureBlock:^(NSError *error) {
-                      NSLog(@"푸시보내기 실패 : %@", error.localizedDescription);
-                  }];
-    
-    
-    
-    
     pageNumber = 10;
     [self loadingViewStart];
     BaasioQuery *query = [BaasioQuery queryWithCollection:[NSString stringWithFormat:@"users/%@/feed",[[BaasioUser currentUser]objectForKey:@"uuid"]]];

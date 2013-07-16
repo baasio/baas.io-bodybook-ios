@@ -69,7 +69,7 @@
 {
 
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -81,6 +81,9 @@
             break;
         case 1:
             return [titlesArray count]-1;
+            break;
+        case 2:
+            return 1;
             break;
         default:
             return 0;
@@ -119,6 +122,17 @@
                     break;
             }
             break;
+        case 2:
+            cell.menuName.text = @"로그아웃";
+//            UIButton *logOutButton = UIButton logOutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//            joinButton.frame = CGRectMake(10, 10, 300, 44);
+//            [joinButton setTitle:@"가입하기" forState:UIControlStateNormal];
+//            [joinButton addTarget:self action:@selector(join) forControlEvents:UIControlEventTouchUpInside];
+//            joinButton.enabled = false;
+//            joinButton.tag = 11;
+//            [cell addSubview:joinButton];
+            break;
+            
         default:
             break;
     }
@@ -162,6 +176,9 @@
             break;
         case 1:
             [title setText:@"즐겨찾기"];
+            break;
+        case 2:
+            [title setText:@"설정"];
             break;
         default:
             break;
@@ -217,6 +234,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.section == 2){
+        [delegate didSelectElementAtIndex:99];
+        return;
+    }
     if ([delegate respondsToSelector:@selector(didSelectElementAtIndex:)]){
         [delegate didSelectElementAtIndex:indexPath.section + indexPath.row];        
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

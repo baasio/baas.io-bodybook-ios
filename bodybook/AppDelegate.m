@@ -21,9 +21,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    [Baasio setApplicationInfo:@"ceffba5f-3514-11e2-a2c1-02003a570010" applicationName:@"d31a99ec-3514-11e2-a2c1-02003a570010"];
+    [Baasio setApplicationInfo:@"ceffba5f-3514-11e2-a2c1-02003a570010" applicationName:@"d31a99ec-3514-11e2-a2c1-02003a570010"];
     
-    [Baasio setApplicationInfo:@"https://stgapi.baas.io/" baasioID:@"d485c0b8-b2e0-11e2-9392-02004d450054" applicationName:@"de0257ae-b2e0-11e2-9392-02004d450054"];
+//    [Baasio setApplicationInfo:@"https://stgapi.baas.io/" baasioID:@"d485c0b8-b2e0-11e2-9392-02004d450054" applicationName:@"de0257ae-b2e0-11e2-9392-02004d450054"];
     
 //    [Baasio setApplicationInfo:@"https://devapi.baas.io/" baasioID:@"7fd4547c-b2c1-11e2-b08a-02004d17003f" applicationName:@"80094718-b2c1-11e2-b08a-02004d17003f"];
 
@@ -131,6 +131,7 @@
 
 //앱을 실행하고 있는 도중에 RemoteNotification 을 수신
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"%@",userInfo);
     //	NSLog(@"1. didReceiveRemoteNotification");
 	// push 메시지 추출
 //    NSDictionary *aps = [userInfo objectForKey:@"aps"];
@@ -157,6 +158,7 @@
 	for(int i = 0 ; i < 32 ; i++)
 	{
 		[deviceId appendFormat:@"%02x", ptr[i]];
+        
 	}
     NSLog(@"디바이스 아이디 : %@", deviceId);
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"deviceID"]){

@@ -15,6 +15,7 @@
     NSString *contentUUID;
     
     UILabel *name;
+    UILabel *commentText;
     UILabel *contentText;
     UILabel *likeLabel;
     UILabel *badLabel;
@@ -38,7 +39,7 @@
 }
 
 @property (nonatomic, retain) NSDictionary *userInfo;
-@property (nonatomic, retain) IBOutlet UILabel *name, *contentText, *likeLabel, *badLabel, *dateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *name, *contentText, *likeLabel, *badLabel, *dateLabel, *commentText;
 @property (nonatomic, retain) IBOutlet UIView *background, *bottomView;
 @property (nonatomic, retain) IBOutlet UIImageView *contentImageView, *profileImage;
 @property (nonatomic, retain) IBOutlet UIButton *likeButton, *badButton, *imageContentButton, *commentButton, *profileImageButton;

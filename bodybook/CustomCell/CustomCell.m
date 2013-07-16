@@ -18,7 +18,7 @@
 
 @implementation CustomCell
 
-@synthesize userInfo,name, contentText, bottomView, background, likeLabel, contentImageView, profileImage, badLabel, dateLabel, likeButton, badButton, imageContentButton, commentButton, profileImageButton;
+@synthesize userInfo,name, contentText, bottomView, background, likeLabel, contentImageView, profileImage, badLabel, dateLabel, likeButton, badButton, imageContentButton, commentButton, profileImageButton,commentText;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -191,6 +191,23 @@
     userInfo = contentDic;
     contentUUID = [userInfo objectForKey:@"uuid"];
     NSDictionary *actorInfo = [userInfo objectForKey:@"actor"];
+    
+    
+    BaasioQuery *query = [BaasioQuery queryWithCollection:@"Comments"];
+    [query setLimit:999];
+    [query setWheres:[NSString stringWithFormat:@"feedUUID = %@",contentUUID]];
+    [query queryInBackground:^(NSArray *array) {
+        if([array count]>0){
+            [commentText setText:[NSString stringWithFormat:@"댓글 %d개",[array count]]];
+        }else{
+            [commentText setText:@"댓글 달기"];
+        }
+    }
+                failureBlock:^(NSError *error) {
+                    [commentText setText:@"댓글 달기"];
+                    NSLog(@"fail : %@", error.localizedDescription);
+                }];
+    
     
 //    실시간 유저프로필 미반영
 //    [profileImage setClipsToBounds:YES];

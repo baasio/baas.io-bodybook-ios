@@ -78,7 +78,7 @@
 								<string key="NSFrame">{{17, 17}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="978447323"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="229370544"/>
+								<reference key="NSNextKeyView" ref="509811137"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">2</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -94,6 +94,7 @@
 								<string key="NSFrame">{{17, 17}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="978447323"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="229370544"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -542,6 +543,14 @@
 					<int key="connectionID">98</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">commentText</string>
+						<reference key="source" ref="686591537"/>
+						<reference key="destination" ref="682637077"/>
+					</object>
+					<int key="connectionID">99</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">likeTouched:</string>
 						<reference key="source" ref="82143146"/>
@@ -708,19 +717,34 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">98</int>
+			<int key="maxID">99</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">CustomCell</string>
 					<string key="superclassName">UITableViewCell</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="badTouched:">id</string>
+						<string key="likeTouched:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="badTouched:">
+							<string key="name">badTouched:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="likeTouched:">
+							<string key="name">likeTouched:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="background">UIView</string>
 						<string key="badButton">UIButton</string>
 						<string key="badLabel">UILabel</string>
 						<string key="bottomView">UIView</string>
 						<string key="commentButton">UIButton</string>
+						<string key="commentText">UILabel</string>
 						<string key="contentImageView">UIImageView</string>
 						<string key="contentText">UILabel</string>
 						<string key="dateLabel">UILabel</string>
@@ -751,6 +775,10 @@
 						<object class="IBToOneOutletInfo" key="commentButton">
 							<string key="name">commentButton</string>
 							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="commentText">
+							<string key="name">commentText</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="contentImageView">
 							<string key="name">contentImageView</string>
